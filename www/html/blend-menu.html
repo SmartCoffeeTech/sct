@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+	
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+	
+	<style>
+	
+ div.inputDiv  {
+   float: left;
+   width: 22%;
+   min-height: 100%;
+   margin: 14px;
+   padding: 10px;
+}
+#progressbar {
+	padding:5px;
+}
+#progressbar1 {
+	margin:10px;
+}
+
+body {
+	background-image:url('coffeemenubackground.jpg');
+	background-attachment:fixed;
+	background-position: 5450px 0px;
+	font-family:serif;	
+        text-align:center;
+}
+
+h1 {
+	color:#330000;
+	text-align:left;
+        font-size: 55px; 
+        margin-left:80px;
+}
+
+h2 {
+	color:#330000;
+        font-size: 35px; 
+	font-weight:bold;        
+}
+
+div.col1 {
+	color:black;
+	font-size: 50px; 
+	float:left;
+	padding:2px;
+	border:10px solid black;
+	border-width:0px;
+	margin-top:-50px;	
+	margin-left:80px;
+	width:1200px;
+}
+div.col2 {
+	color:#330000;
+	text-align:left;
+        float:center;
+        font-size: 30px; 
+        padding:0px;
+	position:absolute;
+	border:10px solid black;
+        border-width:0px;
+        width: 700px;
+ 	margin-left:80px;
+ 	margin-top:150px;
+}
+
+div.col3 {
+	color:#330000;
+	text-align:center;
+        float:center;
+        font-size: 30px; 
+        padding:0px;
+	position:relative;
+	border:10px solid black;
+        border-width:0px;
+        width: 700px;
+ 	margin-left:80px;
+ 	margin-top:40px;
+}
+
+.buttonimage {
+	display: inline-block; 
+	padding: 0px 0px 0px; 
+	border-radius: 10px;
+	position: relative;
+	height: 100px; 
+	width: 100px;
+}
+
+.flagimage {
+	display: inline-block; 
+	padding: 0px 0px 0px; 
+	border-radius: 10px;
+	position: relative;
+	height: 100px; 
+	width: 160px;
+}
+
+form button
+{
+    margin       : 0;
+    float        : left;
+    padding      : 0;
+    border-width : 0;
+    background   : none;
+    cursor       : pointer;	
+}
+
+.awesome, .awesome:visited {
+	background: none ; 
+	display: inline-block; 
+	padding: 0px 0px 0px; 
+	color: none; 
+        text-align:center;
+	text-decoration: none;
+	border-radius: 10px;
+	position: relative;
+	cursor: pointer;
+}
+
+	.awesome:hover							{ background-color: none;}
+	.awesome:active							{ top: 1px; }
+	
+	.large.awesome, .large.awesome:visited 				{height: 100px; width: 100px; margin-top: 10px; float:left; margin-right: 20px; }
+	
+	.extralarge.awesome, .extralarge.awesome:visited 		{height: 150px; width: 250px; margin-top: 10px; margin-right: 20px; }
+		
+	.flaglarge.awesome, .flaglarge.awesome:visited 			{height: 100px; width: 160px; margin-top: 10px; float:left; margin-right: 20px; }
+	
+	.blend.awesome, .blend.awesome:visited				{opacity: 0.5;}
+	.blend.awesome:hover						{opacity: 1; }						
+	
+	</style>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Blend Menu</title>
+       <script type="text/javascript">
+        $(document).ready(function(){
+	
+		    $("#show_div_custom").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_custom").mouseover(function(){ $("#intro").css('visibility','hidden'); });    
+		    $("#show_div_custom").mouseover(function(){ $("#detail").find("blendname").text(""+$.QueryString.name+"'s Custom Creation");});
+		    $("#show_div_custom").mouseover(function(){ $("#detail").find("coffee1").text("?%");});
+		    $("#show_div_custom").mouseover(function(){ $("#detail").find("coffee2").text("?%");});
+		    $("#show_div_custom").mouseover(function(){ $("#detail").find("coffee3").text("?%");});
+		    $("#show_div_custom").mouseover(function(){ $("#detail").find("recommended").text("for coffee enthusiasts and fanatics, or anyone with a desire for experimentation!");});
+		    $("#show_div_custom").mouseover(function(){ $("#detail").find("attributes").text("To be determined!");});   
+		    $("#show_div_custom").mouseout(function() { $("#detail").css('visibility','hidden'); });
+		    $("#show_div_custom").mouseout(function() { $("#intro").css('visibility','visible'); }); 
+
+		    $("#show_div_goldengate").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_goldengate").mouseover(function(){ $("#intro").css('visibility','hidden'); });
+		    $("#show_div_goldengate").mouseover(function(){ $("#detail").find("blendname").text("The Golden Gate");});
+		    $("#show_div_goldengate").mouseover(function(){ $("#detail").find("coffee1").text("25%");});
+		    $("#show_div_goldengate").mouseover(function(){ $("#detail").find("coffee2").text("50%");});
+		    $("#show_div_goldengate").mouseover(function(){ $("#detail").find("coffee3").text("25%");});
+		    $("#show_div_goldengate").mouseover(function(){ $("#detail").find("recommended").text("if you like a bright and fruity cup of coffee.");});
+		    $("#show_div_goldengate").mouseover(function(){ $("#detail").find("attributes").text("Medium intensity, fruit and floral hints, bright and acidic.");});   
+		    $("#show_div_goldengate").mouseout(function() { $("#detail").css('visibility','hidden'); });
+		    $("#show_div_goldengate").mouseout(function() { $("#intro").css('visibility','visible'); }); 
+
+		    $("#show_div_stanford").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_stanford").mouseover(function(){ $("#intro").css('visibility','hidden'); });
+		    $("#show_div_stanford").mouseover(function(){ $("#detail").find("blendname").text("The Stanford Cardinal");});
+		    $("#show_div_stanford").mouseover(function(){ $("#detail").find("coffee1").text("50%");});
+		    $("#show_div_stanford").mouseover(function(){ $("#detail").find("coffee2").text("40%");});
+		    $("#show_div_stanford").mouseover(function(){ $("#detail").find("coffee3").text("10%");});
+		    $("#show_div_stanford").mouseover(function(){ $("#detail").find("recommended").text("if you like a smooth and creamy cup of coffee with citrus and chocolate flavors.");});
+		    $("#show_div_stanford").mouseover(function(){ $("#detail").find("attributes").text("Rustic sweetness, creamy chocolate roast taste, fruit and spice.");});   
+		    $("#show_div_stanford").mouseout(function() { $("#detail").css('visibility','hidden'); });  
+		    $("#show_div_stanford").mouseout(function() { $("#intro").css('visibility','visible'); }); 
+
+		    $("#show_div_fogcity").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_fogcity").mouseover(function(){ $("#intro").css('visibility','hidden'); });
+		    $("#show_div_fogcity").mouseover(function(){ $("#detail").find("blendname").text("Fog City");});
+		    $("#show_div_fogcity").mouseover(function(){ $("#detail").find("coffee1").text("50%");});
+		    $("#show_div_fogcity").mouseover(function(){ $("#detail").find("coffee2").text("0%");});
+		    $("#show_div_fogcity").mouseover(function(){ $("#detail").find("coffee3").text("50%");});
+		    $("#show_div_fogcity").mouseover(function(){ $("#detail").find("recommended").text("if you like Mokha-Java type blends.");});
+		    $("#show_div_fogcity").mouseover(function(){ $("#detail").find("attributes").text("This cup has a deep, full body, and more earthiness in the bass notes. Bittersweet complexity, and light acidity.");});   
+		    $("#show_div_fogcity").mouseout(function() { $("#detail").css('visibility','hidden'); });
+		    $("#show_div_fogcity").mouseout(function() { $("#intro").css('visibility','visible'); }); 
+
+		    $("#show_div_sorigin1").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_sorigin1").mouseover(function(){ $("#intro").css('visibility','hidden'); });
+		    $("#show_div_sorigin1").mouseover(function(){ $("#detail").find("blendname").text("Single Origin, Ethiopia");});
+		    $("#show_div_sorigin1").mouseover(function(){ $("#detail").find("coffee1").text("100%");});
+		    $("#show_div_sorigin1").mouseover(function(){ $("#detail").find("coffee2").text("0%");});
+		    $("#show_div_sorigin1").mouseover(function(){ $("#detail").find("coffee3").text("0%");});
+		    $("#show_div_sorigin1").mouseover(function(){ $("#detail").find("recommended").text("if you desire a very complex coffee. This origin tends to be acidic with rough, fruity/winy tones. Try this if you want a thick body and an earthy aroma coupled with cardamom and lime undertones.");});
+		    $("#show_div_sorigin1").mouseover(function(){ $("#detail").find("attributes").text("Navel orange, cinnamon, and fig fragrances introduce a creamy cup. Watermelon and lime flavors balance a fresh pastry and cardamom finish.");});   
+		    $("#show_div_sorigin1").mouseout(function() { $("#detail").css('visibility','hidden'); });
+		    $("#show_div_sorigin1").mouseout(function() { $("#intro").css('visibility','visible'); }); 
+
+		    $("#show_div_sorigin2").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_sorigin2").mouseover(function(){ $("#intro").css('visibility','hidden'); });
+		    $("#show_div_sorigin2").mouseover(function(){ $("#detail").find("blendname").text("Single Origin, Colombia");});
+		    $("#show_div_sorigin2").mouseover(function(){ $("#detail").find("coffee1").text("0%");});
+		    $("#show_div_sorigin2").mouseover(function(){ $("#detail").find("coffee2").text("100%");});
+		    $("#show_div_sorigin2").mouseover(function(){ $("#detail").find("coffee3").text("0%");});
+		    $("#show_div_sorigin2").mouseover(function(){ $("#detail").find("recommended").text("if you are seeking a smooth pleasant acidity, smooth finish, nutty overtones and rich medium to full body.");});
+		    $("#show_div_sorigin2").mouseover(function(){ $("#detail").find("attributes").text("Shirley temple, dark chocolate, and ghram cracker crust");});   
+		    $("#show_div_sorigin2").mouseout(function() { $("#detail").css('visibility','hidden'); });
+		    $("#show_div_sorigin2").mouseout(function() { $("#intro").css('visibility','visible'); }); 
+
+		    $("#show_div_sorigin3").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_sorigin3").mouseover(function(){ $("#intro").css('visibility','hidden'); });
+		    $("#show_div_sorigin3").mouseover(function(){ $("#detail").find("blendname").text("Single Origin, Indonesia");});
+		    $("#show_div_sorigin3").mouseover(function(){ $("#detail").find("coffee1").text("0%");});
+		    $("#show_div_sorigin3").mouseover(function(){ $("#detail").find("coffee2").text("0%");});
+		    $("#show_div_sorigin3").mouseover(function(){ $("#detail").find("coffee3").text("100%");});
+		    $("#show_div_sorigin3").mouseover(function(){ $("#detail").find("recommended").text("if you want a cup with a rich heavy body, low acidity and an exotic flavor with an intense syrupy aftertaste and sugarcane sweetness.");});
+		    $("#show_div_sorigin3").mouseover(function(){ $("#detail").find("attributes").text("This coffee has a sugarcane sweetness with flavors of concord grape, lemon peel and stone fruit.");});   
+		    $("#show_div_sorigin3").mouseout(function() { $("#detail").css('visibility','hidden'); });
+		    $("#show_div_sorigin3").mouseout(function() { $("#intro").css('visibility','visible'); });
+        
+        });
+        </script>
+
+    </head>
+
+    <body>
+
+	<script>
+
+	(function($) {
+	    $.QueryString = (function(a) {
+	        if (a == "") return {};
+	        var b = {};
+	        for (var i = 0; i < a.length; ++i)
+	        {
+	            var p=a[i].split('=');
+	            if (p.length != 2) continue;
+	            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	        }
+	        return b;
+	    })(window.location.search.substr(1).split('&'))
+	})(jQuery);
+	$(document).ready(function() {
+		$("h1").text("Welcome "+$.QueryString.name+", Make a Selection!");
+		
+		$("#coffee_description_href").click(function () {
+        	var $newValue = 'coffeedescriptions.html?name='+$.QueryString.name;
+        	$(this).attr('href',$(this).attr('href').replace('coffeedescriptions.html', $newValue));
+    		});
+
+		$("#show_div_custom").attr('value', $.QueryString.name + "," + "Custom Creation");
+		$("#show_div_goldengate").attr('value', $.QueryString.name + "," + "Golden Gate Blend");
+		$("#show_div_stanford").attr('value', $.QueryString.name + "," + "Stanford Cardinal Blend");
+		$("#show_div_fogcity").attr('value', $.QueryString.name + "," + "Fog City Blend");
+		$("#show_div_sorigin1").attr('value', $.QueryString.name + "," + "Ethiopian Single Origin");
+		$("#show_div_sorigin2").attr('value', $.QueryString.name + "," + "Colombian Single Origin");
+		$("#show_div_sorigin3").attr('value', $.QueryString.name + "," + "Indonesian Single Origin");
+	
+	});
+
+	</script>
+	
+	<h1></h1>
+
+	<div class='col1'>
+	
+		<p><form action="blend_submit.php" method="post">
+		<button type="submit" name="blend" value="Custom Creation" id="show_div_custom"  class='large blend awesome'><img src="logo_bab.jpg" class='buttonimage'/></button>
+		</form>
+		
+		<form action="blend_submit.php" method="post">
+		<button type="submit" name="blend" value="Golden Gate Blend" id="show_div_goldengate"  class='large blend awesome'><img src="goldengate.jpg" class='buttonimage'/></button>
+		</form>		
+		
+		<form action="blend_submit.php" method="post">
+		<button type="submit" name="blend" value="Stanford Cardinal Blend" id="show_div_stanford"  class='large blend awesome'><img src="stanfordblend.jpg" class='buttonimage'/></button>
+		</form>	
+		
+		<form action="blend_submit.php" method="post">
+		<button type="submit" name="blend" value="Fog City Blend" id="show_div_fogcity"  class='large blend awesome'><img src="fogcity.jpg" class='buttonimage'/></button>
+		</form>
+		
+		<form action="blend_submit.php" method="post">
+		<button type="submit" name="blend" value="Ethiopian Single Origin" id="show_div_sorigin1"  class='flaglarge blend awesome'><img src="ethiopia.gif" class='flagimage'/></button>
+		</form>		
+		
+		<form action="blend_submit.php" method="post">
+		<button type="submit" name="blend" value="Colombian Single Origin" id="show_div_sorigin2"  class='flaglarge blend awesome'><img src="colombia.gif" class='flagimage'/></button>
+		</form>	
+				
+		<form action="blend_submit.php" method="post">
+		<button type="submit" name="blend" value="Indonesian Single Origin" id="show_div_sorigin3"  class='flaglarge blend awesome'><img src="indonesia.gif" class='flagimage'/></button>
+		</form>	</p>
+
+	</div>
+	
+
+
+    <div class='col2' id="detail" style="visibility:hidden;">
+    <dl> 
+     <dt><b>Blend: </b><blendname>name</blendname></dt>
+     <dd><b>Ethiopia: </b><coffee1>percentage</coffee1></dd>
+     <dd><b>Colombia: </b><coffee2>percentage</coffee2></dd>
+     <dd><b>Indonesia: </b><coffee3>percentage</coffee3></dd>
+     <p><dt><b>Attributes: </b><attributes>attributes</attributes></dt></p>
+     <p><dt><b>Recommended </b><recommended>recommended</recommended></dt></p>
+     </dl> 
+    </div>
+    
+   	 <div class='col2' id="intro" style="visibility:visible;">
+   	 <p>Move your mouse over an image above to learn more about a specific blend or Build a Brew option.  If you would like to know more about the various coffees available for blending today, click the image below!</p>
+   	 
+   	 <a id="coffee_description_href" href="coffeedescriptions.html">
+		<img src="beanblends.jpg" class='extralarge awesome' align="middle" float="middle"> </a>
+   	 </div>
+    </body>
+    </html>

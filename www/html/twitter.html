@@ -1,0 +1,74 @@
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
+	
+	<style>
+body {
+	background-image:url('twitterpage.jpg');
+	background-attachment:fixed;
+	background-position: -260px center;
+        background-size: 1000px 680px;
+        background-color:000000;
+	background-repeat:no-repeat;
+	font-family:serif;	
+        text-align:center;
+}
+
+div.col1 {
+	float:right;
+	padding:0px;
+	border:10px solid black;
+	border-width:0px;
+	margin-right:-140px;
+	margin-top:135px;
+	width:800px;
+}
+div.col2 {
+	color:#ffffff;
+	text-align:left;
+        font-size: 55px;
+ 	position:absolute;
+	float:left;
+	padding:0px;
+	border:10px solid black;
+	border-width:0px;
+	margin-left:20px;
+	margin-top:0px;
+	width:800px;
+}
+</style>
+<script>
+
+
+
+$(document).ready(function() {
+	
+	setInterval(function(){
+	    $.ajax({ 
+		url: "dataout1.json",
+		success: function(data){
+			if(data.status=='complete'){
+				var url = "index1.html";
+				setTimeout(function(){$(location).attr('href',url);}, 10);
+			}
+	   },
+	 dataType: "json",
+	 cache: false
+	});
+	},110);
+});
+</script>
+    <title>Twitter</title>
+
+    </head>
+
+    <body>
+       
+	<div class='col1'>
+		<a class="twitter-timeline" href="https://twitter.com/SCT_platform" data-widget-id="307010013518503936">Tweets by @SCT_platform</a>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</div>
+<div class='col2' id="fuckers">	
+ @SCT_Platform</div>
+    </body>
+    </html>

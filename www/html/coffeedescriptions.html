@@ -1,0 +1,209 @@
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
+	<script type="text/javascript" src="querystring-0.9.0.js"></script>
+	
+	<style>
+body {
+	background-image:url('coffeemenubackground.jpg');
+	background-attachment:fixed;
+	background-position: 5450px 0px;
+	font-family:serif;	
+        text-align:center;
+}
+
+h1 {
+	color:#330000;
+	text-align:left;
+        font-size: 55px; 
+        margin-left:80px;
+        margin-top: 35px;
+}
+
+h2 {
+	color:#330000;
+        font-size: 35px; 
+	font-weight:bold;        
+}
+
+div.col1 {
+	color:black;
+	float:left;
+	padding:2px;
+	border:0px solid black;
+	border-width:0px;
+	margin-left:80px;
+}
+div.col2 {
+	color:#330000;
+	text-align:left;
+        float:left;
+        font-size: 40px; 
+        padding:0px;
+	position:relative;
+	border:10px solid black;
+        border-width:0px;
+        width: 750px;
+        height: 400px;
+ 	margin-left:20px;
+ 	margin-top:0px;
+}
+
+div.col3 {
+       color:#330000;
+	text-align:left;
+        float:left;
+        font-size:40px; 
+        padding:0px;
+	position:absolute;
+	border:10px solid black;
+        border-width:0px;
+        width: 300px;
+ 	margin-left:340px;
+ 	margin-top:500px;
+}
+
+div.col4 {
+	color:black;
+	font-size: 0px; 
+	float:left;
+	padding:10px;
+	border:0px solid black;
+	border-width:0px;
+	width: 250px;
+	height:475px;
+	margin-left:80px;
+}
+
+.awesome, .awesome:visited {
+	background: #222 ; 
+	display: inline-block; 
+	padding: 0px 0px 0px; 
+	color: #222; 
+        text-align:center;
+	text-decoration: none;
+	border-radius: 0px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+}
+
+	.awesome:hover							{ background-color: #000; color: #000; }
+	.awesome:active							{ top: 1px; }
+	
+	.large.awesome, .large.awesome:visited 				{height: 125px; width: 225px; margin-bottom: 10px; }
+	
+
+	.ethiopia.awesome, .ethiopia.awesome:visited			{opacity: 0.5;}
+	.ethiopia.awesome:hover						{opacity: 1; }
+	
+	.colombia.awesome, .colombia.awesome:visited			{opacity: 0.5;}
+	.colombia.awesome:hover						{opacity: 1; }
+
+	.indonesia.awesome, .indonesia.awesome:visited			{opacity: 0.5;}
+	.indonesia.awesome:hover					{opacity: 1; }
+	
+	.back.awesome, .back.awesome:visited				{opacity: 0.5;}
+	.back.awesome:hover						{opacity: 1; }
+
+	</style>
+	</style>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Coffee Selection</title>
+       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+       <script type="text/javascript">
+        $(document).ready(function(){
+		    $("#show_div_colombia").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_colombia").mouseover(function(){ $("#detail").find("country").text("Colombia");});
+		    $("#show_div_colombia").mouseover(function(){ $("#detail").find("elevation").text("1,500-1,900 masl");});
+		    $("#show_div_colombia").mouseover(function(){ $("#detail").find("region").text("Gigante, Huila");});
+		    $("#show_div_colombia").mouseover(function(){ $("#detail").find("varietal").text("Caturra, Typica, Bourbon");});
+		    $("#show_div_colombia").mouseover(function(){ $("#detail").find("roaster").text("Ritual");});
+		    $("#show_div_colombia").mouseover(function(){ $("#detail").find("attributes").text("Shirley temple, dark chocolate, and ghram cracker crust");});   
+		    $("#show_div_colombia").mouseout(function() { $("#detail").css('visibility','hidden'); });
+
+		    $("#show_div_ethiopia").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_ethiopia").mouseover(function(){ $("#detail").find("country").text("Ethiopia");});
+		    $("#show_div_ethiopia").mouseover(function(){ $("#detail").find("elevation").text("1,900-2,100 masl");});
+		    $("#show_div_ethiopia").mouseover(function(){ $("#detail").find("region").text("Gera Woreda, Agaro");});
+		    $("#show_div_ethiopia").mouseover(function(){ $("#detail").find("varietal").text("Heirloom");});
+		    $("#show_div_ethiopia").mouseover(function(){ $("#detail").find("roaster").text("Four Barrel");});
+		    $("#show_div_ethiopia").mouseover(function(){ $("#detail").find("attributes").text("Navel orange, cinnamon, and fig fragrances introduce a creamy cup. Watermelon and lime flavors balance a fresh pastry and cardamom finish. Excellent mouthfeel.");});   
+		    $("#show_div_ethiopia").mouseout(function() { $("#detail").css('visibility','hidden'); });
+
+		    $("#show_div_indonesia").mouseover(function(){ $("#detail").css('visibility','visible'); });
+		    $("#show_div_indonesia").mouseover(function(){ $("#detail").find("country").text("Indonesia");});
+		    $("#show_div_indonesia").mouseover(function(){ $("#detail").find("elevation").text("1,400–2,000 masl");});
+		    $("#show_div_indonesia").mouseover(function(){ $("#detail").find("region").text("Northeastern Tana Toraja, Sulawesi");});
+		    $("#show_div_indonesia").mouseover(function(){ $("#detail").find("varietal").text("Typica");});
+		    $("#show_div_indonesia").mouseover(function(){ $("#detail").find("roaster").text("Sightglass");});
+		    $("#show_div_indonesia").mouseover(function(){ $("#detail").find("attributes").text("This coffee has a sugarcane sweetness with flavors of concord grape, lemon peel and stone fruit.");});   
+		    $("#show_div_indonesia").mouseout(function() { $("#detail").css('visibility','hidden'); });
+
+		    $("#show_div_back").mouseover(function(){ $("#back").css('visibility','visible'); });
+		    $("#show_div_back").mouseover(function(){ $("#back").text("Take Me Back to the Blend Menu!");});
+		    $("#show_div_back").mouseout(function() { $("#back").css('visibility','hidden'); });
+
+});
+        </script>
+
+    </head>
+
+    <body>
+
+<script>
+
+	(function($) {
+	    $.QueryString = (function(a) {
+	        if (a == "") return {};
+	        var b = {};
+	        for (var i = 0; i < a.length; ++i)
+	        {
+	            var p=a[i].split('=');
+	            if (p.length != 2) continue;
+	            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	        }
+	        return b;
+	    })(window.location.search.substr(1).split('&'))
+	})(jQuery);
+	$(document).ready(function() {
+		
+		$('#blend_menu_href').click(function () {
+        	var $newValue = 'blend-menu.html?name='+$.QueryString.name;
+        	$(this).attr('href',$(this).attr('href').replace('dontgohere.html', $newValue));
+    		});
+	});
+	
+	</script>
+
+	<h1>Current Available Coffees</h1>
+
+	<div class='col1'>
+		<p> <img src="ethiopia.gif" id="show_div_ethiopia" class='large ethiopia awesome'></p>
+		<p> <img src="colombia.gif" id="show_div_colombia" class='large colombia awesome'></p>
+		<p> <img src="indonesia.gif" id="show_div_indonesia" class='large indonesia awesome' ></p> 
+		 
+		<a id="blend_menu_href" href="dontgohere.html">
+		<p> <img src="beanblends.jpg" id="show_div_back" class='large back awesome'></p> </a>
+	</div>
+	
+
+	<div class='col2' id="detail" style="visibility:hidden;">
+	   <dl> 
+	    <dt><b>Country: </b><country>country</country></dt>
+	    <dd><b>Elevation: </b><elevation>elevation</elevation></dd>
+	    <dd><b>Region: </b><region>region</region></dd>
+	    <dd><b>Varietal: </b><varietal>varietal</varietal></dd>
+	    <p><dt><dt><b>Attributes: </b><attributes>attributes</attributes></dt> </dt> 
+	    <dd><b>Roaster: </b><roaster>roaster</roaster></dd></p>
+	    </dl> 
+	   </div>
+    	<div class='col4'>
+	</div>
+    <div class='col3' id="back" style="visibility:hidden;">
+    </div>
+    </body>
+    </html>

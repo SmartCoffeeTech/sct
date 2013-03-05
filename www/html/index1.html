@@ -1,0 +1,103 @@
+<html>
+
+<head>
+<style>
+h1 {
+	text-align:center;
+	color:GoldenRod;
+	margin-top:120px;
+	font-family:serif;
+	font-size:400%;
+	font-weight:bold;
+}
+
+body {
+	background-image:url('coffee-cup-1-opacity.jpg');
+	background-attachment:fixed;
+	background-position: 5250px 0px;
+	font-family:serif;
+	
+}
+
+p {
+	text-align:center;
+	color:White;
+	margin-top:150px;
+	font-family:serif;
+	font-size:300%;
+	font-weight:bold;
+	margin-bottom:15px;
+}
+
+#logo{
+	color:White;
+	font-size:400%;
+}
+
+.submit{
+	color:black;
+	border-radius:5px;
+	padding:20px;
+	left-padding:10px;
+	background-color:White;
+	font-size:200%;
+	font-family:serif;
+}
+
+.name {
+	padding:8px;
+	width:300px;
+	font-size:20px;
+	text-align:center;
+}
+
+
+.awesome, .awesome:visited {
+	background: #222 ; 
+	display: inline-block; 
+	padding: 5px 10px 6px; 
+	color: #fff; 
+	text-decoration: none;
+	border-radius: 5px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+}
+
+	.awesome:hover							{ background-color: #111; color: #fff; }
+	.awesome:active							{ top: 1px; }
+	
+	.large.awesome, .large.awesome:visited 			{ font-size: 25px; padding: 8px 14px 9px; }
+	
+
+	.red.awesome, .red.awesome:visited			{ background-color: #e33100; }
+	.red.awesome:hover							{ background-color: #872300; }
+</style>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
+<script>
+$(document).ready(function(){
+	$("#name_box").click(function(){
+		$(this).attr('value', $.QueryString.name);
+	});
+});
+</script>
+
+<title>Build a Brew</title>
+</head>
+<body>
+	
+<h1>Welcome to the Build a Brew system!</h1>
+<p>What is your name?</p>
+<form action="customer_submit.php" method="post">
+  <center><input id='name_box' class='name' type="text" name="name" method='post' value=''>
+	<br><br>
+  <input class='large red awesome' type="submit" value="Build a Brew!"></center>
+</form>
+
+
+</body>
+
+</html>
