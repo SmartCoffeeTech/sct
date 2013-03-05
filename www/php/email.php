@@ -1,5 +1,5 @@
 <?php
-require_once 'Swift-4.3.0/lib/swift_required.php';
+require_once 'lib/Swift-4.3.0/lib/swift_required.php';
 
 date_default_timezone_set('America/Los_Angeles');
 $today = date("Y-m-d H:i:s");
