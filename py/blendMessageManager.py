@@ -159,7 +159,7 @@ def setup():
 	#get coffee country_of_origin from database
 	
 	blend_filename = 'dataout1.json'
-	log_filename = 'grinder.log'
+	log_filename = '../log/grinder.log'
 	
 	#setup the connections(grinder and db) and get the latest customer created from the web interface
 	ser = setupSerial()
@@ -168,6 +168,20 @@ def setup():
 	coffee_list = setupCoffeeList(db_con,db_cur)
 	
 	return coffee_list,blend_filename,log_filename,ser,db_con,db_cur
+	
+def sendBlendDictToArduino():
+	# get it from the db
+	# turn it into a string array of arrays.
+	query = """select blend_name,coffee_pct,country_of_origin from Blend join Coffee using(coffee_id)"""
+	db_cur.execute(query)
+	result = db_cur.fetchall()
+	
+	result_list = []
+	for x in xrange(0,max):
+		result_list.append((result[x][0],int(result[x][1]),result[x][2]))
+	arduino_blend_str = str(result_list)
+	arduino_blend_str = clean_str.replace('(','{').replace(')','}').replace('[','{').replace(']','}')
+	return arduino_blend_str
 	
 def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 	#get the message from the grinder - over serial for now
@@ -211,6 +225,7 @@ def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 def main():
 	
 	coffee_list,blend_filename,log_filename,ser,db_con,db_cur = setup()
+	sendBlendDictToArduino()
 	
 	while True:
 		letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur)
