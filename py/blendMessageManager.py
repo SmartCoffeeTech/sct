@@ -1,113 +1,16 @@
-import twitter
-import config as cfg
-import serial
-import MySQLdb as sql
-import json
-import random
-from time import sleep
+#import serial
+import serialHandle
+#import MySQLdb as sql dbHandle imports it
+import dbHandle
+#import json
+import jsonManager as jaysohn
+#import random
+#from time import sleep
+import tweetHandle
 from datetime import datetime
-import collections
+#import collections
+import blendSuggestionCalculator
 
-def setupSerial():
-	port = "/dev/tty.usbmodem1421"
-	speed = 9600
-	ser = serial.Serial(port,speed)
-	return ser
-
-def getMessageFromGrinder(ser):
-	if ser.isOpen() is True:
-		while True:
-			return ser.readline().strip()
-	else:
-		print 'Serial is closed'
-		
-def getMessag():
-	return 'grinderPercentage 0.00 0.00 36.00'
-	
-
-def messageReceived(message):
-	if len(message)>0:
-		return True
-	else:
-		print 'Empty msg received from Arduino'
-		
-def getTweetInfo(customer_name,blend_name,coffee_list):
-	if blend_name in coffee_list:
-		blend_name = blend_name + ' Single Origin'
-	else:
-		blend_name = blend_name + ' blend'
-		
-	tweet = '%s made a cup of the %s w/ the @BuildaBrew platform #coffee #tech. To learn more http://bit.ly/14X7wxa' % (customer_name,blend_name)
-	return tweet
-	
-		
-def tweetIt(tweet_msg):
-	my_auth = twitter.OAuth(cfg.TOKEN,cfg.TOKEN_KEY,cfg.CON_SEC,cfg.CON_SEC_KEY)
-	twit = twitter.Twitter(auth=my_auth)
-	twit.statuses.update(status=tweet_msg)
-	print 'tweeted'
-	 
-def setupDb():
-	db = sql.connect(user="root",passwd="sct",db="sct")
-	cursor = db.cursor()
-	return db,cursor
-	
-
-def makeJson(coffee_list,grinder_pct_list,blend_name):
-	coffeeDict =  dict(zip(coffee_list,grinder_pct_list))
-	coffeeDict = collections.OrderedDict(sorted(coffeeDict.items()))
-	coffeeDict["blendRecipe"]=blend_name
-	coffeeDict["grinderPercentage0"]=grinder_pct_list[0]
-	coffeeDict["grinderPercentage1"]=grinder_pct_list[1]
-	coffeeDict["grinderPercentage2"]=grinder_pct_list[2]
-	coffeeDict["status"]='grinding'
-	
-	'''
-	coffeeDict = {
-    "blendRecipe": blend_name,
-    "grinderPercentage0": grinder_pct_list[0],
-	"grinderPercentage1": grinder_pct_list[1],
-	"grinderPercentage2": grinder_pct_list[2],
-	coffee_list[0]: grinder_pct_list[0],
-	coffee_list[1]: grinder_pct_list[1],
-	coffee_list[2]: grinder_pct_list[2],
-	"status":'grinding'
-	}
-	'''
-	
-	return coffeeDict
-	
-def updateJson(filename,status):
-	file = open(filename,'r+b')
-	coffeeDict = json.loads(file.readline())
-	coffeeDict['status']=status
-	jsonData = json.dumps(coffeeDict)
-	
-	#pointer to the beginning of the file
-	file.seek(0)
-	file.truncate()
-    #now update and close the file
-	file.write(jsonData)
-	file.close()
-	
-def resetJsonFile(filename):
-	file = open(filename,'w+')
-	file.close()
-	
-def postJsonToServer(filename,coffeeDict):
-	file = open(filename,'w+')
-	file.write(json.dumps(coffeeDict))
-	file.close()
-	
-def writeToDb(db_cur,db_con,order_id,customer_id,grinder_pct_list,time):
-	
-	msg = """INSERT INTO Orders (order_id,customer_id,grinder0_pct,grinder1_pct,grinder2_pct,grind_complete) 
-	VALUES (%d,%d,%s,%s,%s,'%s') ON DUPLICATE KEY UPDATE grinder0_pct=VALUES(grinder0_pct),grinder1_pct=VALUES(grinder1_pct),
-	grinder2_pct=VALUES(grinder2_pct), grind_complete=VALUES(grind_complete)""" \
-	% (order_id,customer_id,grinder_pct_list[0],grinder_pct_list[1],grinder_pct_list[2],time)
-	
-	db_cur.execute(msg)
-	db_con.commit()
 
 
 def parseMessageAndReturnInfo(message):
@@ -128,15 +31,7 @@ def parseMessageAndReturnInfo(message):
 		
 	else:
 		print "Failure. did not receive an expected value! I got: %s" % message
-	
 
-def getFromDb(db_cur):
-	query = """Select customer_id,order_id,name,blend_name from Orders o join Blend using(blend_id)
-	join Customer using(customer_id) order by o.time_created desc limit 1"""
-	db_cur.execute(query)
-	result = db_cur.fetchone()
-	
-	return int(result[0]),int(result[1]),str(result[2]),str(result[3])
 	
 def logGrinderMessage(filename,message):
 	file = open(filename,'a')
@@ -157,61 +52,50 @@ def setupCoffeeList(db_con,db_cur):
 	
 def setup():
 	#get coffee country_of_origin from database
-	
+	#set these in a config file
 	blend_filename = 'dataout1.json'
 	log_filename = '../log/grinder.log'
 	
 	#setup the connections(grinder and db) and get the latest customer created from the web interface
-	ser = setupSerial()
-	db_con,db_cur = setupDb()
+	ser = serialHandle.setupSerial()
+	db_con,db_cur = dbHandle.openDbConnection()
 	
 	coffee_list = setupCoffeeList(db_con,db_cur)
-	
 	return coffee_list,blend_filename,log_filename,ser,db_con,db_cur
-	
-def sendBlendDictToArduino():
-	# get it from the db
-	# turn it into a string array of arrays.
-	query = """select blend_name,coffee_pct,country_of_origin from Blend join Coffee using(coffee_id)"""
-	db_cur.execute(query)
-	result = db_cur.fetchall()
-	
-	result_list = []
-	for x in xrange(0,max):
-		result_list.append((result[x][0],int(result[x][1]),result[x][2]))
-	arduino_blend_str = str(result_list)
-	arduino_blend_str = clean_str.replace('(','{').replace(')','}').replace('[','{').replace(']','}')
-	return arduino_blend_str
 	
 def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 	#get the message from the grinder - over serial for now
 	#message = getMessag()
-	message = getMessageFromGrinder(ser)
+	serialHandle.grinderInit(ser)
+	
+	#need a function that gets some data
+	dbHandle.executeDbQuery(db_con,db_cur,query,'select')
 	
 	#figure out what to do with that message
-	if messageReceived(message) is True:
+	if grinderCommManager(ser,msg_to_grinder).startswith():
 		grinder_pct_list,log_msg,grinder_status = parseMessageAndReturnInfo(message)
 		
 		try:
 			
 			if grinder_status.startswith('grind'):
-				customer_id,order_id,customer_name,blend_name = getFromDb(db_cur)
-				coffee_dict = makeJson(coffee_list,grinder_pct_list,blend_name)
-				postJsonToServer(blend_filename,coffee_dict)
+				customer_id,order_id,customer_name,blend_name = dbHandle.executeDbQuery(db_con,db_cur,query,'select')
+				coffee_dict = jaysohn.makeJson(coffee_list,grinder_pct_list,blend_name)
+				jaysohn.postJsonToServer(blend_filename,coffee_dict)
 				
 				if sum(grinder_pct_list)==100:
+					serialHandle.sendMesageToGrinder(ser,'complete')
 					time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 					customer_id,order_id,customer_name,blend_name = getFromDb(db_cur)
-					writeToDb(db_cur,db_con,order_id,customer_id,grinder_pct_list,time)
-					updateJson(blend_filename,'readyToBrew')
-					tweet_msg = getTweetInfo(customer_name,blend_name,coffee_list)
-					tweetIt(tweet_msg)
+					dbHandle.executeDbQuery(db_cur,db_con,order_id,customer_id,grinder_pct_list,time)
+					jaysohn.updateJson(blend_filename,'readyToBrew')
+					tweet_msg = tweetHandle.getTweetInfo(customer_name,blend_name,coffee_list)
+					tweetHandle.tweetIt(tweet_msg)
 				
 			elif grinder_status.startswith('comp'):
-				updateJson(blend_filename,'complete')
+				jaysohn.updateJson(blend_filename,'complete')
 				
 			elif grinder_status.startswith('reset'):
-				resetJsonFile(blend_filename)
+				jaysohn.resetJsonFile(blend_filename)
 				
 		finally:
 			logGrinderMessage(log_filename,log_msg)
@@ -225,7 +109,6 @@ def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 def main():
 	
 	coffee_list,blend_filename,log_filename,ser,db_con,db_cur = setup()
-	sendBlendDictToArduino()
 	
 	while True:
 		letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur)

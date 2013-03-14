@@ -1,25 +1,56 @@
 ## import the serial library
 import serial
 
-## Boolean variable that will represent
-## whether or not the arduino is connected
-connected = False
+def setupSerial():
+	port = "/dev/tty.usbmodem1421"
+	speed = 9600
+	ser = serial.Serial(port,speed)
+	return ser
 
-## open the serial port that your ardiono
-## is connected to.
-ser = serial.Serial("/dev/tty.usbmodem1421", 9600)
+def getMessageFromGrinder(ser):
+	if ser.isOpen() is True:
+		while True:
+			return ser.readline().strip()
+	else:
+		print 'Serial is closed'
 
-## loop until the arduino tells us it is ready
-while not connected:
-    serin = ser.read()
-    connected = True
+def sendMesageToGrinder(ser,msg):
+	## Tell the arduino to blink!
+	ser.write(msg)
 
-## Tell the arduino to blink!
-#ser.write("1")
 
-## Wait until the arduino tells us it
-## is finished blinking
-print ser.read()
+msg = 'basePercentage 33'
+msg2 = 'blend 20 10 3'
+msg3 = 'complete'
+msg4 = 'reset'
+ser = setupSerial()
 
-## close the port and end the program
-ser.close()
+print getMessageFromGrinder(ser) #read
+sendMesageToGrinder(ser,msg)
+print getMessageFromGrinder(ser) # equals the msg just sent
+sendMesageToGrinder(ser,msg2) 
+print getMessageFromGrinder(ser) #validSum
+sendMesageToGrinder(ser,msg3)
+print getMessageFromGrinder(ser)
+sendMesageToGrinder(ser,msg4)
+print getMessageFromGrinder(ser)
+
+
+
+'''
+arduino sends to me:
+ready
+send to arduino:
+basePercentage 33 (check this value in python handshake)
+blend 20 10 3
+
+complete
+reset
+
+arduino sends to me:
+basePercentage 33 (check this value in python handshake)
+validSum
+
+on error:
+invalidProtocol
+invalidSum (resend blend 20 10 3)'''

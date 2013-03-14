@@ -47,11 +47,22 @@ create table Coffee (
 	processing_method varchar(200),
 	altitude varchar(200),
 	grinder varchar(255),
+	acidity tinyint default '0',
+	body tinyint default '0',
+	fruity tinyint default '0',
+	earthy tinyint default '0',
+	chocolatey tinyint default '0',
+	winey tinyint default '0',
+	nutty tinyint default '0',
+	herby tinyint default '0',
+	smokey tinyint default '0',
+	spicy tinyint default '0',
+	floral tinyint default '0',
 	time_created timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	primary Key(coffee_id)
 );
 
-INSERT INTO Coffee (coffee_name,roast_date,roast_company,country_of_origin,region,farm,varietal,processing_method,altitude,grinder)
+INSERT INTO Coffee (coffee_name,roast_date,roast_company,country_of_origin,region,farm,varietal,processing_method,altitude,grinder,coffee_attributes)
  VALUES ('','2013-02-14','Sightglass','Indonesia','Sulawesi','Toarco','Typica','Washed','1400-2000','2');
 INSERT INTO Coffee (coffee_name,roast_date,roast_company,country_of_origin,region,farm,varietal,processing_method,altitude,grinder)
  VALUES ('','2013-02-20','Fourbarrel','Ethiopia','Yukro','Agaro','Heirloom','Washed','1900-2100','0');
@@ -72,6 +83,9 @@ create table Orders (
 	order_id int auto_increment,
 	customer_id int,
 	blend_id int,
+	order_blend_name varchar(255),
+	customization_pct int unsigned,
+	taste_profile text,
 	grinder0_pct decimal(8,5) unsigned default NULL,
 	grinder1_pct decimal(8,5) unsigned default NULL,
 	grinder2_pct decimal(8,5) unsigned default NULL,

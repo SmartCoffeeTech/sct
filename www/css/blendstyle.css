@@ -1,0 +1,187 @@
+<style>
+
+h1 {
+	text-align:center;
+	color:goldenrod;
+	margin-top:100px;
+	margin-bottom:80px;
+	font-family:serif;
+	font-size:60px;
+	font-weight:bold;
+}
+
+body {
+	background-image:url('blendselection.jpg');
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	background-position: 0px 0px;
+	background-color: black;
+	font-family:serif;
+	color:white;
+	
+}
+
+p {
+	text-align:center;
+	color:white;
+	margin-top:40px;
+	margin-bottom:15px;
+	font-family:serif;
+	font-size:30px;
+	font-weight:bold;
+}
+
+p2 {
+	text-align:center;
+	color:white;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+
+}
+
+p3 {
+	text-align:center;
+	color: #e33100;
+	margin-top:5px;
+	margin-bottom:5px;
+	font-family:serif;
+	font-size:40px;
+	font-weight:bold;
+}
+
+div.area0 {
+	color: white;
+        float: center;
+        text-align:center;
+        padding:0px;
+	position:relative;
+        border: 0px solid white;
+        width: 1500px;
+}
+
+div.area1{
+	color: white;
+        float:left;
+        padding:0px;
+	position:relative;
+        border: 0px solid blue;
+        width: 500px;
+        height: 350px;
+}
+
+div.area2{
+	color: white;
+        float:right;
+        padding:0px;
+	position:relative;
+        border: 0px solid blue;
+        width: 500px;
+        height: 350px;
+}
+
+div.area3{
+	color: white;
+        float:left;
+        padding:0px;
+	position:relative;
+        border: 0px solid red;
+        width: 500px;
+        margin-top:300px;
+}
+
+.name {
+	padding:1px;
+	width:300px;
+	font-size:20px;
+	text-align:center;
+	margin-bottom: 0px;
+}
+
+div.sliderarea {
+	color: white;
+	font-size:20px;	
+        float:center;
+        text-align:left;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 400px;
+}
+div.sliderlabelleft {
+	color: white;
+        float:left;
+        text-align:left;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 133px;
+}
+div.sliderlabelcenter {
+	color: white;
+        float:left;
+        text-align:center;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 133px;
+}
+div.sliderlabelright {
+	color: white;
+        float:left;
+        text-align:right;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 133px;
+}
+
+div.aroma {
+	color: white;
+	font-size:20px;
+        float:center;
+        text-align:left;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 400px;
+}
+div.aroma1 {
+        float:left;
+        padding:0px;
+        text-align:justify;
+	position:relative;
+	border:10px solid black;
+        border-width:0px;
+        height: 100px;
+        width: 133px;
+}
+
+.awesome, .awesome:visited {
+	background: #cccccc ; 
+	display: inline-block; 
+	padding: 5px 5px 5px; 
+	color: #ffffff; 
+	text-decoration: none;
+	border-radius: 5px;
+	text-shadow: 0 5px 5px rgba(0,0,0,0.5);
+	border: 2px solid goldenrod;
+	border-bottom-width:1px;
+	border-right-width:1px;
+	position: relative;
+	cursor: pointer;
+	margin-top: 0px;
+}
+
+	.awesome:hover							{ background-color: #111; color: #fff; }
+	.awesome:active							{ top: 1px; }
+	
+	.large.awesome, .large.awesome:visited 			{ font-size: 30px; padding: 6px 3px 6px; }
+	
+
+	.red.awesome, .red.awesome:visited			{ background-color: #e33100; }
+	.red.awesome:hover							{ background-color: #872300; }
+
+</style>

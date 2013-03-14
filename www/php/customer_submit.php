@@ -1,7 +1,7 @@
 <?php
 
 $name = $_POST['name'];
-
+/*
 if(strlen($name)>0)
 {
    $con = mysql_connect("localhost:/tmp/mysql.sock","root","sct");
@@ -18,10 +18,24 @@ if(strlen($name)>0)
 
    mysql_query($sqlCmd);
    mysql_close($con);
- }
+ }*/
+// tell python app location
+$status_arr = array (
+	"status" => "blend-selection.html"
+	);
+
+chdir("/Users/kperko/work/sct/www/data/");
+$status_json = json_encode($status_arr);
+$myFile = "page_location.json";
+
+$fh = fopen($myFile, 'w') or die("can't open file");
+fwrite($fh, $status_json);
+fclose($fh);
+
 // specify desired url
+
 $blend_url = str_replace(" ", "+", $name);
-$url = 'blend-menu.html?name='. $name;
+$url = '/~kperko/html/blend-selection.html?name='. $name;
 header( "Location: $url" );
 
  ?>

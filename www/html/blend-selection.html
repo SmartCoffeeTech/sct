@@ -1,0 +1,88 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="range.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/blendstyle.css" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+<script src="../js/script.js"></script>
+  
+<title>Blend Selector</title>
+</head>
+<body>
+<center>
+<div class="area0">	
+
+	<h1></h1>
+  
+	<div class="area1">
+	<p3>Select your Acidity and Body</p3><br><br>
+	<p2>Acidity</p2><br><br>
+	<form action="../php/customerPreferences.php" method='post'>
+	<input type="range" name="customer_prefs_arr[acidity]" method='post' min="1" max="10" step="4.5"><br><br>
+		<center><div class="sliderarea">
+			<div class="sliderlabelleft">
+			Mellow
+			</div>
+			<div class="sliderlabelcenter">
+			Moderate
+			</div>
+			<div class="sliderlabelright">
+			Sharp
+			</div>
+		</div><br><br></center>
+	<br><br>
+	<p2>Body</p2><br><br>
+	<input type="range" name="customer_prefs_arr[body]" method='post' min="1" max="10" step="4.5"><br><br>
+		<center><div class="sliderarea">
+			<div class="sliderlabelleft">
+			Light
+			</div>
+			<div class="sliderlabelcenter">
+			Medium
+			</div>
+			<div class="sliderlabelright">
+			Heavy
+			</div>
+		</div><br><br></center>
+	</div>
+	
+	<div class="area3">
+		<center><input class='large red awesome' type="submit" value="Personalize!" ></center>	
+		
+	</div>
+	
+	<div class="area2">
+	<p3>What Flavors do you Prefer?</p3><br><br>
+	<p2>Aroma</p2><br><br>
+		<center><div class="aroma">
+			  <div class="aroma1">
+			  <input name="customer_prefs_arr[fruity]" type="checkbox" value="1" method='post'> fruity <br><br>
+			  <input name="customer_prefs_arr[earthy]" type="checkbox" value="1" method='post'> earthy <br><br>
+			  <input name="customer_prefs_arr[chocolatey]" type="checkbox" value="1" method='post'> chocolatey <br><br>
+			  </div>
+			  <div class="aroma1">
+			  <input name="customer_prefs_arr[winey]" type="checkbox" value="1" method='post'> winey <br><br>
+			  <input name="customer_prefs_arr[nutty]" type="checkbox" value="1" method='post'> nutty <br><br>
+			  <input name="customer_prefs_arr[herby]" type="checkbox" value="1" method='post'> herby <br><br>
+			  </div>
+			  <div class="aroma1">
+			  <input name="customer_prefs_arr[smokey]" type="checkbox" value="1" method='post'> smokey <br><br>
+			  <input name="customer_prefs_arr[spicy]"  type="checkbox" value="1" method='post'> spicy <br><br>
+			  <input name="customer_prefs_arr[floral]" type="checkbox" value="1" method='post'> floral <br><br>
+			  </div><br><br>
+		</div></center><br><br><br><br><br>
+		<p3>Now Name It!</p3>
+
+			<center><input class='name' type="text" name="order_blend_name" value="My Blend" method='post'><br><br></center>	
+			
+	</div>
+</form>
+</div>
+</center>	
+
+
+
+
+</body>
+
+</html>
