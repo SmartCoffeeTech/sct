@@ -16,7 +16,10 @@ $base_prefs_arr = array (
 	"winey" => 0
 	);
 
-ksort($customer_prefs_arr);
+# if length > 0
+if (count($customer_prefs_arr)>0){
+	ksort($customer_prefs_arr);
+}
 
 foreach ($customer_prefs_arr as $key => $val) {
     // echo "$key = $val\n";
@@ -73,8 +76,7 @@ if(count($customer_prefs_arr)>0)
 
 	mysql_select_db("sct", $con);
 	
-	$name = 'Erk';
-	$getCustomerId = sprintf("Select customer_id from Customer where name='" . $name . "' order by time_created desc limit 1");
+	$getCustomerId = sprintf("Select customer_id from Customer order by time_created desc limit 1");
 	
 	$result = mysql_query($getCustomerId);
 	$row = mysql_fetch_row($result);
@@ -91,8 +93,9 @@ if(count($customer_prefs_arr)>0)
    mysql_close($con);
  }
 
+// update the application state for python
 $status_arr = array (
-	"status" => "another_page.html"
+	"status" => "base-blend.html"
 	);
 
 chdir("/Users/kperko/work/sct/www/data/");
@@ -102,7 +105,7 @@ $myFile = "page_location.json";
 $fh = fopen($myFile, 'w') or die("can't open file");
 fwrite($fh, $status_json);
 fclose($fh);
-
+// redirect the user to the next page
 $blend_url = str_replace(" ", "+", $name);
 $url = '/~kperko/html/base-blend.html?name='. $name;
 header( "Location: $url" );

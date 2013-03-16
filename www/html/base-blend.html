@@ -3,7 +3,7 @@
     <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-	<link rel="stylesheet" href="range.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="../css/range.css" type="text/css" media="screen" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
 	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 	
@@ -20,10 +20,10 @@ h1 {
 }
 
 body {
-	background-image:url('blendselection.jpg');
+	background-image:url('img/blendselection.jpg');
 	background-attachment:fixed;
 	background-repeat:no-repeat;
-	background-position: 0px 0px;
+	background-position: -30px 0px;
 	background-color: black;
 	font-family:serif;
 	color:white;
@@ -181,8 +181,7 @@ div.sliderlabelright {
 	.blend.awesome:hover						{opacity: 1; }						
 	
 	</style>
-    
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
     <title>Blend Menu</title>
        <script type="text/javascript">
         $(document).ready(function(){
@@ -247,8 +246,8 @@ div.sliderlabelright {
 	<div class='area1' id='show_div_base'>
 		<form action="../php/blend_submit.php" method="post">
 		<p3>Base Blend, Customize It!</p3>
-		<br><br>
-		<center><button type="submit" name="blend" value="Base Blend" class='large blend awesome'><img src="logo_bab.jpg" class='buttonimage'/></button></center>
+		<br> (We'll guide you along the way)<br><br>
+		<center><button type="submit" name="blend" value="Base Blend" class='large blend awesome'><img src="img/logo_bab.jpg" class='buttonimage'/></button></center>
 		<br>
 		<p2>Customization Level</p2><br>
 		<input type="range" name="customization" method='post' min="10" max="30" step="10"><br>
@@ -278,8 +277,8 @@ div.sliderlabelright {
 	<div class='area1' id="show_div_full">
 		<form action="../php/blend_submit.php" method="post">
 		<p3> Suggested Blend, Try It!</p3>
-		<br><br>
-		<button type="submit" name="customization" value="0" class='large blend awesome'><img src="goldengate.jpg" class='buttonimage'/></button>
+		<br>(Best match to your preferences)<br><br>
+		<button type="submit" name="customization" value="0" class='large blend awesome'><img src="img/goldengate.jpg" class='buttonimage'/></button>
 		<br><br>
 		<p2>No Customization Necessary!</p2><br>
 		</form>		

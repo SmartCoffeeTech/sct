@@ -1,7 +1,7 @@
 <?php
 
 $name = $_POST['name'];
-/*
+
 if(strlen($name)>0)
 {
    $con = mysql_connect("localhost:/tmp/mysql.sock","root","sct");
@@ -18,8 +18,8 @@ if(strlen($name)>0)
 
    mysql_query($sqlCmd);
    mysql_close($con);
- }*/
-// tell python app location
+ }
+// tell python user location app
 $status_arr = array (
 	"status" => "blend-selection.html"
 	);

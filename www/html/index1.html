@@ -1,32 +1,35 @@
 <html>
-
 <head>
 <style>
+
 h1 {
 	text-align:center;
-	color:GoldenRod;
-	margin-top:120px;
+	color:goldenrod;
+	margin-top:100px;
+	margin-bottom:80px;
 	font-family:serif;
-	font-size:400%;
+	font-size:60px;
 	font-weight:bold;
 }
 
 body {
-	background-image:url('img/coffee-cup-1-opacity.jpg');
+	background-image:url('img/blendselection.jpg');
 	background-attachment:fixed;
-	background-position: 5250px 0px;
+	background-repeat:no-repeat;
+	background-position: -60px 0px;
+	background-color: black;
 	font-family:serif;
+	color:white;
 	
 }
 
 p {
 	text-align:center;
-	color:White;
-	margin-top:150px;
-	font-family:serif;
-	font-size:300%;
-	font-weight:bold;
 	margin-bottom:15px;
+	margin-top:15px;
+	font-family:serif;
+	font-size:40px;
+	font-weight:bold;
 }
 
 #logo{
@@ -34,70 +37,87 @@ p {
 	font-size:400%;
 }
 
-.submit{
-	color:black;
-	border-radius:5px;
-	padding:20px;
-	left-padding:10px;
-	background-color:White;
-	font-size:200%;
-	font-family:serif;
-}
-
 .name {
-	padding:8px;
+	padding:1px;
 	width:300px;
 	font-size:20px;
 	text-align:center;
+	margin-bottom: 0px;
 }
 
 
+div.area0 {
+	color: white;
+        float: center;
+        text-align:center;
+        padding:0px;
+	position:relative;
+        border: 0px solid white;
+        width: 1200px;
+}
+
+div.col1 {
+        float:left;
+        padding:0px;
+	position:realtive;
+	border: 0px solid red;
+        width: 400px;
+ 	margin-top:70px;
+}
+div.col2 {
+        float:left;
+        padding:0px;
+	position:realtive;
+	border: 0px solid red;
+        width: 1200px;
+ 	margin-top:30px;
+}
+
 .awesome, .awesome:visited {
-	background: #222 ; 
+	background: #cccccc ; 
 	display: inline-block; 
-	padding: 5px 10px 6px; 
-	color: #fff; 
+	padding: 5px 5px 5px; 
+	color: #ffffff; 
 	text-decoration: none;
 	border-radius: 5px;
-	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
-	border-bottom: 1px solid rgba(0,0,0,0.25);
+	text-shadow: 0 5px 5px rgba(0,0,0,0.5);
+	border: 2px solid goldenrod;
+	border-bottom-width:1px;
+	border-right-width:1px;
 	position: relative;
 	cursor: pointer;
+	margin-top: 0px;
 }
 
 	.awesome:hover							{ background-color: #111; color: #fff; }
 	.awesome:active							{ top: 1px; }
 	
-	.large.awesome, .large.awesome:visited 			{ font-size: 25px; padding: 8px 14px 9px; }
+	.large.awesome, .large.awesome:visited 			{ font-size: 20px; padding: 8px 3px 8px; }
 	
 
 	.red.awesome, .red.awesome:visited			{ background-color: #e33100; }
 	.red.awesome:hover							{ background-color: #872300; }
-</style>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
-<script>
-$(document).ready(function(){
-	$("#name_box").click(function(){
-		$(this).attr('value', $.QueryString.name);
-	});
-});
-</script>
+</style>
 
 <title>Build a Brew</title>
 </head>
 <body>
-	
+<center><div class='area0'>	
 <h1>Welcome to the Build a Brew system!</h1>
+<div class="col1">
+</div>
+<div class="col1">
 <p>What is your name?</p>
 <form action="../php/customer_submit.php" method="post">
-  <center><input id='name_box' class='name' type="text" name="name" method='post' value=''>
-	<br><br>
-  <input class='large red awesome' type="submit" value="Build a Brew!"></center>
+  <center><input class='name' type="text" name="name" method='post'><br><br>
+  <input class='large red awesome' type="submit" value="Get Started!">
+</center>
 </form>
-
-
+</div>
+<center><div class="col2">
+<img src="img/logo_bab.png" height=150px >
+</div></center>
+</div></center>
 </body>
-
 </html>
