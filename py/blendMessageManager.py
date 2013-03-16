@@ -4,7 +4,7 @@ import jsonManager as jsonHandle
 import tweetHandle
 from datetime import datetime
 import blendSuggestionCalculator as blendCalc
-
+import json
 
 
 def parseMessageAndReturnInfo(message):
@@ -48,56 +48,64 @@ def setupCoffeeList(db_con,db_cur):
 def setup():
 	#get coffee country_of_origin from database
 	#set these in a config file
-	blend_filename = 'www/data/dataout1.json'
-	blend_chars_filename = 'www/data/dataout2.json'
+	blend_filename = '../www/data/dataout1.json'
+	blend_chars_filename = '../www/data/dataout2.json'
 	log_filename = '../log/grinder.log'
-	page_location_filename = 'www/data/page_location.json'
+	page_location_filename = '../www/data/page_location.json'
 	
+	#initalize blend jsons - next iter move to db
 	blends = blendCalc.initData('blend')
-
 	#setup the connections(grinder and db) and get the latest customer created from the web interface
 	ser = serialHandle.setupSerial()
+	#setup db conns
 	db_con,db_cur = dbHandle.openDbConnection()
-	
+	#setup coffe list - needed?
 	coffee_list = setupCoffeeList(db_con,db_cur)
-	return coffee_list,blends,blend_filename,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur
 	
+	if serialHandle.grinderInit(ser, 'ready')=='arduinoReady':
+		return base_blend_calls,coffee_list,blends,blend_filename,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur
+	else:
+		return 'arduino setup failed'
+		
 def getTheBlendDict(blend_name,blends):
 	for each_dict in blends:
 		if each_dict['name']==blend_name:
 			return each_dict
 		else:
-			pass
+			'No blend_name matches, you sir, are fucked.'
 	
 def getApplicationState(filename):
 	page_location = jsonHandle.readJson(filename)
 	page_location = page_location['status']
 	return page_location
 
-def stateController(page_location,coffee_list,blends,blend_filename,blend_chars_filename,log_filename,ser,db_con,db_cur):
+def stateController(base_blend_calls,page_location,coffee_list,blends,blend_filename,blend_chars_filename,log_filename,ser,db_con,db_cur):
 	# coffee_list,blends,blend_filename,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur
 	""" directs python based on the state of the web application. theCondutor"""
 	if page_location in ['index1.html','blend-selection.html']:
-		pass
+		return
 	elif page_location == 'base-blend.html':
+		# run once
 		blend_name = blendCalc.computeCoffeeBlendSuggestion(blends,cust1)
 		blend_dict = getTheBlendDict(blend_name,blends)
 		aroma_dict = blendCalc.computeTop3Aromas(blend_dict)
 		aroma_json = jsonHandle.makerOfJsons(aroma_dict,'blend')
 		jsonHandle.postJsonToServer(blend_chars_filename,aroma_json)
+		jsonHandle.updateJson(page_location_filename,'base-blend.htm','status')
+		return
 	elif page_location == 'grinding.html':
 		letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur)
 	elif page_location == 'brewing.html':
-		pass
+		return
 	elif page_location == 'twitter.html':
-		pass
-		print 'Erik is a douchelord. rape him.'
+		letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur)
+	else:
+		return
 	
 	
 def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 	#get the message from the grinder - over serial for now
 	#message = getMessag()
-	serialHandle.grinderInit(ser)
 	
 	#need a function that gets some data
 	dbHandle.executeDbQuery(db_con,db_cur,query,'select')
@@ -111,6 +119,8 @@ def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 			if grinder_status.startswith('grind'):
 				customer_id,order_id,customer_name,blend_name = dbHandle.executeDbQuery(db_con,db_cur,query,'select')
 				coffee_dict = jsonHandle.makeJson(coffee_list,grinder_pct_list,blend_name)
+				#add in code to build the new json during grinding
+				jsonHandle.updaterOfJsons(blend_chars_filename,coffee_dict)
 				jsonHandle.postJsonToServer(blend_filename,coffee_dict)
 				
 				if sum(grinder_pct_list)==100:
@@ -121,6 +131,12 @@ def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 					jsonHandle.updateJson(blend_filename,'readyToBrew')
 					tweet_msg = tweetHandle.getTweetInfo(customer_name,blend_name,coffee_list)
 					tweetHandle.tweetIt(tweet_msg)
+				
+			elif grinder_status.startswith('canisterG'):
+				jsonHandle.updateJson(status,'canisterGrinder0')
+				
+			elif grinder_status.startswith('noCanister'):
+				jsonHandle.updateJson(status,'noCanister')
 				
 			elif grinder_status.startswith('comp'):
 				jsonHandle.updateJson(blend_filename,'complete')

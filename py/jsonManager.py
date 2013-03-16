@@ -1,5 +1,63 @@
 import json
 
+
+def createCoffeJsons(roaster):
+	if roaster=='sightglass' or roaster=='columbia':
+		coffee_dict = {
+				"roast_company": "Ritual Roasters",
+				"country_of_origin": "Colombia",
+				"region": "Some region",
+				"farm": "Little Farm",
+				"varietal": "Typica",
+				"altitude": "1000 masl",
+				"acidity": "6.2",
+				"body": "7.5",
+				"aroma1": "Fruity",
+				"aroma2": "Chocolatey",
+				"aroma3": "Herby",
+				"farm_image1_url": "1001",
+				"farm_image2_url": "1002",
+				"farm_image3_url": "1003",
+				"roaster_image_url": "img/fourbarrel.jpg"
+			}
+	elif roatser=='fourbarrel' or roaster=='ethiopia':
+		coffee_dict = {
+				"roast_company": "Ritual Roasters",
+				"country_of_origin": "Colombia",
+				"region": "Some region",
+				"farm": "Little Farm",
+				"varietal": "Typica",
+				"altitude": "1000 masl",
+				"acidity": "6.2",
+				"body": "7.5",
+				"aroma1": "Fruity",
+				"aroma2": "Chocolatey",
+				"aroma3": "Herby",
+				"farm_image1_url": "1001",
+				"farm_image2_url": "1002",
+				"farm_image3_url": "1003",
+				"roaster_image_url": "img/fourbarrel.jpg"
+			}
+	elif roaster=='ritual'  or roaster=='costa rica':
+		coffee_dict = {
+				"roast_company": "Ritual Roasters",
+				"country_of_origin": "Colombia",
+				"region": "Some region",
+				"farm": "Little Farm",
+				"varietal": "Typica",
+				"altitude": "1000 masl",
+				"acidity": "6.2",
+				"body": "7.5",
+				"aroma1": "Fruity",
+				"aroma2": "Chocolatey",
+				"aroma3": "Herby",
+				"farm_image1_url": "1001",
+				"farm_image2_url": "1002",
+				"farm_image3_url": "1003",
+				"roaster_image_url": "img/fourbarrel.jpg"
+			}
+	return coffee_dict
+
 def makerOfJsons(dictr,section):
 	prep_dict={}
 	prep_dict[section] = dictr
