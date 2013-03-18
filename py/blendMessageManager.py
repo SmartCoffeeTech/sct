@@ -95,6 +95,7 @@ def stateController(base_blend_calls,page_location,coffee_list,blends,blend_file
 		return
 	elif page_location == 'grinding.html':
 		letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur)
+		
 	elif page_location == 'brewing.html':
 		return
 	elif page_location == 'twitter.html':
@@ -116,7 +117,7 @@ def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 		
 		try:
 			
-			if grinder_status.startswith('grind'):
+			if grinder_status.startswith('grinderPercentage'):
 				customer_id,order_id,customer_name,blend_name = dbHandle.executeDbQuery(db_con,db_cur,query,'select')
 				coffee_dict = jsonHandle.makeJson(coffee_list,grinder_pct_list,blend_name)
 				#add in code to build the new json during grinding
@@ -131,12 +132,17 @@ def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 					jsonHandle.updateJson(blend_filename,'readyToBrew')
 					tweet_msg = tweetHandle.getTweetInfo(customer_name,blend_name,coffee_list)
 					tweetHandle.tweetIt(tweet_msg)
+					jsonHandle.updateJson(page_location_filename,'grinding.htm','status')
 				
-			elif grinder_status.startswith('canisterG'):
-				jsonHandle.updateJson(status,'canisterGrinder0')
+			elif grinder_status.startswith('grinderCanister'):
+				#add code to update the farm json
+				roaster = grinder_status[1]
+				coffee_dict = jsonHandle.createCoffeeJsons(roaster)
+				jsonHandle.updaterOfJsons(blend_chars_filename,'coffee',coffee_dict)
+				jsonHandle.updaterOfJsons(blend_chars_filename,'canister','true')
 				
 			elif grinder_status.startswith('noCanister'):
-				jsonHandle.updateJson(status,'noCanister')
+				jsonHandle.updatetOfJsons(blend_chars_filename,'canister','false')
 				
 			elif grinder_status.startswith('comp'):
 				jsonHandle.updateJson(blend_filename,'complete')

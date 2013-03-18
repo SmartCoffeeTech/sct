@@ -2,7 +2,7 @@ import json
 
 
 def createCoffeJsons(roaster):
-	if roaster=='sightglass' or roaster=='columbia':
+	if roaster=='sightglass' or roaster=='columbia' or roaster==0:
 		coffee_dict = {
 				"roast_company": "Ritual Roasters",
 				"country_of_origin": "Colombia",
@@ -20,7 +20,7 @@ def createCoffeJsons(roaster):
 				"farm_image3_url": "1003",
 				"roaster_image_url": "img/fourbarrel.jpg"
 			}
-	elif roatser=='fourbarrel' or roaster=='ethiopia':
+	elif roatser=='fourbarrel' or roaster=='ethiopia' or roaster==1:
 		coffee_dict = {
 				"roast_company": "Ritual Roasters",
 				"country_of_origin": "Colombia",
@@ -38,7 +38,7 @@ def createCoffeJsons(roaster):
 				"farm_image3_url": "1003",
 				"roaster_image_url": "img/fourbarrel.jpg"
 			}
-	elif roaster=='ritual'  or roaster=='costa rica':
+	elif roaster=='ritual'  or roaster=='costa rica' or roaster==2:
 		coffee_dict = {
 				"roast_company": "Ritual Roasters",
 				"country_of_origin": "Colombia",
@@ -99,6 +99,9 @@ def makeJson(coffee_list,grinder_pct_list,blend_name,page):
 		base_blend['aroma3']=val
 	
 		overall['base_blend']=base_blend
+		
+	elif page=='grinding.html':
+		
 	
 	overall['coffee']=coffeeDict
 	
@@ -169,6 +172,7 @@ def updateJson(filename,status):
 	file = open(filename,'r+b')
 	coffeeDict = json.loads(file.readline())
 	coffeeDict['status']=status
+	
 	jsonData = json.dumps(coffeeDict)
 	
 	#pointer to the beginning of the file
