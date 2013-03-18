@@ -13,17 +13,17 @@ def parseMessageAndReturnInfo(message):
 		parsed_msg = message.split(' ')
 		grind_pct_list = [float(parsed_msg[1]),float(parsed_msg[2]),float(parsed_msg[3])]
 		log_msg = str(parsed_msg[0]) + "|" + str(parsed_msg[1]) + "|" + str(parsed_msg[2]) +  "|" + str(parsed_msg[3]) + "|" + str(datetime.now())
-		grinder_status = log_msg[0:5]
-		return grind_pct_list,log_msg,grinder_status
+		# grinder_status = log_msg[0:8]
+		return grind_pct_list,log_msg,message
 	# no longer get these messages
-	'''
+	
 	elif message.startswith('comp') or message.startswith('reset'):
 		parsed_msg = message.split(' ')
 		grind_pct_list = ['0','0','0']
 		log_msg = str(parsed_msg[0]) + "|" + str( datetime.now())
-		grinder_status = log_msg[0:5]
-		return grind_pct_list,log_msg,grinder_status
-		'''
+		# grinder_status = log_msg[0:8]
+		return grind_pct_list,log_msg,message
+		
 	else:
 		print "Failure. did not receive an expected value! I got: %s" % message
 
@@ -33,7 +33,8 @@ def logGrinderMessage(filename,message):
 	message += ' \n'
 	file.write(message)
 	file.close()
-	
+
+#do we need this?
 def setupCoffeeList(db_con,db_cur):
 	coffee_list=[]
 	query = """Select country_of_origin,grinder from Coffee order by grinder"""
@@ -48,7 +49,6 @@ def setupCoffeeList(db_con,db_cur):
 def setup():
 	#get coffee country_of_origin from database
 	#set these in a config file
-	blend_filename = '../www/data/dataout1.json'
 	blend_chars_filename = '../www/data/dataout2.json'
 	log_filename = '../log/grinder.log'
 	page_location_filename = '../www/data/page_location.json'
@@ -58,16 +58,17 @@ def setup():
 	#setup the connections(grinder and db) and get the latest customer created from the web interface
 	ser = serialHandle.setupSerial()
 	#setup db conns
-	db_con,db_cur = dbHandle.openDbConnection()
+	db_con,db_cur = dbHandle.openConn()
 	#setup coffe list - needed?
 	coffee_list = setupCoffeeList(db_con,db_cur)
+	jsonHandle.initJson(blend_chars_filename)
 	
 	if serialHandle.grinderInit(ser, 'ready')=='arduinoReady':
-		return base_blend_calls,coffee_list,blends,blend_filename,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur
+		return coffee_list,blends,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur
 	else:
 		return 'arduino setup failed'
 		
-def getTheBlendDict(blend_name,blends):
+def getBlendDict(blend_name,blends):
 	for each_dict in blends:
 		if each_dict['name']==blend_name:
 			return each_dict
@@ -79,77 +80,100 @@ def getApplicationState(filename):
 	page_location = page_location['status']
 	return page_location
 
-def stateController(base_blend_calls,page_location,coffee_list,blends,blend_filename,blend_chars_filename,log_filename,ser,db_con,db_cur):
-	# coffee_list,blends,blend_filename,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur
+def stateController(page_location,coffee_list,blends,blend_chars_filename,log_filename,ser,db_con,db_cur):
+	# coffee_list,blends,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur
 	""" directs python based on the state of the web application. theCondutor"""
-	if page_location in ['index1.html','blend-selection.html']:
-		return
-	elif page_location == 'base-blend.html':
-		# run once
-		blend_name = blendCalc.computeCoffeeBlendSuggestion(blends,cust1)
-		blend_dict = getTheBlendDict(blend_name,blends)
-		aroma_dict = blendCalc.computeTop3Aromas(blend_dict)
-		aroma_json = jsonHandle.makerOfJsons(aroma_dict,'blend')
-		jsonHandle.postJsonToServer(blend_chars_filename,aroma_json)
-		jsonHandle.updateJson(page_location_filename,'base-blend.htm','status')
-		return
-	elif page_location == 'grinding.html':
-		letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur)
+	try:
+		if page_location in ['index1.html','blend-selection.html']:
+			return
+		elif page_location == 'base-blend.html':
+			# run once
+			#get cust1 from the db
+			qry = 'select order_id,taste_profile from Orders order by time_created desc limit 1'
+			result = dbHandle.executeQuery(db_con,db_cur,qry,'select')
+			cust1 = json.loads(result[0][1])
+			blend_name = blendCalc.computeCoffeeBlendSuggestion(blends,cust1)
+			qry = """update Orders set blend_id=(Select blend_id from Blend where blend_name='%s' where order_id=%d limit 1)""" % (blend_name,int(result[0][0]))
+			dbHandle.executeQuery(db_con,db_cur,qry,'insert')
+			blend_dict = getBlendDict(blend_name,blends)
+			aroma_dict = blendCalc.computeTop3Aromas(blend_dict)
+			aroma_json = jsonHandle.makerOfJsons(aroma_dict,'blend')
+			jsonHandle.postJsonToServer(blend_chars_filename,aroma_json)
+			jsonHandle.updateJson(page_location_filename,'base-blend.htm','status')
+			return
+		elif page_location == 'grinding.html':
+			base_grinder_pct_list=[]
+			qry = 'select customization_pct from Orders order by time_created desc limit 1'
+			custom_pct = dbHandle.executeQuery(db_con,db_cur,qry,'select')
+			custom_pct = int(cust1[0][0])
+			blend_name = blendCalc.computeCoffeeBlendSuggestion(blends,cust1)
+			qry = """select grinder,coffee_pct from Orders join Blend using(blend_id) join Coffee using(coffee_id) where order_id=(select order_id from Orders order by time_created desc limit 1) order by grinder"""
+			result = dbHandle.executeQuery(db_con,db_cur,qry,'select')
+			for each in result:
+				base_grinder_pct_list.append(int(each[1]))
+			base_grinder_pct_list = blendCalc.computeBlendPct(base_grinder_pct_list,custom_pct)
+			letsGrind(coffee_list,base_grinder_pct_list,blend_chars_filename,log_filename,ser,db_con,db_cur)
 		
-	elif page_location == 'brewing.html':
-		return
-	elif page_location == 'twitter.html':
-		letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur)
-	else:
-		return
+		elif page_location == 'twitter.html':
+			serialHandle.grinderCommManager(ser,'complete')
+		else:
+			return
+	except Exception, e:
+		print e
 	
-	
-def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
+def letsGrind(coffee_list,base_grinder_pct_list,blend_chars_filename,log_filename,ser,db_con,db_cur):
 	#get the message from the grinder - over serial for now
 	#message = getMessag()
 	
 	#need a function that gets some data
-	dbHandle.executeDbQuery(db_con,db_cur,query,'select')
+	#where does the query var get populated
+	#dbHandle.executeQuery(db_con,db_cur,query,'select')
 	
+	#send the base_pct
+	base_pct = sum(base_grinder_pct_list)
+	msg_to_grinder = 'basePercentage '+str(base_pct)
 	#figure out what to do with that message
-	if grinderCommManager(ser,msg_to_grinder) is True:
-		grinder_pct_list,log_msg,grinder_status = parseMessageAndReturnInfo(message)
+	serialHandle.grinderCommManager(ser,msg_to_grinder)
+	
+	#send the grinder pct values
+	msg_to_grinder = 'blend ' + str(base_grinder_pct_list[0]) + str(base_grinder_pct_list[1]) + str(base_grinder_pct_list[2])
+	serialHandle.grinderCommManager(ser,msg_to_grinder)
+	grinder_pct_list,log_msg,message = parseMessageAndReturnInfo(message)
 		
 		try:
 			
-			if grinder_status.startswith('grinderPercentage'):
-				customer_id,order_id,customer_name,blend_name = dbHandle.executeDbQuery(db_con,db_cur,query,'select')
-				coffee_dict = jsonHandle.makeJson(coffee_list,grinder_pct_list,blend_name)
+			if message.startswith('grinderPercentage'):
+				#customer_id,order_id,customer_name,blend_name = dbHandle.executeQuery(db_con,db_cur,query,'select')
+				coffee_dict = jsonHandle.makeJson(grinder_pct_list)
 				#add in code to build the new json during grinding
-				jsonHandle.updaterOfJsons(blend_chars_filename,coffee_dict)
-				jsonHandle.postJsonToServer(blend_filename,coffee_dict)
+				jsonHandle.updaterOfJsons(blend_chars_filename,'customer',coffee_dict)
 				
 				if sum(grinder_pct_list)==100:
-					serialHandle.sendMesageToGrinder(ser,'complete')
 					time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 					customer_id,order_id,customer_name,blend_name = getFromDb(db_cur)
-					dbHandle.executeDbQuery(db_cur,db_con,order_id,customer_id,grinder_pct_list,time)
-					jsonHandle.updateJson(blend_filename,'readyToBrew')
+					qry = """insert into Orders (order_id,customer_id,grinder0_pct,grinder1_pct,grinder2_pct,grind_complete) VALUES (%d,%d,%f,'%s') ON DUPLICATE KEY UPDATE grinder0_pct=VALUES(grinder0_pct), grinder1_pct=VALUES(grinder1_pct), grinder2_pct=VALUES(grinder2_pct), grind_complete=VALUES(grind_complete)""" % (order_id,customer_id,grinder_pct_list[0],grinder_pct_list[1],grinder_pct_list[2],time)
+					dbHandle.executeQuery(db_cur,db_con,qry,'insert')
+					jsonHandle.updaterOfJsons(blend_chars_filename,'status','readyToBrew')
 					tweet_msg = tweetHandle.getTweetInfo(customer_name,blend_name,coffee_list)
 					tweetHandle.tweetIt(tweet_msg)
 					jsonHandle.updateJson(page_location_filename,'grinding.htm','status')
 				
-			elif grinder_status.startswith('grinderCanister'):
+			elif message.startswith('grinderCanister'):
 				#add code to update the farm json
-				roaster = grinder_status[1]
-				coffee_dict = jsonHandle.createCoffeeJsons(roaster)
+				roaster = message[1]
+				coffee_dict = jsonHandle.getCoffeeJsons(roaster)
 				jsonHandle.updaterOfJsons(blend_chars_filename,'coffee',coffee_dict)
 				jsonHandle.updaterOfJsons(blend_chars_filename,'canister','true')
 				
-			elif grinder_status.startswith('noCanister'):
+			elif message.startswith('noCanister'):
 				jsonHandle.updatetOfJsons(blend_chars_filename,'canister','false')
-				
-			elif grinder_status.startswith('comp'):
-				jsonHandle.updateJson(blend_filename,'complete')
-				
-			elif grinder_status.startswith('reset'):
-				jsonHandle.resetJsonFile(blend_filename)
-				
+			
+			else:
+				raise Exception('no matching messages!')
+		
+		except Exception, e:
+			print e
+		
 		finally:
 			logGrinderMessage(log_filename,log_msg)
 			#db_cur.close()
@@ -161,10 +185,13 @@ def letsGrind(coffee_list,blend_filename,log_filename,ser,db_con,db_cur):
 #create a function that gets the most recent id for the customer created, use that throughout the process		
 def main():
 	
-	coffee_list,blends,blend_filename,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur = setup()
+	coffee_list,blends,blend_chars_filename,log_filename,page_location_filename,ser,db_con,db_cur = setup()
 	
 	while True:
-		stateController(getApplicationState(page_location_filename),coffee_list,blends,blend_filename,blend_chars_filename,log_filename,ser,db_con,db_cur)
-	
+		try:
+			stateController(getApplicationState(page_location_filename),coffee_list,blends,blend_chars_filename,log_filename,ser,db_con,db_cur)
+		except Exception, e:
+			print e
+			
 if __name__=='__main__':
 	main()

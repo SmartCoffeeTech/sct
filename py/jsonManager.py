@@ -1,62 +1,69 @@
 import json
 
-
-def createCoffeJsons(roaster):
-	if roaster=='sightglass' or roaster=='columbia' or roaster==0:
-		coffee_dict = {
-				"roast_company": "Ritual Roasters",
-				"country_of_origin": "Colombia",
-				"region": "Some region",
-				"farm": "Little Farm",
-				"varietal": "Typica",
-				"altitude": "1000 masl",
-				"acidity": "6.2",
-				"body": "7.5",
-				"aroma1": "Fruity",
-				"aroma2": "Chocolatey",
-				"aroma3": "Herby",
-				"farm_image1_url": "1001",
-				"farm_image2_url": "1002",
-				"farm_image3_url": "1003",
-				"roaster_image_url": "img/fourbarrel.jpg"
-			}
-	elif roatser=='fourbarrel' or roaster=='ethiopia' or roaster==1:
-		coffee_dict = {
-				"roast_company": "Ritual Roasters",
-				"country_of_origin": "Colombia",
-				"region": "Some region",
-				"farm": "Little Farm",
-				"varietal": "Typica",
-				"altitude": "1000 masl",
-				"acidity": "6.2",
-				"body": "7.5",
-				"aroma1": "Fruity",
-				"aroma2": "Chocolatey",
-				"aroma3": "Herby",
-				"farm_image1_url": "1001",
-				"farm_image2_url": "1002",
-				"farm_image3_url": "1003",
-				"roaster_image_url": "img/fourbarrel.jpg"
-			}
-	elif roaster=='ritual'  or roaster=='costa rica' or roaster==2:
-		coffee_dict = {
-				"roast_company": "Ritual Roasters",
-				"country_of_origin": "Colombia",
-				"region": "Some region",
-				"farm": "Little Farm",
-				"varietal": "Typica",
-				"altitude": "1000 masl",
-				"acidity": "6.2",
-				"body": "7.5",
-				"aroma1": "Fruity",
-				"aroma2": "Chocolatey",
-				"aroma3": "Herby",
-				"farm_image1_url": "1001",
-				"farm_image2_url": "1002",
-				"farm_image3_url": "1003",
-				"roaster_image_url": "img/fourbarrel.jpg"
-			}
-	return coffee_dict
+def getCoffeeJsons(roaster):
+	try:
+		if roaster==0:
+			coffee_dict = {
+					"roast_company": "Fourbarrel",
+					"country_of_origin": "Ethiopia",
+					"region": "Yukro",
+					"farm": "Agaro",
+					"varietal": "Heirloom",
+					"altitude": "1900-2100 masl",
+					"roast_date":'2013-02-20',
+					"acidity": "6.2",
+					"body": "7.5",
+					"aroma1": "Fruity",
+					"aroma2": "Chocolatey",
+					"aroma3": "Herby",
+					"farm_image1_url": "../img/fourbarrel_agaro_farm1.jpg",
+					"farm_image2_url": "../img/fourbarrel_agaro_farm2.jpg",
+					"farm_image3_url": "../img/fourbarrel_agaro_farm3.jpg",
+					"roaster_image_url": "../img/fourbarrel.jpg"
+				}
+		elif roaster==1:
+			coffee_dict = {
+					"roast_company": "Ritual",
+					"country_of_origin": "Colombia",
+					"region": "Huila",
+					"farm": "Desarrollo",
+					"varietal": "Caturra",
+					"altitude": "1500-1900 masl",
+					"roast_date":'2013-02-14',
+					"acidity": "6.2",
+					"body": "7.5",
+					"aroma1": "Fruity",
+					"aroma2": "Chocolatey",
+					"aroma3": "Herby",
+					"farm_image1_url": "../img/ritual_desarrollo_farm1.jpg",
+					"farm_image2_url": "../img/ritual_desarrollo_farm2.jpg",
+					"farm_image3_url": "../img/ritual_desarrollo_farm3.jpg",
+					"roaster_image_url": "../img/ritual.jpg"
+				}
+		elif roaster==2:
+			coffee_dict = {
+					"roast_company": "Sightglass",
+					"country_of_origin": "Indonesia",
+					"region": "Sulawesi",
+					"farm": "Toarco",
+					"varietal": "Typica",
+					"altitude": "1400-2000 masl",
+					"roast_date":'2013-02-19',
+					"acidity": "6.2",
+					"body": "7.5",
+					"aroma1": "Fruity",
+					"aroma2": "Chocolatey",
+					"aroma3": "Herby",
+					"farm_image1_url": "../img/sightglass_toarco_farm1.jpg",
+					"farm_image2_url": "../img/sightglass_toarco_farm2.jpg",
+					"farm_image3_url": "../img/sightglass_toarco_farm3.jpg",
+					"roaster_image_url": "../img/sightglass.jpg"
+				}
+		else:
+			raise Exception('Grinder value not recognized')
+		return coffee_dict
+	except Exception, e:
+		print e
 
 def makerOfJsons(dictr,section):
 	prep_dict={}
@@ -79,31 +86,14 @@ def updaterOfJsons(filename,section,dictr):
 	file.write(jsonData)
 	file.close()
 
-def makeJson(coffee_list,grinder_pct_list,blend_name,page):
-	coffeeDict =  dict(zip(coffee_list,grinder_pct_list))
-	coffeeDict = collections.OrderedDict(sorted(coffeeDict.items()))
-	coffeeDict["blendRecipe"]=blend_name
+def makeJson(grinder_pct_list):
+	# coffeeDict = dict(zip(coffee_list,grinder_pct_list))
+	# coffeeDict = collections.OrderedDict(sorted(coffeeDict.items()))
+	# coffeeDict["blendRecipe"]=blend_name
 	coffeeDict["grinderPercentage0"]=grinder_pct_list[0]
 	coffeeDict["grinderPercentage1"]=grinder_pct_list[1]
 	coffeeDict["grinderPercentage2"]=grinder_pct_list[2]
-	coffeeDict["status"]='grinding'
-	
-	#base selection page - produced for base_blend.html
-	if page=='base_blend.html':
-		overall = {}
-		base_blend = {}
-		base_blend['acidity']=val
-		base_blend['body']=val
-		base_blend['aroma1']=val
-		base_blend['aroma2']=val
-		base_blend['aroma3']=val
-	
-		overall['base_blend']=base_blend
-		
-	elif page=='grinding.html':
-		
-	
-	overall['coffee']=coffeeDict
+	# coffeeDict["status"]='grinding'
 	
 	coffeeDictJson = json.dumps(coffeeDict)
 	return coffeeDictJson
@@ -139,9 +129,9 @@ def makeJson(coffee_list,grinder_pct_list,blend_name,page):
 					"aroma1": "Fruity",
 					"aroma2": "Chocolatey",
 					"aroma3": "Herby",
-					"farm_image1_url": "1001",
-					"farm_image2_url": "1002",
-					"farm_image3_url": "1003",
+					"farm_image1_url": "../img/",
+					"farm_image2_url": "../img/",
+					"farm_image3_url": "../img/",
 					"roaster_image_url": "img/fourbarrel.jpg"
 				},
 			"customer":
@@ -167,6 +157,18 @@ def makeJson(coffee_list,grinder_pct_list,blend_name,page):
 			}
 		}
 	'''
+	
+def initJson(filename):
+	setupjson = {
+	       "status": "",
+	       "canister": "",
+	       "button": "",
+	       "state": "",
+	       "coffee":"",
+	       "customer":"",
+	       "blend":""
+	}
+	postJsonToServer(filename,setupjson)
 	
 def updateJson(filename,status):
 	file = open(filename,'r+b')

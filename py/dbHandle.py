@@ -1,13 +1,13 @@
 import MySQLdb as sql
 
-def openDbConnection():
+def openConn():
 	"""instantiates the mysql db connection and returns the connection and cursor objects"""
 	#abstract the user,passwd,db,host fields in a config file next
 	connection = sql.connect(user="root",passwd="sct",db="sct")
 	cursor = connection.cursor()
 	return connection,cursor
 
-def executeDbQuery(connection,cursor,query,query_type):
+def executeQuery(connection,cursor,query,query_type):
 	"""executes the queries agains the database, query_type can be select or insert/update/delete"""
 	if query_type =='select':
 		cursor.execute(query)
@@ -19,7 +19,7 @@ def executeDbQuery(connection,cursor,query,query_type):
 		connection.commit()
 		#generate a log msg in the future
 		
-def closeDbConnection(connection,cursor):
+def closeConn(connection,cursor):
 	"""closes the cursor and database connections. Python does this automatically but you can explicitly call it."""
 	cursor.close()
 	connection.close()

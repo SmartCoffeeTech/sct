@@ -38,7 +38,7 @@ drop table if exists Coffee;
 create table Coffee (
 	coffee_id int auto_increment,
 	coffee_name varchar(255) default NULL,
-	roast_date timestamp DEFAULT '00-00-00 00:00:00',
+	roast_date timestamp default '00-00-00 00:00:00',
 	roast_company varchar(255),
 	country_of_origin varchar(255),
 	region varchar(200),

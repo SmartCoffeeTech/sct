@@ -158,6 +158,17 @@ def computeCoffeeChange(cp_list=[],bp_list=[],a_list=[],b_list=[],blend={},blend
 	Bc = (((cp1-bp1)*b1) + ((cp2-bp2)*b2) + ((cp3-bp3)*b3) + (Bp*Bb))/Tp
 	print Ac, Bc
 	
+def computeBlendPct(grinder_pct_list=0,custom_pct=0):
+	grinder_pct_list = [20,40,40]
+	if custom_pct!=0:
+		blend_pct = float(sum(grinder_pct_list)-custom_pct)/100
+		grinder_pct_list[0] = blend_pct * grinder_pct_list[0]
+		grinder_pct_list[1] = blend_pct * grinder_pct_list[1]
+		grinder_pct_list[2] = blend_pct * grinder_pct_list[2]
+		return grinder_pct_list
+	else:
+		return grinder_pct_list
+	
 def main():
 	blend_list = initData('blend')
 	cust_list = initData('cust')

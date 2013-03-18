@@ -65,25 +65,28 @@ def grinderCommManager(ser,msg_to_grinder):
 		print e
 		sleep(.1)
 		grinderCommManager(ser,msg_to_grinder)
-
+'''
 if grinderInit(ser,'ready')=='arduinoReady':
 	#wait for php to send a message
-	#when they indicate how much customization they want
-	#20,40,60 or 100
-	msg_to_grinder = getValueFromDbOrJson()
-	if msg_to_grinder.startswith('basePercentage'):
-		# 'basePercentage 33'
-		grinderCommManager(ser,msg_to_grinder)
-		msg_to_grinder = 'blend 20 10 3'
-		grinderCommManager(ser,msg_to_grinder)
+	if getJsonMsg()=='base_blend.html':
+		#when they indicate how much customization they want
+		#20,40,60 or 100
+		msg_to_grinder = getValueFromJson()
+		if msg_to_grinder.startswith('basePercentage'):
+			# 'basePercentage 33'
+			grinderCommManager(ser,msg_to_grinder)
+			msg_to_grinder = 'blend 20 10 3'
+			grinderCommManager(ser,msg_to_grinder)
 		
-	msg_to_grinder = getValueFromDbOrJson()
-	# 'blend 20 10 3'
-	grinderCommManager(ser,msg_to_grinder)
-	#if sum == 100 'complete'
-	grinderCommManager(ser,msg_to_grinder)
-	#wait a bit then 'reset'
-	grinderCommManager(ser,msg_to_grinder)
+		msg_to_grinder = getValueFromDbOrJson()
+		# 'blend 20 10 3'
+		grinderCommManager(ser,msg_to_grinder)
+		#if sum == 100 'complete'
+		grinderCommManager(ser,msg_to_grinder)
+		#wait a bit then 'reset'
+		grinderCommManager(ser,msg_to_grinder)
+	else:
+		grinderInit(ser)'''
 	
 'Handshake: always return message sent'
 
@@ -93,16 +96,6 @@ if grinderInit(ser,'ready')=='arduinoReady':
 'expecting complete'
 'expecting reset'
 'expecting ready'
-
-getMessageFromGrinder(ser)
-	
-if grinderCommManager(msg).startswith('ready'):
-	
-else if grinderCommManager(msg).startswith('basePercentage'):
-	
-else if grinderCommManager(msg).startswith('blend'):
-	
-else if grinderCommManager(msg).startswith('complete'):
 	
 	
 	
