@@ -61,6 +61,7 @@ def getCoffeeJsons(roaster):
 				}
 		else:
 			raise Exception('Grinder value not recognized')
+		
 		return coffee_dict
 	except Exception, e:
 		print e
@@ -87,6 +88,7 @@ def updaterOfJsons(filename,section,dictr):
 	file.close()
 
 def makeJson(grinder_pct_list):
+	coffeeDict={}
 	# coffeeDict = dict(zip(coffee_list,grinder_pct_list))
 	# coffeeDict = collections.OrderedDict(sorted(coffeeDict.items()))
 	# coffeeDict["blendRecipe"]=blend_name
@@ -95,8 +97,7 @@ def makeJson(grinder_pct_list):
 	coffeeDict["grinderPercentage2"]=grinder_pct_list[2]
 	# coffeeDict["status"]='grinding'
 	
-	coffeeDictJson = json.dumps(coffeeDict)
-	return coffeeDictJson
+	return coffeeDict
 	
 	'''
 	coffeeDict = {
@@ -168,6 +169,7 @@ def initJson(filename):
 	       "customer":"",
 	       "blend":""
 	}
+	setupjson = json.dumps(setupjson)
 	postJsonToServer(filename,setupjson)
 	
 def updateJson(filename,status):

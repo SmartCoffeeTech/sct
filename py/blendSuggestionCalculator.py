@@ -113,13 +113,14 @@ def computeCoffeeBlendSuggestion(blends,cust):
 	
 #for this to work:
 # 
-def computeCoffeeChange(cp_list=[],bp_list=[],a_list=[],b_list=[],blend={},blend_percentage=0):
+def computeCoffeeChange(cp_list=[],bp_list=[],blend={},blend_percentage=0):
 	coffee1 = {"name":"Ethiopian",  "body":2.3,"acidity":4.5,"fruity":6,"earthy":8,"chocolatey":5,"winey":4,"nutty":3,"herby":2,"smokey":3,"spicy":7,"floral":5}
 	coffee2 = {"name":"Colombian",   "body":9.1,"acidity":2.5,"fruity":4,"earthy":4,"chocolatey":3,"winey":2,"nutty":7,"herby":6,"smokey":6,"spicy":4,"floral":9}
 	coffee3 = {"name":"Costa Rican", "body":4.9,"acidity":5.5,"fruity":2,"earthy":3,"chocolatey":7,"winey":10,"nutty":5,"herby":8,"smokey":4,"spicy":2,"floral":2}
 	
-	#percentage of coffee in the cup
+	
 	if len(cp_list)==0:
+		#percentage of coffee in the cup
 		cp1 = 20
 		cp2 = 40
 		cp3 = 10
@@ -148,7 +149,7 @@ def computeCoffeeChange(cp_list=[],bp_list=[],a_list=[],b_list=[],blend={},blend
 		b1,b2,b3 = coffee1['body'],coffee2['body'],coffee3['body']
 		Ab = blend['acidity']
 		Bb = blend['body']
-		Bp = blend_percentage
+		Bp = blend_percentage #base_pct
 	
 	#Total Percentage sum (grinder values)
 	Tp = cp1+cp2+cp3
@@ -157,14 +158,15 @@ def computeCoffeeChange(cp_list=[],bp_list=[],a_list=[],b_list=[],blend={},blend
 	#Body of the cup
 	Bc = (((cp1-bp1)*b1) + ((cp2-bp2)*b2) + ((cp3-bp3)*b3) + (Bp*Bb))/Tp
 	print Ac, Bc
+	return Ac,Bc
 	
 def computeBlendPct(grinder_pct_list=0,custom_pct=0):
 	grinder_pct_list = [20,40,40]
 	if custom_pct!=0:
 		blend_pct = float(sum(grinder_pct_list)-custom_pct)/100
-		grinder_pct_list[0] = blend_pct * grinder_pct_list[0]
-		grinder_pct_list[1] = blend_pct * grinder_pct_list[1]
-		grinder_pct_list[2] = blend_pct * grinder_pct_list[2]
+		grinder_pct_list[0] = int(blend_pct * grinder_pct_list[0])
+		grinder_pct_list[1] = int(blend_pct * grinder_pct_list[1])
+		grinder_pct_list[2] = int(blend_pct * grinder_pct_list[2])
 		return grinder_pct_list
 	else:
 		return grinder_pct_list
