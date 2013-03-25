@@ -105,11 +105,12 @@ def stateController(page_location,page_location_filename,coffee_list,blends,blen
 			result = dbHandle.executeQuery(db_con,db_cur,qry,'select')
 			cust1 = json.loads(result[0][1])
 			
-			global blend_name
+			#global blend_name
 			blend_name = blendCalc.computeCoffeeBlendSuggestion(blends,cust1)
 			qry = """update Orders set blend_id=(Select blend_id from Blend where blend_name='%s' limit 1) where order_id=%d""" % (blend_name,int(result[0][0]))
 			dbHandle.executeQuery(db_con,db_cur,qry,'insert')
 			
+			global blend_dict
 			blend_dict = getBlendDict(blend_name,blends)
 			aroma_dict = blendCalc.computeTop3Aromas(blend_dict)
 			aroma_json = jsonHandle.makerOfJsons(aroma_dict,'blendAromas')
@@ -119,7 +120,7 @@ def stateController(page_location,page_location_filename,coffee_list,blends,blen
 			
 		elif page_location == 'grinding.html':
 			
-			
+			global base_grinder_pct_list
 			base_grinder_pct_list=[]
 			qry = 'select customization_pct from Orders order by time_created desc limit 1'
 			custom_pct = dbHandle.executeQuery(db_con,db_cur,qry,'select')
@@ -132,27 +133,31 @@ def stateController(page_location,page_location_filename,coffee_list,blends,blen
 			base_grinder_pct_list = blendCalc.computeBlendPct(base_grinder_pct_list,custom_pct)
 			
 			#send the base_pct
+			print 'sending the base pct'
 			global base_pct
 			base_pct = sum(base_grinder_pct_list)
 			msg_to_grinder = 'basePercentage '+str(int(base_pct))
 			serialHandle.grinderCommManager(ser,msg_to_grinder)
 			
 			#send the grinder pct values
+			print 'sending grinder pct values'
 			msg_to_grinder = 'blend ' + str(base_grinder_pct_list[0]) + ' ' + str(base_grinder_pct_list[1]) + ' ' + str(base_grinder_pct_list[2])
 			serialHandle.grinderCommManager(ser,msg_to_grinder)
 			
 			#make the necessary jsons
-			blend_pct_dict = jsonHandle.makeJson(grinder_pct_list)
+			print 'making jsons'
+			blend_pct_dict = jsonHandle.makeJson(base_grinder_pct_list)
 			jsonHandle.updaterOfJsons(blend_chars_filename,'blendPercentages',blend_pct_dict)
 			jsonHandle.updaterOfJsons(blend_chars_filename,'state','base')
 			jsonHandle.updateJson(page_location_filename,'grinding.htm')
 			
 			
 		elif page_location == 'grinding.htm':
-			letsGrind(coffee_list,blend_chars_filename,blends,log_filename,ser,db_con,db_cur)
+			letsGrind(coffee_list,blend_chars_filename,blends,log_filename,ser,db_con,db_cur,page_location_filename)
 		
 		elif page_location == 'twitter.html':
 			serialHandle.grinderCommManager(ser,'complete')
+			jsonHandle.updateJson(page_location_filename,'twitter.htm')
 		else:
 			return
 	except Exception, e:
@@ -160,7 +165,7 @@ def stateController(page_location,page_location_filename,coffee_list,blends,blen
 
 #add code to declare the state: base or custom
 #keep the base pct and pass it in
-def letsGrind(coffee_list,blend_chars_filename,blends,log_filename,ser,db_con,db_cur):
+def letsGrind(coffee_list,blend_chars_filename,blends,log_filename,ser,db_con,db_cur,page_location_filename=''):
 	message = serialHandle.getMessageFromGrinder(ser)
 	
 	if len(message)>0:
@@ -171,38 +176,49 @@ def letsGrind(coffee_list,blend_chars_filename,blends,log_filename,ser,db_con,db
 			if message.startswith('grinderPercentage'):
 				print 'in the grinder pct loop'
 				jsonHandle.updaterOfJsons(blend_chars_filename,'status','grinding')
-				
-				#customer_id,order_id,customer_name,blend_name = dbHandle.executeQuery(db_con,db_cur,query,'select')
 				coffee_dict = jsonHandle.makeJson(grinder_pct_list)
-				#add in code to build the new json during grinding
 				jsonHandle.updaterOfJsons(blend_chars_filename,'customerPercentages',coffee_dict)
 				
 				#base_pct is a global var
 				if sum(grinder_pct_list)>=base_pct:
+					print "in the greater than base loop"
+					blend_ab_dict={}
+					blend_ab_dict['acidity']=blend_dict['acidity']
+					blend_ab_dict['body']=blend_dict['body']
+					cust_ac,cust_bdy = blendCalc.computeCoffeeChange(grinder_pct_list,base_grinder_pct_list,blend_ab_dict,base_pct)
+					print "customer acidity", cust_ac
+					print "customer body", cust_bdy
+					jsonHandle.updaterOfJsons(blend_chars_filename,'customerAcidity',cust_ac)
+					jsonHandle.updaterOfJsons(blend_chars_filename,'customerBody',cust_bdy)
 					jsonHandle.updaterOfJsons(blend_chars_filename,'state','custom')
-					#blend_ab_dict = blend_acidity + blend_body
-					blend_dict = getBlendDict(blend_name,blends)
-					cust_ac,cust_bdy = blendCalc.computeCoffeeChange(grinder_pct_list,blend_pct_list,blend_ab_dict,base_pct)
-					jsonHandle.updaterOfJsons(blend_chars_filename,'customerAcidity',blend_dict['acidity'])
-					jsonHandle.updaterOfJsons(blend_chars_filename,'customerBody',blend_dict['body'])
+					print "customeracid and body jsons updated and state set to custom"
 					
 				#base_pct is a global var
-				if sum(grinder_pct_list)<=base_pct:
-					jsonHandle.updaterOfJsons(blend_chars_filename,'basePercentages',coffee_dict)
+				if sum(grinder_pct_list)<base_pct:
+					print "in the less than base loop"
+					pass
 					
 				if sum(grinder_pct_list)==100:
 					time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+					print "in the 100pct grinder pre db insert loop"
 					qry = """insert into Orders (order_id,grinder0_pct,grinder1_pct,grinder2_pct,grind_complete)
-					VALUES ((select order_id from Orders order by time_created desc limit 1),%f,%f,%f,'%s')
+					VALUES ((select order_id from (select order_id from Orders order by time_created desc limit 1) as x),%f,%f,%f,'%s')
 					ON DUPLICATE KEY UPDATE grinder0_pct=VALUES(grinder0_pct), grinder1_pct=VALUES(grinder1_pct),
 					grinder2_pct=VALUES(grinder2_pct), grind_complete=VALUES(grind_complete)
 					""" % (grinder_pct_list[0],grinder_pct_list[1],grinder_pct_list[2],time)
 					
+					print "database order qry prepped"
 					dbHandle.executeQuery(db_con,db_cur,qry,'insert')
 					jsonHandle.updaterOfJsons(blend_chars_filename,'status','readyToBrew')
-					tweet_msg = tweetHandle.getTweetInfo(customer_name,blend_name,coffee_list)
+					print "readytobrew json made"
+					qry = 'select name from Customer order by time_created desc limit 1'
+					customer_name = dbHandle.executeQuery(db_con,db_cur,qry,'select')
+					customer_name = customer_name[0][0]
+					tweet_msg = tweetHandle.getTweetInfo(customer_name,blend_dict['name'],coffee_list)
 					tweetHandle.tweetIt(tweet_msg)
-					jsonHandle.updateJson(page_location_filename,'grinding.htm','status')
+					print "tweet made"
+					#update page status while waiting for redirect
+					jsonHandle.updateJson(page_location_filename,'grind.htm')
 				
 			elif message.startswith('grinderCanister'):
 				#add code to update the farm json
