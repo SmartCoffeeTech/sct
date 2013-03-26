@@ -113,7 +113,7 @@ $(document).ready(function() {
 							$("#indicator0star").show();
 							$("#indicator0check").hide();
 							$("#indicator0cross").hide();
-							$("#coffeebar0").width(data.overall.customerPercentages.grinder0Percentage+'%');
+							$("#coffeebar0").width(data.customerPercentages.grinder0Percentage+'%');
 						}
 						if (data.customerPercentages.grinder1Percentage!=0){
 							$("#indicator1star").show();

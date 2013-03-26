@@ -10,35 +10,35 @@ def getCoffeeJsons(roaster):
 					"farm": "Agaro",
 					"varietal": "Heirloom",
 					"altitude": "1900-2100 masl",
-					"roast_date":'2013-02-20',
-					"acidity": "6.2",
-					"body": "7.5",
+					"roast_date":"2013-02-20",
+					"acidity": 6.2,
+					"body": 7.5,
 					"aroma1": "Fruity",
 					"aroma2": "Chocolatey",
 					"aroma3": "Herby",
-					"farm_image1_url": "../img/fourbarrel_agaro_farm1.jpg",
-					"farm_image2_url": "../img/fourbarrel_agaro_farm2.jpg",
-					"farm_image3_url": "../img/fourbarrel_agaro_farm3.jpg",
+					"farm_image1_url": "../img/ethiopia_map.gif",
+					"farm_image2_url": "../img/ethiopia_farm.jpg",
+					"farm_image3_url": "../img/ethiopia_flag.gif",
 					"roaster_image_url": "../img/fourbarrel.jpg"
 				}
 		elif roaster==1:
 			coffee_dict = {
 					"roast_company": "Ritual",
-					"country_of_origin": "Colombia",
-					"region": "Huila",
-					"farm": "Desarrollo",
-					"varietal": "Caturra",
-					"altitude": "1500-1900 masl",
-					"roast_date":'2013-02-14',
-					"acidity": "6.2",
-					"body": "7.5",
-					"aroma1": "Fruity",
-					"aroma2": "Chocolatey",
+					"country_of_origin": "Bolivia",
+					"region": "Caranavi",
+					"farm": "Calama",
+					"varietal": "Caturra, Catuai, Typica",
+					"altitude": "1350 masl",
+					"roast_date":"2013-02-19",
+					"acidity": 6.2,
+					"body": 7.5,
+					"aroma1": "Winey",
+					"aroma2": "Spicy",
 					"aroma3": "Herby",
-					"farm_image1_url": "../img/ritual_desarrollo_farm1.jpg",
-					"farm_image2_url": "../img/ritual_desarrollo_farm2.jpg",
-					"farm_image3_url": "../img/ritual_desarrollo_farm3.jpg",
-					"roaster_image_url": "../img/ritual.jpg"
+					"farm_image1_url": "../img/bolivia_map.gif",
+					"farm_image2_url": "../img/bolivia_farm.jpg",
+					"farm_image3_url": "../img/bolivia_flag.gif",
+					"roaster_image_url": "../img/ritual.gif"
 				}
 		elif roaster==2:
 			coffee_dict = {
@@ -48,16 +48,16 @@ def getCoffeeJsons(roaster):
 					"farm": "Toarco",
 					"varietal": "Typica",
 					"altitude": "1400-2000 masl",
-					"roast_date":'2013-02-19',
-					"acidity": "6.2",
-					"body": "7.5",
+					"roast_date":"2013-02-19",
+					"acidity": 6.2,
+					"body": 7.5,
 					"aroma1": "Fruity",
 					"aroma2": "Chocolatey",
 					"aroma3": "Herby",
-					"farm_image1_url": "../img/sightglass_toarco_farm1.jpg",
-					"farm_image2_url": "../img/sightglass_toarco_farm2.jpg",
-					"farm_image3_url": "../img/sightglass_toarco_farm3.jpg",
-					"roaster_image_url": "../img/sightglass.jpg"
+					"farm_image1_url": "../img/indonesia_map.gif",
+					"farm_image2_url": "../img/indonesia_farm.jpg",
+					"farm_image3_url": "../img/indonesia_flag.gif",
+					"roaster_image_url": "../img/sightglass.png"
 				}
 		else:
 			raise Exception('Grinder value not recognized')
@@ -92,9 +92,9 @@ def makeJson(grinder_pct_list):
 	# coffeeDict = dict(zip(coffee_list,grinder_pct_list))
 	# coffeeDict = collections.OrderedDict(sorted(coffeeDict.items()))
 	# coffeeDict["blendRecipe"]=blend_name
-	coffeeDict["grinderPercentage0"]=grinder_pct_list[0]
-	coffeeDict["grinderPercentage1"]=grinder_pct_list[1]
-	coffeeDict["grinderPercentage2"]=grinder_pct_list[2]
+	coffeeDict["grinder0Percentage"]=grinder_pct_list[0]
+	coffeeDict["grinder1Percentage"]=grinder_pct_list[1]
+	coffeeDict["grinder2Percentage"]=grinder_pct_list[2]
 	# coffeeDict["status"]='grinding'
 	
 	return coffeeDict
@@ -125,8 +125,8 @@ def makeJson(grinder_pct_list):
 					"farm": "Little Farm",
 					"varietal": "Typica",
 					"altitude": "1000 masl",
-					"acidity": "6.2",
-					"body": "7.5",
+					"acidity": 6.2,
+					"body": 7.5,
 					"aroma1": "Fruity",
 					"aroma2": "Chocolatey",
 					"aroma3": "Herby",
@@ -149,15 +149,28 @@ def makeJson(grinder_pct_list):
 				},
 			"blend":
 			{
-				"grinder0Percentage":40,
-				"grinder1Percentage":30,
-				"grinder2Percentage":0,
-				"aroma1":"honey",
-				"aroma2":"cherry",
-				"aroma3":"winning"
+				"DORNER LIVES HERE"
 			}
 		}
 	'''
+	'''old Ritual coffee_dict = {
+			"roast_company": "Ritual",
+			"country_of_origin": "Colombia",
+			"region": "Huila",
+			"farm": "Desarrollo",
+			"varietal": "Caturra",
+			"altitude": "1500-1900 masl",
+			"roast_date":"2013-02-14",
+			"acidity": 6.2,
+			"body": 7.5,
+			"aroma1": "Fruity",
+			"aroma2": "Chocolatey",
+			"aroma3": "Herby",
+			"farm_image1_url": "../img/ritual_desarrollo_farm1.jpg",
+			"farm_image2_url": "../img/ritual_desarrollo_farm2.jpg",
+			"farm_image3_url": "../img/ritual_desarrollo_farm3.jpg",
+			"roaster_image_url": "../img/ritual.jpg"
+		}'''
 	
 def initJson(filename):
 	setupjson = {
@@ -166,9 +179,11 @@ def initJson(filename):
 	       "button": "",
 	       "state": "",
 	       "coffee":"",
-	       "customer":"",
-	       "blend":""
+		   "customerPercentages":"",
+		   "blendPercentages":"",
+		   "blendAromas":""
 	}
+	
 	setupjson = json.dumps(setupjson)
 	postJsonToServer(filename,setupjson)
 	

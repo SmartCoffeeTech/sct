@@ -1,0 +1,537 @@
+body {
+  background-image:url('../html/img/coffeegrindingbackground.jpg');
+  background-attachment:fixed;
+  background-position: 0px 0px;
+  font-family:serif;	
+  text-align:center;
+  color:goldenRod;
+}
+
+h1 {
+  color:goldenRod;
+  text-align:center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 50px; 
+}
+
+h2 {
+  color:goldenRod;
+  text-align:center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 40px; 
+}
+
+p {
+	text-align:center;
+	color: #e33100;
+	margin-top:35px;
+	margin-bottom:15px;
+	font-family:serif;
+	font-size:30px;
+	font-weight:bold;
+}
+
+p1 {
+	text-align:center;
+	color: goldenrod;
+	margin-top:10px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:30px;
+	font-weight:bold;
+}
+
+p2 {
+	text-align:center;
+	margin-top:0px;
+	font-family:serif;
+	font-size:35px;
+	font-weight:bold;
+}
+
+p3 {
+	text-align:center;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+}
+
+p4 {
+	text-align:center;
+	line-height:25px;
+	color:white;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+}
+
+div.pageArea {
+	padding:0px;
+	float:left;
+	border: 0px solid red;
+	border-width: 0px;
+	width: 930px;
+	height: 470px;
+	margin-left: 0px;
+	margin-top: 20px;
+}
+
+div.centerArea{
+  float: left;
+  position:relative;     
+  border: 0px solid white;
+  border-width: 0px;
+  width: 300px;
+  height: 100%;
+  opacity: 1;
+  margin-left: 20px;
+  margin-top: 0px; 
+}
+
+div.coffeeName{
+  float: left;
+  position:absolute;       
+  border: 0px solid white;
+  border-width: 0px;
+  width: 300px;
+  height: 100px;
+  margin-left: 0px;
+  margin-top: 0px; 
+}
+
+div.imageArea{
+  float: left;
+  position:relative;       
+  border: 0px solid white;
+  border-width: 0px;
+  width: 300px;
+  height: 100%;
+  margin-left: 0px;
+  margin-top: 0px; 
+}
+
+div.nivoSlider {
+  position: absolute;       
+  border: 0px solid white;
+  border-width:0px;
+  width: 300px;
+  height: 400px;
+  text-align: center;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width:100%;
+  height:auto;
+  overflow: hidden;
+}
+
+div.nivoSlider img {     
+  border-radius: 15px;
+}
+
+.nivo-main-image {
+	display: block !important;
+	position: absolute !important; 
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	width: 100% !important;
+}
+
+div.farmName{
+  float: left;
+  position:absolute;       
+  border: 0px solid white;
+  border-width: 0px;
+  width: 300px;
+  height: 100px;
+  bottom: 0;
+  margin-left: 0px;
+}
+
+div.leftArea{
+  float: left;
+  position:relative;       
+  border: 0px solid goldenrod;
+  border-width: 0px;
+  width: 300px;
+  height: 100%;
+  margin-left: 40px;
+  margin-top: 0px; 
+}
+
+div.progressArea {
+  padding:0px;
+  float:left;
+  position:relative;       
+  border: 0px solid white;
+  border-width:0px;
+  width: 100%;
+  height:25%;
+  margin-right:0px;
+}
+
+div.progressBarArea {
+  padding:0px;
+  float:left;
+  position:relative;       
+  border: 0px solid white;
+  border-width:0px;
+  width: 100%;
+  height: 50px;
+  margin-right:0px;
+}
+
+div.progressBar {
+  margin-bottom: 0px;
+  height:100%;
+  width: 100%;
+  border: 0px solid red;
+  border-width:0px;
+  overflow: visible;
+  background-color: #cccccc;
+  border-radius: 15px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+div.progressBar .barLevel {
+  position: absolute;
+  height: 100%;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 15px 15px 15px 15px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color:  #e33100;
+  bottom: 0;
+  max-width:100%;
+  width: 0%;
+}
+
+div.progressBarLabel {
+	padding:0px;
+	float:left;
+	position: relative;
+	text-align: center;
+	font-size: 30px;
+	border: 0px solid orange;
+	border-width: 0px;
+	width: 100%;
+	height: 30px;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+
+div.coffeeInfoArea {
+	position: relative;
+	padding:0px;
+	float:left;
+	border: 1px solid red;
+	border-width: 0px;
+	width: 100%;
+	height: 57%;
+	margin-left: 0%;
+	margin-top: 5%;
+}
+
+div.coffeeBarArea {
+	position: relative;
+	padding:0px;
+	float:left;
+	border: 1px solid red;
+	border-width: 0px;
+	width: 45%;
+	height: 100%;
+	margin-left: 0%;
+	margin-top: 0px;
+}
+
+div.barAreaLeft {
+  padding:0px;
+  float:left;
+  position:relative;       
+  border: 0px solid white;
+  border-width:0px;
+  width: 50px;
+  height:100%;
+  margin-right:0px;
+  margin-left:0px;
+}
+
+div.barAreaRight {
+  padding:0px;
+  float:right;
+  position:relative;       
+  border: 0px solid white;
+  border-width:0px;
+  width: 50px;
+  height:100%;
+  margin-right:0px;
+  margin-left:0px;
+}
+
+div.coffeeData {
+  margin-bottom: 0px;
+  height:100%;
+  width: 100%;
+  border: 0px solid red;
+  border-width:0px;
+  overflow: visible;
+  background-color: #cccccc;
+  border-radius: 15px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+div.coffeeData .coffeeAcidity {
+  position: absolute;
+  width: 50%;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 15px 15px 0px 15px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: goldenRod;
+  bottom: 0;
+  max-height:100%;
+  height: 0%;
+}
+
+div.coffeeData .customerAcidity {
+  float:right;
+  position: absolute;
+  right:0;
+  width: 50%;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 15px 15px 15px 0px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #e33100;
+  bottom: 0;
+  max-height:100%;
+  height: 0%;
+}
+
+div.coffeeData .coffeeBody{
+  position: absolute;
+  width: 50%;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 15px 15px 0px 15px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: goldenRod;
+  bottom: 0;
+  max-height:100%;
+  height: 0%;
+}
+
+div.coffeeData .customerBody {
+  float:right;
+  position: absolute;
+  right:0;
+  width: 50%;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 15px 15px 15px 0px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #e33100;
+  bottom: 0;
+  max-height:100%;
+  height: 0%;
+}
+
+div.barLabelHorizontalLeft {
+	padding:0px;
+	float:left;
+	position: relative;
+	text-align: left;
+	font-size: 30px;
+	color: white;
+	border: 0px solid orange;
+	border-width: 0px;
+	height: 8%;
+	margin-left: -7%;
+	margin-top: 0px;
+}
+
+div.barLabelHorizontalRight {
+	padding:0px;
+	float:left;
+	position: relative;
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	border: 0px solid orange;
+	border-width: 0px;
+	width: 30%;
+	height: 8%;
+	margin-right: 0px;
+	margin-top: 0px;
+}
+
+div.logoArea {
+	padding:0px;
+	float:right;
+	bottom: 0;
+	right: 0;
+	border: 0px solid green;
+	border-width: 0px;
+	width: 50%;
+	margin-top: 15%;
+}
+div.keyArea {
+	padding:0px;
+	float:right;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border: 0px solid green;
+	border-width: 0px;
+	width: 50%;
+	height: 25%;
+}
+
+div.keyBox {
+	padding:0px;
+	float:left;
+	position: relative;
+	border: 0px solid green;
+	border-width: 0px;
+	width: 20%;
+	height: 100%;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+div.keyColorCustomer {
+	padding:0px;
+	float:left;
+	background-color: #e33100;
+	position: relative;
+	border: 0px solid green;
+	border-width: 0px;
+	width: 100%;
+	height: 40%;
+	border-radius: 10px;
+	margin-bottom:20%;
+	margin-top:10%;
+}
+
+div.keyColorCoffee {
+	padding:0px;
+	float:left;
+	background-color: goldenRod;
+	position: relative;
+	border: 0px solid green;
+	border-width: 0px;
+	width: 100%;
+	height: 40%;
+	border-radius: 10px;
+}
+
+div.keyLabel {
+	padding:0px;
+	float:left;
+	color: white;
+	font-size: 22px;
+	text-align: left;
+	position: relative;
+	border: 0px solid green;
+	border-width: 0px;
+	width: 75%;
+	height: 40%;
+	margin-left: 5%;
+	margin-bottom:3%;
+	margin-top:2%;
+}
+
+div.rightArea {
+  padding:0px;
+  float:left;
+  position:relative;       
+  border: 0px solid white;
+  border-width: 0px;
+  height:100%;
+  width:250px;
+  margin-left:20px;
+  margin-top: auto;
+}
+
+div.roasterArea{
+  padding:0px;
+  float:right;
+  position:relative;       
+  font-size: 25px;
+  border: 0px solid green;
+  border-width: 0px;
+  width: 100%;
+  height:60%;
+}
+
+div.roasterName{
+  padding:0px;
+  float:right;
+  position:absolute; 
+  top:0;      
+  font-size: 25px;
+  border: 0px solid green;
+  border-width: 0px;
+  width: 100%;
+  height:30px;
+}
+
+.roasterImage {
+	display: inline-block; 
+	padding: 0px 0px 0px; 
+	border-radius: 10px;
+	position: relative;
+	height: 82%; 
+	width: auto;
+	margin-top:45px;
+}
+
+div.aromaArea{
+  padding:0px;
+  float:right;
+  color: white;
+  font-size: 25px;
+  position:relative;    
+  border: 0px solid blue;
+  border-width: 0px;
+  width: 100%;
+  height:40%;
+}
+
+.leftText {
+  float: left;
+  text-align: left;
+  width: 33%;
+}
+
+.centerText {
+  float: left;
+  text-align: center;
+  width: 33%;
+}
+
+.rightText {
+  float: right;
+  text-align: right;
+}
+
+.buttonimage {
+  display: inline-block; 
+  padding: 0px 0px 0px; 
+  border-radius: 10px;
+  position: relative;
+  height: 120px; 
+}

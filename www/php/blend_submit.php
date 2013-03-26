@@ -16,15 +16,15 @@ if(strlen($customization_pct)>0)
 
 	mysql_select_db("sct", $con);
 
-	$getCustomerId = sprintf("Select customer_id from Orders order by time_created desc limit 1");
+	$getOrderId = sprintf("Select order_id from Orders order by time_created desc limit 1");
 
-	$result = mysql_query($getCustomerId);
+	$result = mysql_query($getOrderId);
 	$row = mysql_fetch_row($result);
-	$customer_id = $row[0];
+	$order_id = $row[0];
 
-   $sqlCmd = sprintf("INSERT INTO Orders (customer_id, customization_pct) 
+   $sqlCmd = sprintf("INSERT INTO Orders (order_id, customization_pct) 
      VALUES (%d,%d) ON DUPLICATE KEY UPDATE customization_pct=VALUES(customization_pct)", 
-      $customer_id,
+      $order_id,
       $customization_pct
 	);
 

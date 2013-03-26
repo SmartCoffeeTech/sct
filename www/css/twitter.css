@@ -1,0 +1,43 @@
+body {
+	background-image:url('../html/img/twitterpage.jpg');
+	background-attachment:fixed;
+	background-position: -260px center;
+	background-size: 1000px 680px;
+	background-color:000000;
+	background-repeat:no-repeat;
+	font-family:serif;	
+	text-align:center;
+}
+
+div.pageArea {
+	color: white;
+	text-align:center;
+	padding:0px;
+	float:left;
+	position:relative;
+	margin-top: 0px;
+	border: 0px solid white;
+	width:1600px;
+}
+
+div.col1 {
+	float:right;
+	padding:0px;
+	border:10px solid red;
+	border-width:0px;
+	width:600px;
+	margin-top:135px;
+}
+div.col2 {
+	color:#ffffff;
+	text-align:left;
+	font-size: 55px;
+	position:absolute;
+	float:left;
+	padding:0px;
+	border:10px solid black;
+	border-width:0px;
+	margin-left:20px;
+	margin-top:0px;
+	width:800px;
+}

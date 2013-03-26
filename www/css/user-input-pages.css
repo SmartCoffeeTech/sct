@@ -1,0 +1,240 @@
+body {
+	background-image:url('../html/img/blendselection.jpg');
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	background-position: 10px 0px;
+	background-color: black;
+	font-family:serif;
+	color:goldenrod;
+	
+}
+
+h1 {
+	text-align:center;
+	font-size:60px;
+	font-weight:bold;
+	line-height: 1.2; 
+	margin: auto;
+	color: goldenrod;
+}
+
+h2 {
+	text-align:center;
+	font-size:75px;
+	font-weight:bold;
+	line-height: 1.2; 
+	margin: auto;
+	color: black;
+}
+
+p {
+	text-align:center;
+	font-size:40px;
+	font-weight:bold;
+	margin:auto;
+	color:goldenrod;
+}
+
+p1 {
+	text-align:center;
+	font-size:40px;
+	font-weight:bold;
+	margin: auto;
+	color:white;
+}
+
+p2 {
+	text-align:center;
+	color:white;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+
+}
+
+p3 {
+	text-align:center;
+	color: #e33100;
+	margin-top:5px;
+	margin-bottom:5px;
+	font-family:serif;
+	font-size:40px;
+	font-weight:bold;
+}
+
+div.pageArea {
+	color: white;
+	text-align:center;
+	padding:0px;
+	position:relative;
+	margin-top: 100px;
+	border: 0px solid white;
+}
+
+div.customerName {
+	padding:0px;
+	position: relative;
+	border: 0px solid red;
+	margin-top:150px;
+}
+
+div.BABLogo {
+	padding:0px;
+	position:realtive;
+	border: 0px solid blue;
+	margin-top:60px;
+}
+
+.name {
+	padding:2px;
+	width:300px;
+	font-size:20px;
+	text-align:center;
+	margin: 15px 0px 25px;
+	border: 1px solid white;	
+}
+
+.awesome, .awesome:visited {
+	background: none; 
+	display: inline-block; 
+	padding: 5px;
+	color: white; 
+	text-decoration: none;
+	border-radius: 5px;
+	text-shadow: 0 5px 5px rgba(0,0,0,0.5);
+	border: 2px solid goldenrod;
+	border-bottom-width:1px;
+	border-right-width:1px;
+	position: relative;
+	cursor: pointer;
+	margin-top: 0px;
+}
+
+	.awesome:hover								{ background-color: #111; color: #fff; }
+	.awesome:active								{ top: 1px; }
+	
+	.large.awesome, .large.awesome:visited 		{ font-size: 30px; padding: 5px; }
+	
+	.red.awesome, .red.awesome:visited			{ background-color: #e33100; }
+	.red.awesome:hover							{ background-color: #872300; }
+
+	.blend.awesome, .blend.awesome:visited		{opacity: 0.5; border: none;}
+	.blend.awesome:hover						{opacity: 1; border: none; }	
+
+div.inputArea{
+	color: white;
+	float:center;
+	padding:0px;
+	position:relative;
+	border: 0px solid blue;
+	width: 1500px;
+	height: 450px;
+	margin-top: 100px;
+}
+
+div.column1{
+	color: white;
+	float:left;
+	padding:0px;
+	position:relative;
+	border: 0px solid green;
+	width: 33.3%;
+	height: 100%;
+}
+
+div.column2{
+	color: white;
+	float:left;
+	padding:0px;
+	position:relative;
+	border: 0px solid red;
+	width: 33.3%;
+	margin-top:300px;
+}
+
+div.columnCenter{
+	color: white;
+	float:center;
+	padding:0px;
+	position:relative;
+	border: 0px solid red;
+	width: 500px;
+	margin-top:150px;
+}
+
+div.sliderarea {
+	color: white;
+	font-size:20px;	
+	float:center;
+	text-align:left;
+	padding:0px;
+	position:relative;
+	border-width:0px;
+	width: 400px;
+	margin-bottom: 20px;
+}
+div.sliderlabelleft {
+	color: white;
+	float:left;
+	text-align:left;
+	padding:0px;
+	position:relative;
+	border-width:0px;
+	width: 33.3%;
+}
+div.sliderlabelcenter {
+	color: white;
+	float:left;
+	text-align:center;
+	padding:0px;
+	position:relative;
+	width: 33.3%;
+}
+div.sliderlabelright {
+	color: white;
+	float:left;
+	text-align:right;
+	padding:0px;
+	position:relative;
+	border-width:0px;
+	width: 33.3%;
+}
+
+div.aromaArea{
+	color: white;
+	font-size:20px;
+	float:center;
+	text-align:left;
+	padding:0px;
+	border:0px solid red;
+	position:relative;
+	border-width: 0px;
+	width: 400px;
+}
+div.aromaColumn {
+	float:left;
+	padding:0px;
+	text-align:justify;
+	position:relative;
+	border:0px solid black;
+	border-width:0px;
+	width: 33.3%;
+}
+
+.buttonimage {
+	display: inline-block; 
+	padding: 0px 0px 0px; 
+	border-radius: 10px;
+	position: relative;
+	height: 200px; 
+	width: 200px;
+}
+
+div.customerEmail {
+	padding:0px;
+	position: relative;
+	border: 0px solid red;
+	margin-top:20px;
+}

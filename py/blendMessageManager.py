@@ -149,6 +149,12 @@ def stateController(page_location,page_location_filename,coffee_list,blends,blen
 			blend_pct_dict = jsonHandle.makeJson(base_grinder_pct_list)
 			jsonHandle.updaterOfJsons(blend_chars_filename,'blendPercentages',blend_pct_dict)
 			jsonHandle.updaterOfJsons(blend_chars_filename,'state','base')
+			jsonHandle.updaterOfJsons(blend_chars_filename,'status','grinding')
+			coffee_dict = jsonHandle.makeJson([0,0,0])
+			jsonHandle.updaterOfJsons(blend_chars_filename,'customerPercentages',coffee_dict)
+			jsonHandle.updaterOfJsons(blend_chars_filename,'customerAcidity',blend_dict['acidity'])
+			jsonHandle.updaterOfJsons(blend_chars_filename,'customerBody',blend_dict['body'])
+			#update the page to avoid running again
 			jsonHandle.updateJson(page_location_filename,'grinding.htm')
 			
 			
@@ -165,19 +171,21 @@ def stateController(page_location,page_location_filename,coffee_list,blends,blen
 
 #add code to declare the state: base or custom
 #keep the base pct and pass it in
-def letsGrind(coffee_list,blend_chars_filename,blends,log_filename,ser,db_con,db_cur,page_location_filename=''):
+def letsGrind(coffee_list,blend_chars_filename,blends,log_filename,ser,db_con,db_cur,page_location_filename):
 	message = serialHandle.getMessageFromGrinder(ser)
 	
 	if len(message)>0:
 		grinder_pct_list,log_msg,message = parseMessageAndReturnInfo(message)
-		print "we're above the try"
+		print "we've sent and parsed the msg to the grndr"
 		try:
 			
 			if message.startswith('grinderPercentage'):
 				print 'in the grinder pct loop'
-				jsonHandle.updaterOfJsons(blend_chars_filename,'status','grinding')
+				print 'grinder_pct_list'
 				coffee_dict = jsonHandle.makeJson(grinder_pct_list)
+				print 'coffee_dict', coffee_dict
 				jsonHandle.updaterOfJsons(blend_chars_filename,'customerPercentages',coffee_dict)
+				print 'made the jsons'
 				
 				#base_pct is a global var
 				if sum(grinder_pct_list)>=base_pct:

@@ -10,12 +10,12 @@ def initData(selection):
 	
 	blend = '{"name":"Golden Gate",        "body":9.0,"acidity":5.5,"fruity":3,"earthy":3,"chocolatey":5,"winey":6,"nutty":5,"herby":3,"smokey":3,"spicy":3,"floral":3}'
 	blend1 = '{"name":"Stanford Cardinal", "body":8.3,"acidity":6.5,"fruity":3,"earthy":3,"chocolatey":5,"winey":6,"nutty":5,"herby":3,"smokey":3,"spicy":5,"floral":6}'
-	blend2 ='{"name":"Shreveport John",    "body":9.1,"acidity":7.5,"fruity":2,"earthy":4,"chocolatey":3,"winey":4,"nutty":6,"herby":4,"smokey":6,"spicy":4,"floral":7}'
-	blend3 ='{"name":"Johan Gutenburg",    "body":6.9,"acidity":8.5,"fruity":1,"earthy":5,"chocolatey":7,"winey":8,"nutty":5,"herby":5,"smokey":4,"spicy":3,"floral":2}'
+	blend2 ='{"name":"Fog City",    "body":9.1,"acidity":7.5,"fruity":2,"earthy":4,"chocolatey":3,"winey":4,"nutty":6,"herby":4,"smokey":6,"spicy":4,"floral":7}'
+	# blend3 ='{"name":"Johan Gutenburg",    "body":6.9,"acidity":8.5,"fruity":1,"earthy":5,"chocolatey":7,"winey":8,"nutty":5,"herby":5,"smokey":4,"spicy":3,"floral":2}'
 	blend = json.loads(blend)
 	blend1 = json.loads(blend1)
 	blend2 = json.loads(blend2)
-	blend3 = json.loads(blend3)
+	# blend3 = json.loads(blend3)
 	
 	coffee1 = '{"name":"Ethiopian",  "body":2.3,"acidity":4.5,"fruity":6,"earthy":8,"chocolatey":5,"winey":4,"nutty":3,"herby":2,"smokey":3,"spicy":7,"floral":5}'
 	coffee2 ='{"name":"Colombian",   "body":9.1,"acidity":2.5,"fruity":4,"earthy":4,"chocolatey":3,"winey":2,"nutty":7,"herby":6,"smokey":6,"spicy":4,"floral":9}'
