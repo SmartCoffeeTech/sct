@@ -16,7 +16,7 @@ Shadowbox.init();
 
 $(document).ready(function() {
 
-	$("h1").text("Grind Your "+$.QueryString.blend+"!");          
+	$("h1").text("Grind Your Personal Blend!");          
 	              
 	var coffeegage0 = new JustGage({
 		id: "gage0",

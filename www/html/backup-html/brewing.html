@@ -1,0 +1,145 @@
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
+	<script type="text/javascript" src="querystring-0.9.0.js"></script>
+	
+	<style>
+	body {
+	    background-image:url('brewing.jpg');
+	    background-attachment:fixed;
+	    background-color:000000;
+	    background-size: 1200px 800px;
+	    background-position: center center;
+	    background-repeat:no-repeat;
+	    font-family:serif;    
+	        text-align:center;
+	}
+
+	h1 {
+	    color:#000000;
+	    text-align:center;
+	        font-size: 75px; 
+	        margin-left:0px;
+	}
+
+	h2 {
+	    color:#000000;
+	    text-align:left;
+	        font-size: 35px; 
+	        margin-left:0px;
+	}
+
+	div.col1 {
+	    float:center;
+	    padding:2px;
+	    font-size: 30px;
+	    border:10px solid black;
+	    border-width:0px;
+	    margin-left:0px;
+	    margin-top:150px;
+	    text-align:center;
+	    color:white;
+	}
+
+	p {
+	    text-align:center;
+	    color:goldenrod;
+	    margin-top:40px;
+	    font-family:serif;
+	    font-size:45px;
+	    font-weight:bold;
+	    margin-bottom:15px;
+	}
+
+	.email {
+	    padding:1px;
+	    width:200px;
+	    font-size:20px;
+	    text-align:center;
+		margin-bottom:-12px;
+	}
+
+
+.awesome, .awesome:visited {
+	background: #222 ; 
+	display: inline-block; 
+	padding: 5px 10px 6px; 
+	color: #fff; 
+	text-decoration: none;
+	border-radius: 5px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+}
+
+	.awesome:hover							{ background-color: #111; color: #fff; }
+	.awesome:active							{ top: 1px; }
+	
+	.large.awesome, .large.awesome:visited 			{ font-size: 30px; padding: 5px 5px 5px; }
+	
+
+	.red.awesome, .red.awesome:visited			{ background-color: #e33100; }
+	.red.awesome:hover							{ background-color: #872300; }
+	
+</style>
+
+    <title>Brewing</title>
+
+    </head>
+
+    <body>
+	<script>
+	(function($) {
+	    $.QueryString = (function(a) {
+	        if (a == "") return {};
+	        var b = {};
+	        for (var i = 0; i < a.length; ++i)
+	        {
+	            var p=a[i].split('=');
+	            if (p.length != 2) continue;
+	            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+	        }
+	        return b;
+	    })(window.location.search.substr(1).split('&'))
+	})(jQuery);
+	$(document).ready(function(){
+		var blend = $.QueryString.blend;
+		$.getJSON('dataout1.json', function(data){
+			$("#coffee0").html("<b>" +Object.keys(data)[1]+": </b>" + data[Object.keys(data)[1]] + "%");
+			$("#coffee1").html("<b>" +Object.keys(data)[5]+": </b>" + data[Object.keys(data)[5]] + "%");
+			$("#coffee2").html("<b>" +Object.keys(data)[7]+": </b>" + data[Object.keys(data)[7]] + "%");
+		});
+		
+		if (blend.substr(-5,5)=='Blend'){
+			$("blendname").html("<strong> the </strong>" + blend);
+		}
+		else if (blend.substr(-8,8)=='Creation'){
+			$("blendname").text(" your own " + blend);
+		}
+		else if (blend.substr(-6,6)=='Origin'){
+			$("blendname").text(" "+ blend);
+		}
+		
+	});</script>
+	
+	<div class='col1'>
+	
+ 	<h1>Ready to Brew</h1>   
+     <dl> 
+     <dt><b>We're brewing your cup of</b><blendname></blendname></dt>
+     <dd id='coffee0'><coffee0pct></coffee0pct></dd>
+     <dd id='coffee1'><coffee1pct></coffee1pct></dd>
+     <dd id='coffee2'><coffee2pct></coffee2pct></dd>
+     </dl> 
+     
+	
+	<p>What is your email?</p>
+<form action="email.php" method='post'>
+  <center><input class='email' type="text" name="email" method='post'><br><br>
+  <input class='large red awesome' type="submit" value="Email Me Details!"></center>
+</form>
+</div>
+    </body>
+    </html>

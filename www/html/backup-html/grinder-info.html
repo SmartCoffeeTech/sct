@@ -1,0 +1,595 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<link rel="stylesheet" href="../css/nivo-slider.css" type="text/css" media="screen" />
+
+<script  src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="../js/nivo/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+
+<style>
+body {
+	background-image:url('img/coffeegrindingbackground.jpg');
+	background-attachment:fixed;
+	background-position: 0px 0px;
+	font-family:serif;	
+    text-align:center;
+}
+
+h1 {
+	color:goldenRod;
+	text-align:center;
+	margin-top: 0px;
+	margin-bottom: 0px;
+    font-size: 50px; 
+}
+
+h2 {
+	color:goldenRod;
+	text-align:center;
+	margin-top: 0px;
+	margin-bottom: 0px;
+    font-size: 40px; 
+}
+
+p {
+	text-align:center;
+	color: #e33100;
+	margin-top:35px;
+	margin-bottom:15px;
+	font-family:serif;
+	font-size:30px;
+	font-weight:bold;
+}
+
+p1 {
+	text-align:center;
+	color:goldenRod;
+	margin-top:10px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:30px;
+	font-weight:bold;
+
+}
+
+p2 {
+	text-align:center;
+	color:goldenRod;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:35px;
+	font-weight:bold;
+
+}
+
+p3 {
+	text-align:center;
+	color:goldenRod;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+
+}
+
+p4 {
+	text-align:center;
+	line-height:25px;
+	color:white;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+
+}
+
+div.pageArea {
+	padding:0px;
+	float:left;
+	border: 0px solid red;
+	border-width: 0px;
+	width: 930px;
+	height: 470px;
+	margin-left: 0px;
+	margin-top: 20px;
+}
+
+div.topArea {
+	padding:0px;
+	float:left;
+	border: 1px solid red;
+	border-width: 0px;
+	width: 100%;
+	height: 75%;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+div.bottomArea {
+	padding:0px;
+	float:left;
+	position: absolute;
+	bottom:0;
+	border: 0px solid green;
+	border-width: 0px;
+	width: 100%;
+	height: 80px;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+div.progressBarLabel1 {
+	padding:0px;
+	float:left;
+	position: absolute;
+	bottom: 0;
+	text-align: left;
+	font-size: 30px;
+	color: white;
+	border: 0px solid orange;
+	border-width: 0px;
+	width: 100%;
+	height: 30px;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+div.progressBarLabel2 {
+	padding:0px;
+	float:left;
+	position: relative;
+	top: 0;
+	text-align: center;
+	font-size: 30px;
+	color: white;
+	border: 0px solid orange;
+	border-width: 0px;
+	width: 100%;
+	height: 30px;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+
+div.rightArea {
+   padding:0px;
+   float:left;
+   position:relative;       
+   border: 0px solid white;
+   border-width: 0px;
+   height:100%;
+   width:250px;
+   margin-left:20px;
+   margin-top: auto;
+}
+
+div.roasterArea{
+   padding:0px;
+   float:right;
+   position:relative;       
+   color: goldenRod;
+   font-size: 25px;
+   border: 0px solid blue;
+   border-width: 0px;
+   width: 100%;
+   height:50%;
+}
+
+.roasterImage {
+	display: inline-block; 
+	padding: 0px 0px 0px; 
+	border-radius: 10px;
+	position: relative;
+	height: 80%; 
+	width: auto;
+}
+
+div.aromaArea{
+   padding:0px;
+   float:right;
+   font-size: 25px;
+   color: #e33100;
+   position:relative;       
+   border: 0px solid blue;
+   border-width: 0px;
+   width: 100%;
+   height:50%;
+}
+
+div.barArea {
+   padding:0px;
+   float:left;
+   position:relative;       
+   border: 0px solid white;
+   border-width:0px;
+   width: 20%;
+   height:100%;
+   margin-right:0px;
+
+}
+
+div.barLabel {
+   padding:0px;
+   float:left;
+   position:relative;  
+   text-align: center;
+   font-size: 40px;    
+   color: white; 
+   border: 0px solid white;
+   border-width:0px;
+   width: 15%;
+   height:100%;
+   margin-right:0px;
+}
+
+
+div.coffeeData {
+  margin-bottom: 0px;
+  height:100%;
+  width: 100%;
+  border: 0px solid red;
+  border-width:0px;
+  overflow: visible;
+  background-color: #cccccc;
+  border-radius: 15px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+div.coffeeData .coffeeAcidity {
+  position: absolute;
+  width: 50%;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 15px 15px 0px 15px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: goldenRod;
+  bottom: 0;
+  max-height:100%;
+  height: 0%;
+}
+
+div.coffeeData .customerAcidity {
+  float:right;
+  position: absolute;
+  right:0;
+  width: 50%;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 15px 15px 15px 0px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: blue;
+  bottom: 0;
+  max-height:100%;
+  height: 0%;
+}
+
+div.coffeeData .coffeeBody{
+  position: absolute;
+  width: 50%;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+  border-radius: 15px 15px 0px 15px;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: goldenRod;
+  bottom: 0;
+  max-height:100%;
+  height: 0%;
+}
+
+div.coffeeData .customerBody {
+  float:right;
+  position: absolute;
+  right:0;
+  width: 50%;
+  font-size: 12px;
+  color: #ffffff;
+  border-radius: 15px 15px 15px 0px;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: blue;
+  bottom: 0;
+  max-height:100%;
+  height: 0%;
+}
+
+div.leftArea{
+   float: left;
+   position:relative;       
+   border: 0px solid white;
+   border-width: 0px;
+   width: 300px;
+   height: 100%;
+   margin-left: 20px;
+   margin-top: 0px; 
+}
+
+div.statusArea{
+   float: left;
+   position:relative;       
+   border: 0px solid white;
+   border-width: 0px;
+   width: 300px;
+   height: 100%;
+   margin-left: 20px;
+   margin-top: 0px; 
+}
+
+div.coffeeName{
+   float: left;
+   position:absolute;       
+   border: 0px solid white;
+   border-width: 0px;
+   width: 300px;
+   height: 100px;
+   margin-left: 0px;
+   margin-top: 0px; 
+}
+
+div.farmName{
+   float: left;
+   position:absolute;       
+   border: 0px solid white;
+   border-width: 0px;
+   width: 300px;
+   height: 100px;
+   bottom: 0;
+   margin-left: 0px;
+}
+
+div.imageArea{
+   float: left;
+   position:relative;       
+   border: 0px solid white;
+   border-width: 0px;
+   width: 300px;
+   height: 100%;
+   margin-left: 0px;
+   margin-top: 0px; 
+}
+
+div.nivoSlider {
+   position: absolute;       
+   border: 0px solid white;
+   border-width:0px;
+   width: 300px;
+   height: 400px;
+   text-align: center;
+   top: 0;
+   bottom: 0;
+   margin: auto;
+   width:100%;
+   height:auto;
+   overflow: hidden;
+}
+
+div.nivoSlider img {     
+	border-radius: 15px;
+}
+
+.nivo-main-image {
+	display: block !important;
+	position: absolute !important; 
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	width: 100% !important;
+}
+
+.progress {
+  height: 50px;
+  margin-top: 0px;
+  border:0px solid black;
+  border-width:0px;
+  overflow: hidden;
+  background-color: #cccccc;
+  border-radius: 15px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.progress .bar {
+  float: left;
+  height: 100%;
+  font-size: 12px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #ffffff;
+}
+
+
+.progress-coffee0 .bar,
+.progress .bar-coffee0 {
+background-color:  blue;
+width: 0%;
+}
+.progress-coffee1 .bar,
+.progress .bar-coffee1 {
+background-color:  blue;
+width: 0%;
+}
+.progress-coffee2 .bar,
+.progress .bar-coffee2 {
+background-color:  blue;
+width: 0%;
+}
+
+.leftText {
+    float: left;
+    text-align: left;
+     width: 33%;
+}
+
+.centerText {
+    float: left;
+    text-align: center;
+     width: 33%;
+}
+
+.rightText {
+    float: right;
+    text-align: right;
+}
+
+}
+
+</style>
+
+
+
+<script type="text/javascript">
+
+$(window).load(function() {
+    $('#slider').nivoSlider({
+        effect: 'none', // Specify sets like: 'fold,fade,sliceDown'
+        animSpeed: 500, // Slide transition speed
+        pauseTime: 5000, // How long each slide will show
+        startSlide: 0, // Set starting Slide (0 index)
+        directionNav: false, // Next & Prev navigation
+        controlNav: false, // 1,2,3... navigation
+        controlNavThumbs: false, // Use thumbnails for Control Nav
+        pauseOnHover: false, // Stop animation while hovering
+        manualAdvance: false, // Force manual transitions
+        prevText: 'Prev', // Prev directionNav text
+        nextText: 'Next', // Next directionNav text
+        randomStart: false, // Start on a random slide
+    });
+});
+
+</script>
+
+<script>
+
+$(document).ready(function() {
+
+setInterval(function(){
+			    $.ajax({ 
+				url: "../data/dataout2.json", 
+				success: function(data){
+					if (data.overall.status=='grinding'){
+
+						var coffeeAcidity = (data.overall.coffee.acidity-6)*(25);
+						var customerAcidity = (data.overall.customer.acidity-6)*(25);
+						var coffeeBody = (data.overall.coffee.body-6)*(25);
+						var customerBody = (data.overall.customer.body-6)*(25);
+
+							$("#coffeeAcidity").height(coffeeAcidity+'%');
+							$("#customerAcidity").height(customerAcidity+'%');
+
+							$("#coffeeBody").height(coffeeBody+'%');
+							$("#customerBody").height(customerBody+'%');
+
+							$("#coffeebar0").width(data.overall.customer.grinder0Percentage+'%');
+							$("#coffeebar1").width(data.overall.customer.grinder1Percentage+'%');
+							$("#coffeebar2").width(data.overall.customer.grinder2Percentage+'%');
+
+							 $("#coffeeDetails").find("country").text( data.overall.coffee.country_of_origin);
+							 $("#coffeeDetails").find("region").text(data.overall.coffee.region);
+							 $("#farmDetails").find("farm").text(data.overall.coffee.farm);
+							 $("#farmDetails").find("altitude").text(data.overall.coffee.altitude);
+
+							 $("#roast_company").find("roaster").text(data.overall.coffee.roast_company);
+							 $("#roaster_image").attr("src", data.overall.coffee.roaster_image_url);
+
+							 $("#aromas").find("aroma1").text(data.overall.coffee.aroma1);
+							 $("#aromas").find("aroma2").text(data.overall.coffee.aroma2);
+							 $("#aromas").find("aroma3").text(data.overall.coffee.aroma3);
+
+					}
+
+			   },
+			 dataType: "json",
+			 cache: false
+			});
+			},10); 
+    		
+});
+
+</script>
+<title>Blend Menu</title>
+<body>
+<div class="pageArea">
+	<div class="leftArea">
+		<div class="coffeeName" id="coffeeDetails">
+			<h1><country>Country</country></h1>
+			<p2><region>Region</region></p2>
+		</div>
+		<div class="farmName" id="farmDetails">
+			<h2><farm>Farm</farm></h2>
+			<p3>Altitude: </p3><p3><altitude><p2>Altitude</altitude></p3>
+		</div>
+		<div class="imageArea">
+			<div class="slider-wrapper">
+			    <div id="slider" class="nivoSlider">
+			        <img src="img/ethiopianfarm1.jpg" />
+			        <img src="img/ethiopianfarm2.gif" />
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="statusArea">
+		<div class="topArea">
+			<div class="barLabel">
+			</div>
+			<div class="barArea">
+			    <div class="coffeeData">
+			    	<div id="coffeeAcidity" class="coffeeData coffeeAcidity"></div>
+			    	<div id="customerAcidity" class="coffeeData customerAcidity"></div>
+				</div>
+			</div>
+			<div class="barLabel">
+			</div>
+			<div class="barLabel">
+			</div>
+			<div class="barArea">
+				<div class="coffeeData">
+			    	<div id="coffeeBody" class="coffeeData coffeeBody"></div>
+			    	<div id="customerBody" class="coffeeData customerBody"></div>
+				</div>
+			</div>
+			<div class="barLabel">
+			</div>
+
+		<div class="progressBarLabel2">
+	        	Order Completion
+			</div>
+			
+			</div>
+		<div class="bottomArea">
+			
+			<div class="progress">
+			    <div id="coffeebar0" class="bar bar-coffee0"></div>
+			    <div id="coffeebar1" class="bar bar-coffee1"></div>
+			    <div id="coffeebar2" class="bar bar-coffee2"></div>
+			</div>
+			<div class="progressBarLabel1">
+				<span class="leftText">0%</span>
+	        	<span class="centerText">50%</span>
+	        	<span class="rightText">100%</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="rightArea">
+			<div class="roasterArea" id="roast_company">
+				<p2><roaster>Ritual Roasters</roaster></p2><br>
+				<img src='img/ritual.gif' class='roasterImage' id='roaster_image'</img>
+			</div>
+			<div class="aromaArea" id="aromas">
+				<p1>Coffee Characteristics</p1>
+				<dl> 
+				    <dt><aroma1>aroma1</aroma1></dt>
+				    <dt><aroma2>aroma2</aroma2></dt>
+				    <dt><aroma3>aroma3</aroma3></dt>
+	    		</dl> 
+			</div>
+	</div>
+</div>
+
+</body>
+</html>

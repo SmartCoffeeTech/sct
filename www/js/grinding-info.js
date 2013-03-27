@@ -9,10 +9,10 @@ $(document).ready(function() {
                 $('#slider').data('nivoslider').stop();
             }
 
-            var coffeeAcidity = (data.coffee.acidity-6)*(25);
-            var coffeeBody = (data.coffee.body-6)*(25);
-            var customerAcidity = (data.customerAcidity-6)*(25);
-            var customerBody = (data.customerBody-6)*(25);
+            var coffeeAcidity = data.coffee.acidity*10;
+            var coffeeBody = data.coffee.body*10;
+            var customerAcidity = data.customerAcidity*10;
+            var customerBody = data.customerBody*10;
             var progressBarLevel = (data.customerPercentages.grinder0Percentage)+(data.customerPercentages.grinder1Percentage)+(data.customerPercentages.grinder2Percentage);
 
             $("#progressBar").width(progressBarLevel+'%');

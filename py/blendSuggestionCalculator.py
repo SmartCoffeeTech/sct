@@ -8,18 +8,18 @@ import collections
 
 def initData(selection):
 	
-	blend = '{"name":"Golden Gate",        "body":9.0,"acidity":5.5,"fruity":3,"earthy":3,"chocolatey":5,"winey":6,"nutty":5,"herby":3,"smokey":3,"spicy":3,"floral":3}'
-	blend1 = '{"name":"Stanford Cardinal", "body":8.3,"acidity":6.5,"fruity":3,"earthy":3,"chocolatey":5,"winey":6,"nutty":5,"herby":3,"smokey":3,"spicy":5,"floral":6}'
-	blend2 ='{"name":"Fog City",    "body":9.1,"acidity":7.5,"fruity":2,"earthy":4,"chocolatey":3,"winey":4,"nutty":6,"herby":4,"smokey":6,"spicy":4,"floral":7}'
-	# blend3 ='{"name":"Johan Gutenburg",    "body":6.9,"acidity":8.5,"fruity":1,"earthy":5,"chocolatey":7,"winey":8,"nutty":5,"herby":5,"smokey":4,"spicy":3,"floral":2}'
-	blend = json.loads(blend)
+	blend1 = '{"name":"Golden Gate",        "body":5.0,"acidity":5.25,"fruity":3,"earthy":3,"chocolatey":6,"winey":2,"nutty":7,"herby":4,"smokey":2,"spicy":2,"floral":2}'
+	blend2 = '{"name":"Stanford Cardinal", "body":5.7,"acidity":7.1,"fruity":5,"earthy":4,"chocolatey":4,"winey":1,"nutty":4,"herby":3,"smokey":3,"spicy":3,"floral":5}'
+	blend3 ='{"name":"Fog City",    "body":8.5,"acidity":5.5,"fruity":8,"earthy":5,"chocolatey":3,"winey":2,"nutty":5,"herby":2,"smokey":4,"spicy":4,"floral":6}'
+	# blend4 ='{"name":"Johan Gutenburg",    "body":6.9,"acidity":8.5,"fruity":1,"earthy":5,"chocolatey":7,"winey":8,"nutty":5,"herby":5,"smokey":4,"spicy":3,"floral":2}'
 	blend1 = json.loads(blend1)
 	blend2 = json.loads(blend2)
-	# blend3 = json.loads(blend3)
+	blend3 = json.loads(blend3)
+	# blend4 = json.loads(blend4)
 	
-	coffee1 = '{"name":"Ethiopian",  "body":2.3,"acidity":4.5,"fruity":6,"earthy":8,"chocolatey":5,"winey":4,"nutty":3,"herby":2,"smokey":3,"spicy":7,"floral":5}'
-	coffee2 ='{"name":"Colombian",   "body":9.1,"acidity":2.5,"fruity":4,"earthy":4,"chocolatey":3,"winey":2,"nutty":7,"herby":6,"smokey":6,"spicy":4,"floral":9}'
-	coffee3 ='{"name":"Costa Rican", "body":4.9,"acidity":5.5,"fruity":2,"earthy":3,"chocolatey":7,"winey":10,"nutty":5,"herby":8,"smokey":4,"spicy":2,"floral":2}'
+	coffee1 = '{"name":"Ethiopian",  "body":7.0,"acidity":10.0,"fruity":9,"earthy":3,"chocolatey":5,"winey":2,"nutty":6,"herby":2,"smokey":3,"spicy":5,"floral":5}'
+	coffee2 ='{"name":"Indonesian",   "body":10.0,"acidity":1.0,"fruity":7,"earthy":6,"chocolatey":3,"winey":1,"nutty":4,"herby":2,"smokey":5,"spicy":3,"floral":6}'
+	coffee3 ='{"name":"Bolovian", "body":3.0,"acidity":5.0,"fruity":2,"earthy":2,"chocolatey":7,"winey":3,"nutty":8,"herby":5,"smokey":1,"spicy":1,"floral":1}'
 	json.loads(coffee1)
 	json.loads(coffee2)
 	json.loads(coffee3)
@@ -39,7 +39,7 @@ def initData(selection):
 		return coffee_list
 	elif selection=='blend':	
 		blend_list = []
-		blend_list = [blend,blend1,blend2,blend3]
+		blend_list = [blend1,blend2,blend3]
 		return blend_list
 	elif selection=='customer':	
 		customer_list = []
@@ -114,9 +114,9 @@ def computeCoffeeBlendSuggestion(blends,cust):
 #for this to work:
 # 
 def computeCoffeeChange(cp_list=[],bp_list=[],blend={},blend_percentage=0):
-	coffee1 = {"name":"Ethiopian",  "body":2.3,"acidity":4.5,"fruity":6,"earthy":8,"chocolatey":5,"winey":4,"nutty":3,"herby":2,"smokey":3,"spicy":7,"floral":5}
-	coffee2 = {"name":"Colombian",   "body":9.1,"acidity":2.5,"fruity":4,"earthy":4,"chocolatey":3,"winey":2,"nutty":7,"herby":6,"smokey":6,"spicy":4,"floral":9}
-	coffee3 = {"name":"Costa Rican", "body":4.9,"acidity":5.5,"fruity":2,"earthy":3,"chocolatey":7,"winey":10,"nutty":5,"herby":8,"smokey":4,"spicy":2,"floral":2}
+	coffee1 = {"name":"Ethiopian",  "body":7.0,"acidity":10.0,"fruity":9,"earthy":3,"chocolatey":5,"winey":2,"nutty":6,"herby":2,"smokey":3,"spicy":5,"floral":5}
+	coffee2 = {"name":"Bolovian", "body":3.0,"acidity":5.0,"fruity":2,"earthy":2,"chocolatey":7,"winey":3,"nutty":8,"herby":5,"smokey":1,"spicy":1,"floral":1}
+	coffee3 = {"name":"Indonesian",   "body":10.0,"acidity":1.0,"fruity":7,"earthy":6,"chocolatey":3,"winey":1,"nutty":4,"herby":2,"smokey":5,"spicy":3,"floral":6}
 	
 	
 	if len(cp_list)==0:
@@ -157,7 +157,7 @@ def computeCoffeeChange(cp_list=[],bp_list=[],blend={},blend_percentage=0):
 	Ac = (((cp1-bp1)*a1) + ((cp2-bp2)*a2) + ((cp3-bp3)*a3) + (Bp*Ab))/Tp
 	#Body of the cup
 	Bc = (((cp1-bp1)*b1) + ((cp2-bp2)*b2) + ((cp3-bp3)*b3) + (Bp*Bb))/Tp
-	print Ac, Bc
+	
 	return Ac,Bc
 	
 def computeBlendPct(grinder_pct_list=0,custom_pct=0):

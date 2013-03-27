@@ -1,0 +1,72 @@
+	
+	coffeeDict = {
+    "blendRecipe": blend_name,
+    "grinderPercentage0": grinder_pct_list[0],
+	"grinderPercentage1": grinder_pct_list[1],
+	"grinderPercentage2": grinder_pct_list[2],
+	coffee_list[0]: grinder_pct_list[0],
+	coffee_list[1]: grinder_pct_list[1],
+	coffee_list[2]: grinder_pct_list[2],
+	"status":'grinding'
+	}
+	
+	
+	
+		{
+			"status": "grinding",
+			"canister": "false",
+			"state":"base",
+			"coffee":
+				{
+					"roast_company": "Ritual Roasters",
+					"country_of_origin": "Colombia",
+					"region": "Some region",
+					"farm": "Little Farm",
+					"varietal": "Typica",
+					"altitude": "1000 masl",
+					"acidity": 6.2,
+					"body": 7.5,
+					"aroma1": "Fruity",
+					"aroma2": "Chocolatey",
+					"aroma3": "Herby",
+					"farm_image1_url": "../img/",
+					"farm_image2_url": "../img/",
+					"farm_image3_url": "../img/",
+					"roaster_image_url": "img/fourbarrel.jpg"
+				},
+			"customer":
+				{
+					"acidity": "8",
+					"body": "9",
+					"aroma1": "Fruity",
+					"aroma2": "Chocolatey",
+					"aroma3": "Herby",
+					"grinder0Percentage": 40,
+					"grinder1Percentage": 0,
+					"grinder2Percentage": 0,
+					"name": "Erik"
+				},
+			"blend":
+			{
+				"DORNER LIVES HERE"
+			}
+		}
+	
+old Ritual coffee_dict = {
+			"roast_company": "Ritual",
+			"country_of_origin": "Colombia",
+			"region": "Huila",
+			"farm": "Desarrollo",
+			"varietal": "Caturra",
+			"altitude": "1500-1900 masl",
+			"roast_date":"2013-02-14",
+			"acidity": 6.2,
+			"body": 7.5,
+			"aroma1": "Fruity",
+			"aroma2": "Chocolatey",
+			"aroma3": "Herby",
+			"farm_image1_url": "../img/ritual_desarrollo_farm1.jpg",
+			"farm_image2_url": "../img/ritual_desarrollo_farm2.jpg",
+			"farm_image3_url": "../img/ritual_desarrollo_farm3.jpg",
+			"roaster_image_url": "../img/ritual.jpg"
+		}

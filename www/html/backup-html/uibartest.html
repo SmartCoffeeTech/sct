@@ -1,0 +1,49 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>jQuery UI Progressbar - Default functionality</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+<style>
+ div.inputDiv  {
+   float: left;
+   width: 22%;
+   min-height: 100%;
+   margin: 14px;
+   padding: 10px;
+}
+#progressbar {
+	padding:5px;
+}
+#progressbar1 {
+	margin:10px;
+}
+</style>
+  <script>
+
+
+  $(function() {
+    $( "#progressbar1" ).progressbar({
+      value: 66,
+    });
+  });
+  $(function() {
+    $( "#progressbar2" ).progressbar({
+      value: 96,
+    });
+  });
+  </script>
+</head>
+<body>
+ <div id='mainObj' class="inputDiv">
+<div id="progressbar1"></div>
+<div id="progressbar2"></div>
+ </div>
+ 
+</body>
+</html>

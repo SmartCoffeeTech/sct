@@ -1,0 +1,294 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="../css/range.css" type="text/css" media="screen" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+ <style>
+
+h1 {
+	text-align:center;
+	color:goldenrod;
+	margin-top:100px;
+	margin-bottom:80px;
+	font-family:serif;
+	font-size:60px;
+	font-weight:bold;
+}
+
+body {
+	background-image:url('img/blendselection.jpg');
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	background-position: -30px 0px;
+	background-color: black;
+	font-family:serif;
+	color:white;
+
+}
+
+p {
+	text-align:center;
+	color:white;
+	margin-top:40px;
+	margin-bottom:15px;
+	font-family:serif;
+	font-size:30px;
+	font-weight:bold;
+}
+
+p2 {
+	text-align:center;
+	color:white;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+
+}
+
+p3 {
+	text-align:center;
+	color: #e33100;
+	margin-top:5px;
+	margin-bottom:5px;
+	font-family:serif;
+	font-size:40px;
+	font-weight:bold;
+}
+
+div.area0 {
+	color: white;
+        float: center;
+        text-align:center;
+        padding:0px;
+	position:relative;
+        border: 0px solid white;
+        width: 1500px;
+}
+
+div.area1{
+	color: white;
+        float:left;
+        padding:0px;
+	position:relative;
+        border: 0px solid blue;
+        width: 500px;
+        height: 350px;
+}
+
+div.area2{
+	color: white;
+        float:right;
+        padding:0px;
+	position:relative;
+        border: 0px solid blue;
+        width: 500px;
+        height: 350px;
+}
+
+div.area3{
+	color: white;
+        float:left;
+        padding:0px;
+	position:relative;
+        border: 0px solid red;
+        width: 500px;
+        margin-top:300px;
+}
+
+.name {
+	padding:1px;
+	width:300px;
+	font-size:20px;
+	text-align:center;
+	margin-bottom: 0px;
+}
+
+div.sliderarea {
+	color: white;
+	font-size:20px;	
+        float:center;
+        text-align:left;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 400px;
+}
+div.sliderlabelleft {
+	color: white;
+        float:left;
+        text-align:left;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 133px;
+}
+div.sliderlabelcenter {
+	color: white;
+        float:left;
+        text-align:center;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 133px;
+}
+div.sliderlabelright {
+	color: white;
+        float:left;
+        text-align:right;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 133px;
+}
+
+div.aroma {
+	color: white;
+	font-size:20px;
+        float:center;
+        text-align:left;
+        padding:0px;
+	position:relative;
+        border-width:0px;
+        width: 400px;
+}
+div.aroma1 {
+        float:left;
+        padding:0px;
+        text-align:justify;
+	position:relative;
+	border:10px solid black;
+        border-width:0px;
+        height: 100px;
+        width: 133px;
+}
+
+.awesome, .awesome:visited {
+	background: #cccccc ; 
+	display: inline-block; 
+	padding: 5px 5px 5px; 
+	color: #ffffff; 
+	text-decoration: none;
+	border-radius: 5px;
+	text-shadow: 0 5px 5px rgba(0,0,0,0.5);
+	border: 2px solid goldenrod;
+	border-bottom-width:1px;
+	border-right-width:1px;
+	position: relative;
+	cursor: pointer;
+	margin-top: 0px;
+}
+
+	.awesome:hover							{ background-color: #111; color: #fff; }
+	.awesome:active							{ top: 1px; }
+
+	.large.awesome, .large.awesome:visited 			{ font-size: 30px; padding: 6px 3px 6px; }
+
+
+	.red.awesome, .red.awesome:visited			{ background-color: #e33100; }
+	.red.awesome:hover							{ background-color: #872300; }
+
+</style>
+
+<title>Blend Selector</title>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	(function($) {
+		    $.QueryString = (function(a) {
+		        if (a == "") return {};
+		        var b = {};
+		        for (var i = 0; i < a.length; ++i)
+		        {
+		            var p=a[i].split('=');
+		            if (p.length != 2) continue;
+		            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+		        }
+		        return b;
+		    })(window.location.search.substr(1).split('&'))
+		})(jQuery);
+		
+		$("h1").text("Hey "+$.QueryString.name+", Lets Personalize your Coffee!");
+	});
+	
+</script>
+</head>
+<body>
+<center>
+<div class="area0">	
+
+	<h1></h1>
+  
+	<div class="area1">
+	<p3>Select your Acidity and Body</p3><br><br>
+	<p2>Acidity</p2><br><br>
+	<form action="../php/customerPreferences.php" method='post'>
+	<input type="range" name="customer_prefs_arr[acidity]" method='post' min="1" max="10" step="4.5"><br><br>
+		<center><div class="sliderarea">
+			<div class="sliderlabelleft">
+			Mellow
+			</div>
+			<div class="sliderlabelcenter">
+			Moderate
+			</div>
+			<div class="sliderlabelright">
+			Sharp
+			</div>
+		</div><br><br></center>
+	<br><br>
+	<p2>Body</p2><br><br>
+	<input type="range" name="customer_prefs_arr[body]" method='post' min="1" max="10" step="4.5"><br><br>
+		<center><div class="sliderarea">
+			<div class="sliderlabelleft">
+			Light
+			</div>
+			<div class="sliderlabelcenter">
+			Medium
+			</div>
+			<div class="sliderlabelright">
+			Heavy
+			</div>
+		</div><br><br></center>
+	</div>
+	
+	<div class="area3">
+		<center><input class='large red awesome' type="submit" value="Personalize!" ></center>	
+		
+	</div>
+	
+	<div class="area2">
+	<p3>What Flavors do you Prefer?</p3><br><br>
+	<p2>Aroma</p2><br><br>
+		<center><div class="aroma">
+			  <div class="aroma1">
+			  <input name="customer_prefs_arr[fruity]" type="checkbox" value="1" method='post'> fruity <br><br>
+			  <input name="customer_prefs_arr[earthy]" type="checkbox" value="1" method='post'> earthy <br><br>
+			  <input name="customer_prefs_arr[chocolatey]" type="checkbox" value="1" method='post'> chocolatey <br><br>
+			  </div>
+			  <div class="aroma1">
+			  <input name="customer_prefs_arr[winey]" type="checkbox" value="1" method='post'> winey <br><br>
+			  <input name="customer_prefs_arr[nutty]" type="checkbox" value="1" method='post'> nutty <br><br>
+			  <input name="customer_prefs_arr[herby]" type="checkbox" value="1" method='post'> herby <br><br>
+			  </div>
+			  <div class="aroma1">
+			  <input name="customer_prefs_arr[smokey]" type="checkbox" value="1" method='post'> smokey <br><br>
+			  <input name="customer_prefs_arr[spicy]"  type="checkbox" value="1" method='post'> spicy <br><br>
+			  <input name="customer_prefs_arr[floral]" type="checkbox" value="1" method='post'> floral <br><br>
+			  </div><br><br>
+		</div></center><br><br><br><br><br>
+		<p3>Now Name It!</p3>
+
+			<center><input class='name' type="text" name="order_blend_name" value="My Blend" method='post'><br><br></center>	
+			
+	</div>
+</form>
+</div>
+</center>	
+
+
+
+
+</body>
+
+</html>

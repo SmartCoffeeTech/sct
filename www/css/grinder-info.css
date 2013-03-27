@@ -128,11 +128,13 @@ div.nivoSlider {
   margin: auto;
   width:100%;
   height:auto;
+  max-height: 400px;
   overflow: hidden;
 }
 
 div.nivoSlider img {     
   border-radius: 15px;
+  max-height: 280px;
 }
 
 .nivo-main-image {

@@ -18,16 +18,16 @@ $customer_email = $_POST['email'];
 	$row = mysql_fetch_row($result);
 	$order_id = $row[0];
 
-	$getCustomerInfo = sprintf("Select customer_id,name,blend_name,
+	$getCustomerInfo = sprintf("Select customer_id,name,
 	grinder0_pct,grinder1_pct,grinder2_pct
-	 from Orders o join Customer c using(customer_id) join Blend using(blend_id) where order_id=" . $order_id . " order by o.time_created desc limit 1");
+	 from Orders o join Customer c using(customer_id) where order_id=" . $order_id . " order by o.time_created desc limit 1");
 	
 	$result = mysql_query($getCustomerInfo);
 	$row = mysql_fetch_row($result);
 	$customer_id = $row[0];
 	$customer_name = $row[1];
-	$blend_name = $row[2];
 
+// fix the db query
    $sqlCmd = sprintf("INSERT INTO Customer (customer_id, email) 
      VALUES (%d,'%s') ON DUPLICATE KEY UPDATE email=VALUES(email)", 
       $customer_id,
@@ -43,9 +43,8 @@ $customer_email = $_POST['email'];
   $subject.= $customer_name ;
   $subject.= ', Thanks for Blending with Us @ Stanford!';
   $msg = 'Thanks for trying the Build a Brew platform by Smart Coffee Technology. 
-You made a personalized cup of the ';
-  $msg.= $blend_name;
-  $msg.= '. Please visit our website to learn more about SCT: smartcoffeetech.com.
+We hope you enjoyed your personalized blend.';
+  $msg.= ' Please visit our website to learn more about SCT: smartcoffeetech.com.
 
 <p>We\'re continually improving our system to optimize the customer experience, 
 so if you have any feedback please contact us by replying to this email.</p>
@@ -60,9 +59,7 @@ Kevin and Erik';
 
 
   $intro = $customer_name;
-  $intro.= ', <br /> Thanks for trying the Build a Brew platform by Smart Coffee Technology. You made a personalized cup of the ';
-  $intro.= $blend_name;
-  $intro.='.';
+  $intro.= ', <br /> Thanks for trying the Build a Brew platform by Smart Coffee Technology. We hope you enjoyed your personalized blend.';
 
   $headers  = 'From: BuildaBrew@SmartCoffeeTech.com';
 /*
@@ -83,8 +80,8 @@ $message = Swift_Message::newInstance()
   ->setSubject($subject)
   ->setFrom(array('BuildaBrew@SmartCoffeeTech.com' => 'Smart Coffee Technology'))
   ->setTo(array($customer_email => $customer_name));
-$header = $message->embed(Swift_Image::fromPath('coffee-bean-banner.jpg'));
-$footer = $message->embed(Swift_Image::fromPath('smartcoffeetechlogo6.png'));
+$header = $message->embed(Swift_Image::fromPath('../html/img/coffee-bean-banner.jpg'));
+$footer = $message->embed(Swift_Image::fromPath('../html/img/smartcoffeetechlogo6.png'));
 /*$message->setBody(
 '<html>' .
 ' <head><style> div {background-color:brown;}</style></head>' .
@@ -154,6 +151,19 @@ $mailer = Swift_Mailer::newInstance($transport);
 // Send the message
 $result = $mailer->send($message);
 
-$url = 'twitter.html';
+// update the application state for python
+$status_arr = array (
+	"status" => "twitter.html"
+	);
+
+chdir("/Users/kperko/work/sct/www/data/");
+$status_json = json_encode($status_arr);
+$myFile = "page_location.json";
+
+$fh = fopen($myFile, 'w') or die("can't open file");
+fwrite($fh, $status_json);
+fclose($fh);
+
+$url = '/~kperko/html/twitter.html';
 header( "Location: $url");
 ?>

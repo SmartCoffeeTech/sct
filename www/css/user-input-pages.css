@@ -64,6 +64,48 @@ p3 {
 	font-weight:bold;
 }
 
+p4 {
+	text-align:center;
+	color: white;
+	margin-top:5px;
+	margin-bottom:5px;
+	font-family:serif;
+	font-size:40px;
+	font-weight:bold;
+}
+
+p5 {
+	text-align:center;
+	color:goldenRod;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+
+}
+
+p6 {
+	text-align:center;
+	color: black;
+	margin-top:5px;
+	margin-bottom:5px;
+	font-family:serif;
+	font-size:40px;
+	font-weight:bold;
+}
+
+p7 {
+	text-align:center;
+	color:black;
+	margin-top:0px;
+	margin-bottom:0px;
+	font-family:serif;
+	font-size:25px;
+	font-weight:bold;
+
+}
+
 div.pageArea {
 	color: white;
 	text-align:center;
@@ -154,6 +196,16 @@ div.column2{
 	margin-top:300px;
 }
 
+div.column3{
+	color: white;
+	float:left;
+	padding:0px;
+	position:relative;
+	border: 0px solid red;
+	width: 33.3%;
+	margin-top:50px;
+}
+
 div.columnCenter{
 	color: white;
 	float:center;
@@ -161,7 +213,7 @@ div.columnCenter{
 	position:relative;
 	border: 0px solid red;
 	width: 500px;
-	margin-top:150px;
+	margin-top:80px;
 }
 
 div.sliderarea {

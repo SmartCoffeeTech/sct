@@ -76,11 +76,12 @@ if(count($customer_prefs_arr)>0)
 
 	mysql_select_db("sct", $con);
 	
-	$getCustomerId = sprintf("Select customer_id from Customer order by time_created desc limit 1");
+	$getCustomerId = sprintf("Select customer_id,name from Customer order by time_created desc limit 1");
 	
 	$result = mysql_query($getCustomerId);
 	$row = mysql_fetch_row($result);
 	$customer_id = $row[0];
+	$customer_name = $row[1];
 
    $sqlCmd = sprintf("INSERT INTO Orders (customer_id, taste_profile, order_blend_name) 
      VALUES (%d,'%s','%s')", 
@@ -107,6 +108,6 @@ fwrite($fh, $status_json);
 fclose($fh);
 // redirect the user to the next page
 $blend_url = str_replace(" ", "+", $name);
-$url = '/~kperko/html/base-blend.html?name='. $name;
+$url = '/~kperko/html/base-blend.html?name='. $customer_name;
 header( "Location: $url" );
 ?>

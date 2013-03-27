@@ -107,7 +107,7 @@ def stateController(page_location,page_location_filename,coffee_list,blends,blen
 			
 			#global blend_name
 			blend_name = blendCalc.computeCoffeeBlendSuggestion(blends,cust1)
-			qry = """update Orders set blend_id=(Select blend_id from Blend where blend_name='%s' limit 1) where order_id=%d""" % (blend_name,int(result[0][0]))
+			qry = """update Orders set blend_id=(Select blend_id from (select blend_id from Blend where blend_name='%s' limit 1) as x) where order_id=%d""" % (blend_name,int(result[0][0]))
 			dbHandle.executeQuery(db_con,db_cur,qry,'insert')
 			
 			global blend_dict
