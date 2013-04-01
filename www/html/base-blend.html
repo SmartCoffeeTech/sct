@@ -9,54 +9,48 @@
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 <script type="text/javascript" src="../js/base-blend.js"></script>
 
+<style>
+body {
+	background-color:black;
+	background-image: none;
+	font-family:serif;
+	color:goldenrod;
+}
+</style>
+
 <title>Base Blend Choice</title>
 </head>
 <body>
 	
-<center><div class = 'pageArea'>
+<div class = 'pageArea'>
 	<h1></h1>
-	<div class = 'inputArea'>
-		<div class='column1' id='show_div_base'>
-			<form action="../php/blend_submit.php" method="post">
-			<p3>Base Blend, Customize It!</p3>
-			<br><br>
-			<center><button type="submit" name="blend" value="Base Blend" class='large blend awesome'><img src="img/logo_bab.png" class='buttonimage'/></button></center>
-			<br>
-			<p2>Customization Level</p2><br><br>
-			<input type="range" name="customization" method='post' min="10" max="30" step="10"><br>
+	<center><div class = 'inputArea'>
+	    <center><div class='column3' id="detail">
+	    <p3>Your Suggested Blend:</p3><br>
+	        <p><name1>Stanford Cardinal</name1></p><br><br>
+	        <div class='blendChoice'>
+	        	<p2>We chose this blend because it best matched your desired acidity, body, and has aromas of:</p2><br>
+		        <p2><aroma1>aroma1</aroma1><span>, </span><aroma2>aroma2</aroma2><span>, and </span><aroma3>aroma3</aroma3></p2>
+		    </div><br><br><br>
+
+			<p8>Your Customization Level:</p8><br><br>
+			<input type="range" name="customization" method='post' min="0" max="30" step="15"><br>
 			<center><div class="sliderarea">
 					<div class="sliderlabelleft">
-					Little
+					None
 					</div>
 					<div class="sliderlabelcenter">
-					Some
+					A little
 					</div>
 					<div class="sliderlabelright">
 					A Lot!
 					</div>
-				</div></center>	
-			</form>
-		</div>	
-			
-    <div class='column3' id="detail">
-    <p3>Your Suggested Blend:</p3><br>
-        <p4><name1>Stanford Cardinal</name1></p4><br>
-        <p><name2>Fog City</name2></p>
-        <p><name3>Golden Gate</name3></p><br><br><br>
-        <p2><aroma1>aroma1</aroma1></p2><br>
-        <p2><aroma2>aroma2</aroma2></p2><br>
-        <p2><aroma3>aroma3</aroma3></p2>
-    </div>  
-		
-		<div class='column1'>
+				</div></center>	<br><br><br>
 			<form action="../php/blend_submit.php" method="post">
-			<p3> Suggested Blend, Try It!</p3>
-			<br><br>
-			<button type="submit" name="customization" value="0" class='large blend awesome'><img src="img/full_blend.jpg" class='buttonimage'/></button>
-			<br><br>
-			<p2>No Customization Necessary!</p2><br>
-			</form>		
-		</div>
+	  		<input class='large red awesome' type="submit" value="Let's Grind!">
+		</form>
+			</form>
+		</div></center>  
 	</div>
 </div> 
 </center>   

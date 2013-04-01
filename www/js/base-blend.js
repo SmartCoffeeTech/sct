@@ -29,20 +29,14 @@ $(document).ready(function() {
             $("#detail").find("name3").css('opacity', .5);      
 
             if (data.blendAromas.name=='Stanford Cardinal'){
-            $("#detail").find("name3").text("Fog City");
-            $("#detail").find("name2").text("Golden Gate");
             $("#detail").find("name1").text("Stanford Cardinal");
             }
 
             if (data.blendAromas.name=='Fog City'){
-            $("#detail").find("name3").text("Stanford Cardinal");
-            $("#detail").find("name2").text("Golden Gate");
             $("#detail").find("name1").text("Fog City");                                                      
             }                                                             
 
             if (data.blendAromas.name=='Golden Gate'){
-            $("#detail").find("name3").text("Fog City");
-            $("#detail").find("name2").text("Stanford Cardinal");
             $("#detail").find("name1").text("Golden Gate");
 
             }             
