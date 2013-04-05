@@ -46,6 +46,7 @@ fwrite($fh, $status_json);
 fclose($fh);
 
 // specify desired url
+
 $blend_url = str_replace(" ", "+", $url_blend);
 $url = '/~kperko/html/grinding.html';
 header( "Location: $url" );

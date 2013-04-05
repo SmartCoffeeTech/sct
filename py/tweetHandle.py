@@ -8,7 +8,7 @@ def getTweetInfo(customer_name,blend_name,coffee_list):
 		else:
 			blend_name = blend_name + ' blend'
 			
-		tweet = '%s made a cup of the %s w/ the @BuildaBrew platform #coffee #tech. To learn more http://bit.ly/14X7wxa' % (customer_name,blend_name)
+		tweet = '%s made a cup of the %s w/ the @BuildaBrew platform #coffee #tech. To learn more www.smartcoffeetech.com' % (customer_name,blend_name)
 		return tweet
 	except Exception, e:
 		print e
