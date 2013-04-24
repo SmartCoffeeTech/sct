@@ -13,7 +13,7 @@ def parseMessageAndReturnInfo(message):
 		parsed_msg = message.split(' ')
 		grind_pct_list = [float(parsed_msg[1]),float(parsed_msg[2]),float(parsed_msg[3])]
 		log_msg = str(parsed_msg[0]) + "|" + str(parsed_msg[1]) + "|" + str(parsed_msg[2]) +  "|" + str(parsed_msg[3]) + "|" + str(datetime.now())
-		# grinder_status = log_msg[0:8]
+		#  grinder_status = log_msg[0:8]
 		return grind_pct_list,log_msg,message
 	# no longer get these messages
 	
