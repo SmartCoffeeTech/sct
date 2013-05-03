@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+
+		<title>Ship it to Me!</title>
+		<meta name="fragment" content="!"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+		<link rel="stylesheet" type="text/css" href="style/jquery.qtip.css"/>
+		<link rel="stylesheet" type="text/css" href="style/jquery-ui/jquery-ui.css"/>
+		<link rel="stylesheet" type="text/css" href="style/supersized/supersized.css"/>
+		<link rel="stylesheet" type="text/css" href="style/supersized/supersized.shutter.css"/>
+		<link rel="stylesheet" type="text/css" href="style/fancybox/jquery.fancybox.css"/> 
+		<link rel="stylesheet" type="text/css" href="style/base.css"/> 
+		<link rel="stylesheet" type="text/css" media="screen and (max-width:969px)" href="style/responsive/width-0-969.css"/>
+		<link rel="stylesheet" type="text/css" media="screen and (max-width:767px)" href="style/responsive/width-0-767.css"/>
+		<link rel="stylesheet" type="text/css" media="screen and (min-width:480px) and (max-width:969px)" href="style/responsive/width-480-969.css"/>
+		<link rel="stylesheet" type="text/css" media="screen and (min-width:768px) and (max-width:969px)" href="style/responsive/width-768-969.css"/>
+		<link rel="stylesheet" type="text/css" media="screen and (min-width:480px) and (max-width:767px)" href="style/responsive/width-480-767.css"/>
+		<link rel="stylesheet" type="text/css" media="screen and (max-width:479px)" href="style/responsive/width-0-479.css"/>
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Voces"/>
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dosis:400,300,200,500,600,700,800" />
+		
+		<script type="text/javascript" src="script/linkify.js"></script>
+        <script type="text/javascript" src="script/jquery.min.js"></script>
+		<script type="text/javascript" src="script/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="script/jquery.qtip.min.js"></script>
+		<script type="text/javascript" src="script/jquery.blockUI.js"></script>
+		<script type="text/javascript" src="script/jquery.supersized.min.js"></script>
+		<script type="text/javascript" src="script/jquery.elastic.source.js"></script>
+		<script type="text/javascript" src="script/jquery.infieldlabel.min.js"></script>
+		<script type="text/javascript" src="script/script.js"></script>
+		<script type="text/javascript" src="script/main.js"></script>
+		<script type="text/javascript" src="script/shipping.js"></script>
+        <script type="text/javascript" src="plugin/contact-form/contact-form.js"></script>
+
+	</head>
+	<body>
+		
+		<div class="main main-body">
+			<!-- Header -->
+			<div class="header clear-fix">
+				<div class="layout-50p clear-fix">
+					<!-- Logo -->
+					<div class="layout-50p-left clear-fix">
+						<a href="index.html" class="header-logo">Coffee Post</a>
+					</div>
+					<!-- /Logo -->
+				</div>
+			</div>
+			<!-- /Header -->
+			<!-- Content -->
+			<div class="content clear-fix">
+				<ul class="no-list clear-fix section-list">
+					<!-- Shipping-->
+					<li>
+						<h2>Ship it to Me!</h2>
+						<p class="subtitle-paragraph">
+							So you want to try this coffee? Simply fill out the information below and it will be on its way!
+							<span class="bold">All we ask in return is that you provide us with some feedback about your experience.</span>
+						</p>
+
+						<div class="clear-fix layout-50">
+							<!-- Left column -->
+							<div class="layout-50-left" id="coffee">					
+							<h3>Recommended Coffee</h3>							
+								<!-- Image list -->
+								<ul class="no-list image-list image-list-carousel">
+									<!-- Image -->
+									<li id="roaster">
+										<h3><coffeeName></coffeeName></h3>
+										<div>
+											<a>
+												<img src='' id="roast_image" alt=""/>
+											</a>
+											 <a class="clear-fix padding-0"><h3><roastCompany></roastCompany></h3></a>
+											 <p><roastLocation></roastLocation></p>
+										</div>
+									</li>
+									<!-- /Image -->
+								</ul>
+								<!-- /Image list -->
+							</div>
+							<!-- /Left column -->
+							<!-- Right column -->
+							<div class="layout-50-right">
+							<h3>Shipping Information</h3>
+								<!-- Shipping form -->
+								<form name="contact-form" id="contact-form" action="" method="post" class="clear-fix">
+									<div class="clear-fix">
+										<ul class="no-list form-line">
+											<li class="clear-fix block">
+												<label for="contact-form-name">Full Name</label>
+												<input type="text" name="contact-form-name" id="contact-form-name" value=""/>
+											</li>
+											<li class="clear-fix block">
+												<label for="contact-form-mail">Your E-mail</label>
+												<input type="text" name="contact-form-mail" id="contact-form-mail" value=""/>
+											</li>
+											<li class="clear-fix block">
+												<label for="contact-form-number">Phone Number</label>
+												<input type="text" name="contact-form-number" id="contact-form-number" value=""/>
+											</li>
+											<li class="clear-fix block">
+												<input type="hidden" name="contact-form-coffee" id="contact-form-coffee" value="coffee"/>
+											</li>
+											<li class="clear-fix block">
+												<input type="hidden" name="contact-form-roast" id="contact-form-roast" value="roast"/>
+											</li>
+											<li class="clear-fix block">
+												<label for="contact-form-message">Delivery Address (number, street, state, zip code)</label>
+												<textarea name="contact-form-message" id="contact-form-message" rows="1" cols="1"></textarea>	
+											</li>
+											<li class="clear-fix block">
+												<input type="submit" id="contact-form-send" name="contact-form-send" class="button" value="Send"/>
+											</li>											
+										</ul>											
+									</div>
+								</form>
+								<!-- /Shipping form -->
+							</div>
+							<!-- /Right column -->							
+						</div>				
+					</li>
+					<!-- Shipping -->
+				</ul>
+			</div>
+			<!-- /Content -->
+		</div>
+		
+		<!-- Background overlay -->
+		<div id="background-overlay"></div>
+		<!-- /Background overlay -->
+	
+	</body>
+</html>

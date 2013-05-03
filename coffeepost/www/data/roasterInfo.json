@@ -1,0 +1,38 @@
+{
+    "fourbarrel": {
+        "roast_company": "Four Barrel Coffee",
+        "roast_image_url": "image/roaster_logo/fourbarrel.jpg",
+        "roast_location" : "San Francisco, CA",
+        "roast_description": "we love coffee because even after all these years, coffee keeps us guessing. things are as fresh as the day we met, and while you might think that at this point we could claim knowledge of every sock in the drawer, coffee has yet to become the predictable, housecoat wearing type. she is still the sly seductress we’re following around the dark corner, always just a few steps behind. constantly changing, full of intrigue, disgustingly rewarding. the closest we can come to mastery is by association: we’ve mastered the art of learning about coffee."
+    },
+    "ritual": {
+        "roast_company": "Ritual Coffee Roasters",
+        "roast_image_url": "image/roaster_logo/ritual.jpg",
+        "roast_location" : "San Francisco, CA",
+        "roast_description": "Ritual has been a pioneer in this delicious shift in coffee consciousness since we opened our doors on Valencia Street in 2005 and started what some call a coffee revolution in San Francisco. Our goal then--and our goal now--was to craft the very best cup of coffee available anywhere. Period. We've learned a lot over the years, but the care and attention we lavish on our process is unchanged, including tasting every coffee several times before it goes out to our coffee bars and into your cup."
+    },
+    "bluebottle": {
+        "roast_company": "Blue Bottle Coffee",
+        "roast_image_url": "image/roaster_logo/bluebottle.jpg",
+        "roast_location" : "San Francisco, CA",
+        "roast_description": "Blue Bottle Coffee has grown to a small network of cafes, wholesale partners, an espresso cart, a coffee kiosk, and some vintage German coffee roasters. We are still united by the simple purpose of getting great coffee to everyone who asks for it. Improbably and delightfully, there are several dozen of us now. We roast coffee on vintage gear, put it in compostable bags, and still get it to our customers within 48 hours. We roast great coffee on two coasts, we make great drinks, we clean up after ourselves, we bake cookies, we type up invoices, we get change at the bank, we say please and thank you. We offer the elderly and pregnant our seats on the bus and brush and floss daily. We look forward to seeing you soon."
+    },
+    "verve": {
+        "roast_company": "Verve Coffee",
+        "roast_image_url": "image/roaster_logo/verve.jpg",
+        "roast_location" : "Santa Cruz, CA",
+        "roast_description": "Before we buy green beans, we run sample roasts through several cupping sessions. Then the roast profile refinement begins. We work a 1965 German-made Probat UG 15 roaster at our Seabright roastery. We keep the roasting close to the café to monitor how the coffees perform for our baristas, who help us hone taste profiles and calibrate brewing parameters. Our regular customers know the café is also our lab, and they line up for the experiment. Their feedback keeps us open to exploring where a coffee can go. But we’re not reckless. We roast by hand and meticulously record everything we do. So we can reproduce what slays us and learn from what doesn’t."
+    },
+    "bicycle": {
+        "roast_company": "Bicyle Coffee",
+        "roast_image_url": "image/roaster_logo/bicycle.jpg",
+        "roast_location" : "San Francisco, CA",
+        "roast_description": "We love good coffee and we really like to ride bicycles, so we decided to combine the two. It’s pretty simple, we roast quality coffee in our custom built roaster and deliver it by bicycle. We only roast organic, fair-trade, Arabica beans grown by farm cooperatives. Bicycle Coffee was started in 2009 by three brothers, a cousin, and a family friend. The idea of delivering coffee by bicycle came about while trekking through the rain forests of Central America. Our original plan was to move to a tropical country and live in tree-houses, but plans changed when we started hanging out with coffee farmers and drinking their delicious coffee. We began to understand and appreciate all the hard work that goes into a good cup of coffee. We learned first-hand how quality coffee is grown, picked, and roasted."
+    },
+    "tico": {
+        "roast_company": "Tico Coffee Roasters",
+        "roast_image_url": "image/roaster_logo/tico.jpg",
+        "roast_location" : "San Jose, CA",
+        "roast_description": "We have specialized in bringing only the best coffees and the finest teas from the producing countries around the world and we are craft roasting sustainable, exclusive and unique direct trade boutique coffees in very small batches guaranteeing product freshness and consistency. Tico Coffee Roasters started in 2010 and the very different heritage and skill-sets that we bring with us are the perfect ingredients to provide a truly unique experience to the coffee and tea lovers in the Bay Area."
+    }
+}

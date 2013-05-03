@@ -1,0 +1,54 @@
+[
+  {
+    "roaster": "Four Barrel",
+    "coffee" : "Ethiopian",
+    "value": "Four Barrel, Ethiopian",
+    "tokens": [
+      "Four",
+      "Barrel",
+      "Ethiopia"
+    ]
+  },
+   {
+    "roaster": "Four Barrel",
+    "coffee" : "Indonesian",
+    "value": "Four Barrel, Indonesian",
+    "tokens": [
+      "Four",
+      "Barrel",
+      "Indonesian"
+    ]
+  },
+   {
+    "roaster": "Four Barrel",
+    "coffee" : "Friendo Blendo",
+    "value": "Four Barrel, Friendo Blendo",
+    "tokens": [
+      "Four",
+      "Barrel",
+      "Friendo",
+      "Blendo"
+    ]
+  },  
+  {
+    "roaster": "Blue Bottle",
+    "coffee" : "Colombian",
+    "value" : "Blue Bottle, Colombian",
+    "tokens": [
+      "Blue",
+      "Bottle",
+      "Colombian"
+   ]
+  },
+  {
+    "roaster": "Tico Roasters",
+    "value": "Tico Roasters, Costa Rican",
+    "coffee" : "Costa Rican",
+    "tokens": [
+      "Costa",
+      "Rican",
+      "Roasters",
+      "Tico"
+    ]
+  }
+]

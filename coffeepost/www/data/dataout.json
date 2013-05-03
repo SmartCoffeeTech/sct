@@ -1,0 +1,12 @@
+{
+    "coffee": {
+        "roast_company": "Ritual",
+        "coffee_name": "Columbian",
+        "coffee_description": "As a shot, this Friendo’s fragrance hints at the season’s last tart Pink Lady apples. Its silky mouthfeel encapsulates flavors of green grape and plum. Heavy caramel and toffee sweetness finish this dynamic blend.",
+        "roast_image_url": "image/roaster_logo/ritual.jpg",
+        "roast_location" : "San Francisco, CA",
+        "coffee_aromas" : "Fruity. Chocolate. Sweet.",
+        "recommendation_matches" : "Fruity. Medium Roast.",
+        "roast_description": "Blue Bottle Coffee has grown to a small network of cafes, wholesale partners, an espresso cart, a coffee kiosk, and some vintage German coffee roasters. We are still united by the simple purpose of getting great coffee to everyone who asks for it. Improbably and delightfully, there are several dozen of us now. We roast coffee on vintage gear, put it in compostable bags, and still get it to our customers within 48 hours. We roast great coffee on two coasts, we make great drinks, we clean up after ourselves, we bake cookies, we type up invoices, we get change at the bank, we say please and thank you. We offer the elderly and pregnant our seats on the bus and brush and floss daily. We look forward to seeing you soon."
+    }
+}
