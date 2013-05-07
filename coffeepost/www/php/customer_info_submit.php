@@ -5,14 +5,16 @@ include("/db_config.php");
 
 // get from query string
 $customer_id = $_POST["customer_id"];
+$customer_id = $customer_id/1003;
 
-$customer_name = $_POST["customer_name"];
-$customer_city = $_POST["customer_city"];
-$customer_address = $_POST["customer_address"];
-$customer_state = $_POST["customer_state"];
-$customer_zip = $_POST["customer_zip"];
+$customer_name = $_POST["contact-form-name"];
+$customer_city = $_POST["contact-form-mail"];
+$customer_address = $_POST["contact-form-street"];
+$customer_city = $_POST["contact-form-city"];
+$customer_state = $_POST["contact-form-state"];
+$customer_zip = $_POST["contact-form-zip"];
 
-if ($customer_name && $customer_city && $customer_address && $customer_state && $customer_zip)
+if ($customer_name && $customer_city && $customer_address && $customer_city && $customer_state && $customer_zip)
 {
 	// update this to use a production ready config file
 	// $con = mysql_connect(db_host,db_user,db_pass);
@@ -28,8 +30,8 @@ if ($customer_name && $customer_city && $customer_address && $customer_state && 
 	// only one order per customer during trial period. 
 
 	$sqlCmd = sprintf("INSERT IGNORE INTO Customer (customer_id,customer_name, city, address, state, zip, shipping_info_submitted) VALUES(%d, %s,%s,%s,%s,%s,1)
-	ON DUPLICATE KEY UPDATE customer_name=VALUES(customer_name),customer_city=VALUES(customer_city),customer_address=VALUES(customer_address),
-	customer_state=VALUES(customer_state),customer_zip=VALUES(customer_zip), shipping_info_submitted=VALUES(shipping_info_submitted))", 
+	ON DUPLICATE KEY UPDATE name=VALUES(name),city=VALUES(city),address=VALUES(address),
+	state=VALUES(state),zip=VALUES(zip), shipping_info_submitted=VALUES(shipping_info_submitted))", 
 	$customer_id,
 	mysql_real_escape_string($customer_name),
 	mysql_real_escape_string($customer_city),

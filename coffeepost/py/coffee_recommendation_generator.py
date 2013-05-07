@@ -95,6 +95,8 @@ def write_to_db(db,cur,coffee_id):
 	cur.execute(sql1)
 	db.commit()
 	
+	return customer_id
+	
 	
 def write_to_json(filename,result_list):
 	json_dict = {}
@@ -158,11 +160,11 @@ def main():
 	data,rec_coffee_id = compute_coffee_recommendation(coffee_tuple)
 	
 	write_to_json(filename,data)
-	write_to_db(db,cur,rec_coffee_id)
+	customer_id = write_to_db(db,cur,rec_coffee_id)
 	
 	time_epoch = str(time_epoch)
 	subprocess.call(["chmod", "755", filename])
-	subprocess.call(["php", "../www/php/customer_redirect.php", "-t", time_epoch])
+	subprocess.call(["php", "../www/php/customer_redirect.php", "-t", time_epoch, "-c", customer_id])
 	
 	
 if __name__=='__main__':

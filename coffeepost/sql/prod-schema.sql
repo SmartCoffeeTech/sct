@@ -2,6 +2,7 @@ create table Customer (
 	customer_id int(11) not null auto_increment,
 	customer_name varchar(255) default null,
 	email varchar(255) default null,
+	address varchar(255) default null,
 	city varchar(255) default null,
 	state varchar(255) default null,
 	state_abbrev char(2) default null,
