@@ -14,7 +14,7 @@ def init_db():
 def get_the_coffee_data(cursor):
 	
 	sql2 = """select c.id,roaster_name,coffee_name,origin from coffeez_coffee c join coffeez_roaster r \
-	on c.roaster_id=r.id where binary_rep is not NULL limit 10"""
+	on c.roaster_id=r.id where binary_rep is not NULL"""
 	cursor.execute(sql2)
 	result = cursor.fetchall()
 	
