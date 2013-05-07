@@ -16,10 +16,12 @@
 	(
 		'contact-form-name'						=> $_POST['contact-form-name'],
 		'contact-form-mail'						=> $_POST['contact-form-mail'],
-		'contact-form-number'					=> $_POST['contact-form-number'],
+		'contact-form-street'					=> $_POST['contact-form-street'],
+		'contact-form-city'					    => $_POST['contact-form-city'],
+		'contact-form-state'					=> $_POST['contact-form-state'],
+		'contact-form-zip'					    => $_POST['contact-form-zip'],
 		'contact-form-roast'					=> $_POST['contact-form-roast'],		
 		'contact-form-coffee'					=> $_POST['contact-form-coffee'],
-		'contact-form-message'					=> $_POST['contact-form-message']
 	);
 	
 	/**************************************************************************/
@@ -30,10 +32,28 @@
 		$response['info'][]=array('fieldId'=>'contact-form-name','message'=>CONTACT_FORM_MSG_INVALID_DATA_NAME);
 	}
 
-	if(isEmpty($values['contact-form-number']))
+	if(isEmpty($values['contact-form-street']))
 	{
 		$response['error']=1;
-		$response['info'][]=array('fieldId'=>'contact-form-number','message'=>CONTACT_FORM_MSG_INVALID_DATA_NUMBER);
+		$response['info'][]=array('fieldId'=>'contact-form-street','message'=>CONTACT_FORM_MSG_INVALID_DATA_STREET);
+	}
+
+	if(isEmpty($values['contact-form-city']))
+	{
+		$response['error']=1;
+		$response['info'][]=array('fieldId'=>'contact-form-city','message'=>CONTACT_FORM_MSG_INVALID_DATA_CITY);
+	}
+
+	if(isEmpty($values['contact-form-state']))
+	{
+		$response['error']=1;
+		$response['info'][]=array('fieldId'=>'contact-form-state','message'=>CONTACT_FORM_MSG_INVALID_DATA_STATE);
+	}
+
+	if(isEmpty($values['contact-form-zip']))
+	{
+		$response['error']=1;
+		$response['info'][]=array('fieldId'=>'contact-form-zip','message'=>CONTACT_FORM_MSG_INVALID_DATA_ZIP);
 	}
 	
 	if(!validateEmail($values['contact-form-mail']))
@@ -41,12 +61,6 @@
  		$response['error']=1;	
 		$response['info'][]=array('fieldId'=>'contact-form-mail','message'=>CONTACT_FORM_MSG_INVALID_DATA_MAIL);
 	}
-	
-	if(isEmpty($values['contact-form-message']))
-	{
-		$response['error']=1;
-		$response['info'][]=array('fieldId'=>'contact-form-message','message'=>CONTACT_FORM_MSG_INVALID_DATA_MESSAGE);
-	}	
 	
 	if($response['error']==1) createResponse($response);
 	
