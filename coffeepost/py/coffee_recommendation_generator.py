@@ -162,7 +162,7 @@ def main():
 	
 	time_epoch = str(time_epoch)
 	subprocess.call(["chmod", "755", filename])
-	subprocess.call(["php", "customer_redirect.php", "-t", time_epoch])
+	subprocess.call(["php", "../www/php/customer_redirect.php", "-t", time_epoch])
 	
 	
 if __name__=='__main__':
