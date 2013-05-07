@@ -384,6 +384,7 @@
             this.minLength = o.minLength || 1;
             this.header = o.header;
             this.footer = o.footer;
+            this.idcof = o.idcof || "id";
             this.valueKey = o.valueKey || "value";
             this.template = compileTemplate(o.template, o.engine, this.valueKey);
             this.local = o.local;
@@ -432,9 +433,10 @@
                 }
             },
             _transformDatum: function(datum) {
-                var value = utils.isString(datum) ? datum : datum[this.valueKey], tokens = datum.tokens || utils.tokenizeText(value), item = {
+                var value = utils.isString(datum) ? datum : datum[this.valueKey], tokens = datum.tokens || utils.tokenizeText(value), idcof = datum.idcof, item = {
                     value: value,
-                    tokens: tokens
+                    tokens: tokens,
+                    idcof: idcof
                 };
                 if (utils.isString(datum)) {
                     item.datum = {};
@@ -967,6 +969,7 @@
             _handleSelection: function(e) {
                 var byClick = e.type === "suggestionSelected", suggestion = byClick ? e.data : this.dropdownView.getSuggestionUnderCursor();
                 if (suggestion) {
+                    $("#coffee_id").attr("value", suggestion.idcof);
                     this.inputView.setInputValue(suggestion.value);
                     byClick ? this.inputView.focus() : e.data.preventDefault();
                     byClick && utils.isMsie() ? utils.defer(this.dropdownView.close) : this.dropdownView.close();
