@@ -16,7 +16,6 @@
 		<link rel="stylesheet" type="text/css" href="style/fancybox/jquery.fancybox.css"/> 
 		<link rel="stylesheet" type="text/css" href="style/typeahead.css"/> 
 		<link rel="stylesheet" type="text/css" href="style/base.css"/> 
-		<link rel="stylesheet" type="text/css" href="style/favorite.css"/> 
 		<link rel="stylesheet" type="text/css" media="screen and (max-width:969px)" href="style/responsive/width-0-969.css"/>
 		<link rel="stylesheet" type="text/css" media="screen and (max-width:767px)" href="style/responsive/width-0-767.css"/>
 		<link rel="stylesheet" type="text/css" media="screen and (min-width:480px) and (max-width:969px)" href="style/responsive/width-480-969.css"/>
@@ -44,6 +43,7 @@
 		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   		<script type="text/javascript" src="script/hogan.js"></script>
 		<script type="text/javascript" src="script/typeahead.js"></script>
+		<script type="text/javascript" src="script/favorite.js"></script>
         <script type="text/javascript" src="plugin/contact-form/contact-form.js"></script>
 		<script type="text/javascript" src="plugin/newsletter-form/newsletter-form.js"></script>
 		<script type="text/javascript">
@@ -52,6 +52,7 @@
 				{
 				name: 'roaster',
 				prefetch: "data/typeahead.json",
+				limit: '4',
 				template: '<span class="bold">{{roaster}}</span> – {{coffee}}</p>',
 				engine: Hogan
 					}
@@ -89,22 +90,27 @@
 							<span class="bold">Can't find what you are looking for? Click on "Surprise Me!" for a special roast.</span>
 						</p>
 						<form id="favorite-form" action="php/favorite_submit.php" method="post" class="clear-fix">	
-							<div class="clear-fix">
-								<div id="roaster">
-									<ul class="no-list form-line">
-										<li class="clear-fix block">
-											<input class="typeahead" type="text" name="fav_coffee" id="newsletter-form-mail" placeholder="Tell Me Something" value=""/> 
-										</li>
-										<li class="clear-fix block">
-											<input type="submit" id="favorite-send" name="favorite-send" class="button-black" value="Let's Go!"/>
-										</li>
+						<div class="clear-fix">
+							<div id="roaster">
+								<ul class="no-list form-line">
+									<li class="clear-fix block">
+										<input class="typeahead" type="text" name="fav_coffee" id="newsletter-form-mail" placeholder="Tell Me Something" value=""/>
+										<input type="hidden" name="coffee_id" id="coffee_id" value=""/>
+									</li>
+									<li class="clear-fix block">
+										<input type="submit" id="favorite-send" name="favorite-send" class="button-black" value="Let's Go!"/>
+									</li>
+									</form>
+									<form id="surprise-form" action="php/favorite_submit.php" method="post" class="clear-fix">
+											<input type="hidden" name="fav_coffee" value="surprise"/>
+											<input type="hidden" name="coffee_id" id="coffee_id" value="0"/>
 										<li class="clear-fix block margin-left-2">
 											<input type="submit" id="surprise-send" name="surprise-send" class="button-black" value="Surprise Me!"/>
 										</li>
-									</ul>
-								</div>
-							</div>	
-						</form>
+									</form>
+								</ul>
+							</div>
+						</div>	
 					</li>
 					<!-- Favorite -->
 				</ul>
