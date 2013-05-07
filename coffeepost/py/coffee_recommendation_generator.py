@@ -102,62 +102,62 @@ def write_to_json(filename,result_list):
 	
 	data = json.dumps(json_dict)
 	with open(filename, 'w+b') as f:
-		f.write(data)	
+		f.write(data)
+		
 
+def compute_coffee_recommendation(coffee_tuple):
 	
+	unordered_cor_matrix_list = []
+	rank_list = []
+	
+	for each in coffee_tuple:
+		np_array = convert_string_to_np_array(each[2])
+
+		correlation_matrix = multiply_vectors(np_coffee_array, np_array)
+		unordered_cor_matrix_list.append(correlation_matrix)
+		rank_list.append([each[0],each[1],correlation_matrix.sum()])
+		
+	#sort the list by the number of matches
+	rank_list.sort(key=itemgetter(2), reverse=True)
+	
+	top_5_cor_matrices = unordered_cor_matrix_list[-5:]
+	top_5_cor_values = rank_list[:5]
+	data = rank_list[:1]
+	
+	rec_coffee_id = int(data[0][0])
+	
+	return data,rec_coffee_id
+
+
 def main():
-	#add id and coffee_name
-	#for testing
 	#from coffee_recommendation_generator import *
 	#import numpy as np
 	#import MySQLdb as mysql
 	
+	#setup arg parsing
 	parser = argparse.ArgumentParser(description='Process some command line args. Imagine that!')
 	parser.add_argument('-id', '--coffee-id', type=int, help='the coffee_id in the db')
 	parser.add_argument('-t', '--time-epoch', type=int, help='time since epoch')
-
+	
+	#parse args and assign vars
 	args = parser.parse_args()
-
 	cust_coffee_id = args.coffee_id
 	time_epoch = args.time_epoch
 	
+	#setup fn
 	filename = '/tmp/customer_rec' + str(time_epoch) +'.json'
-	
-	#customer_id = int(cursor.lastrowid)
-	#
-	#
-	#COMMENT THIS LINE OUT
-	cust_coffee_id=981
 
+	#setup db
 	db,cur = init_db()
+	
+	#setup coffee rec
 	coffee_id,coffee_name,coffee_vector_string = get_customer_selection(cur,cust_coffee_id)
 	np_coffee_array = convert_string_to_np_array(coffee_vector_string)
 	coffee_tuple = get_all_coffee_vectors(cust_coffee_id,cur)
-
-	unordered_cor_matrix_list = []
-	rank_list = []
-
-	for each in coffee_tuple:
-		np_array = convert_string_to_np_array(each[2])
 	
-		correlation_matrix = multiply_vectors(np_coffee_array, np_array)
-		unordered_cor_matrix_list.append(correlation_matrix)
-		rank_list.append([each[0],each[1],correlation_matrix.sum()])
+	data,rec_coffee_id = compute_coffee_recommendation(coffee_tuple)
 	
-	
-	#sort the list by the number of matches
-	rank_list.sort(key=itemgetter(2), reverse=True)
-	#not implemented
-	#ordered_cor_matrix_list = rank_order_results(unordered_cor_matrix_list)
-	top_5_cor_matrices = unordered_cor_matrix_list[-5:]
-	top_5_cor_values = rank_list[:5]
-	data = rank_list[:1]
-	#print top_5_cor_matrices
-	print top_5_cor_values
-	
-	rec_coffee_id = int(data[0][0])
 	write_to_json(filename,data)
-	#need to create the user and put in their recommended coffee
 	write_to_db(db,cur,rec_coffee_id)
 	
 	time_epoch = str(time_epoch)
