@@ -111,6 +111,12 @@ a,a:hover			{ text-decoration:none;				}
 span.bold			{ font-weight:bold;					}
 .overflow-hidden	{ overflow:hidden;					}
 
+.inside-line{
+	border: solid white;
+	border-width: 3px;
+	outline: solid 5px #FACC00;
+}
+
 p
 {
 	margin:0px;
