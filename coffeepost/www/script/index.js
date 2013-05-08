@@ -15,7 +15,7 @@ $(document).ready(function() {
 
 	$(".roasterInfo").click(function(){
 		Shadowbox.open({
-		content:    'roasterInfo.html',
+		content:    'roasterinfo.html',
 		player:     "iframe",
 		width:      1900,
 		height:     1250
