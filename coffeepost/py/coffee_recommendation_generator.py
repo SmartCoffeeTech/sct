@@ -1,11 +1,14 @@
 import numpy as np
-import MySQLdb as mysql
 from operator import itemgetter, attrgetter
 import json
 import argparse
 import os
 import subprocess
 import config as cfg
+os.environ['PYTHON_EGG_CACHE'] = '/tmp'
+
+import MySQLdb as mysql
+
 
 
 def init_db():
@@ -139,8 +142,7 @@ def compute_coffee_recommendation(np_coffee_array,coffee_tuple):
 
 def main():
 	
-	#setup arg parsing
-	try: 
+	try:
 		parser = argparse.ArgumentParser(description='Process some command line args. Imagine that!')
 		parser.add_argument('-id', '--coffee-id', type=int, help='the coffee_id in the db')
 		parser.add_argument('-t', '--epoch-time', type=int, help='time since epoch')
@@ -173,9 +175,13 @@ def main():
 		subprocess.call(["chmod", "755", filename])
 		# subprocess.call(["php", "../www/php/customer_redirect.php", "-t", epoch_time, "-c", customer_id])
 		write_to_file(filename_2,rec_coffee_id,epoch_time)
+		
 	except Exception, e:
 		write_to_file(logfile,'EXCEPTION: ',str(e))
+		
+	finally:
+		print 'Nogomenti Savez!!!'
 	
 	
-if __name__=='__main__':
+if __name__ == "__main__":
 	main()

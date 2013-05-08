@@ -2,23 +2,15 @@
 // set the default tz
 date_default_timezone_set('America/Los_Angeles');
 
-//error config settings
-ini_set(‘display_errors’, true);
-ini_set(‘display_startup_errors’, true);
-error_reporting (E_ALL);
-
 // request the form data
 $coffee_id = $_POST["coffee_id"];
-
 $epoch_time = date("YmdHis");
 
 /* for testing
 $epoch_time = 20130507152500;
 $coffee_id = 52; */
 
-exec("echo . | python ../../py/coffee_recommendation_generator.py -id $coffee_id -t $epoch_time");
-
-sleep(.11);
+$output = exec("python ../../py/coffee_recommendation_generator.py -id $coffee_id -t $epoch_time");
 
 $filename = "/tmp/recinfo$epoch_time";
 
