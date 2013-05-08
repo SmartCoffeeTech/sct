@@ -1,10 +1,27 @@
 <?php
 // setup connection with database
 // add full dir path
-include("/db_config.php");
+// include("/db_config.php");
 
 // get from query string
-$customer_id = $_POST["customer_id"];
+
+function curPageURL() {
+ $pageURL = 'http';
+ if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+ $pageURL .= "://";
+ if ($_SERVER["SERVER_PORT"] != "80") {
+  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ } else {
+  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ }
+ return $pageURL;
+}
+
+$url = curPageURL();
+
+$a = parse_url($url);
+$a = explode("=",$a['query']);
+$customer_id = $a[1];
 $customer_id = $customer_id/1003;
 
 $customer_name = $_POST["contact-form-name"];
@@ -23,7 +40,7 @@ if ($customer_name && $customer_city && $customer_address && $customer_city && $
 	die('Could not connect: ' . mysql_error());
 	}
 
-	mysql_select_db("sct", $con);
+	mysql_select_db("coffeehouse", $con);
 
 	// record customer selection into db
 	// not an "order" until the put in their address? just a customer_rec?
@@ -44,8 +61,8 @@ if ($customer_name && $customer_city && $customer_address && $customer_city && $
 	mysql_close($con);
 
 	// redirect to another url
-	$url = '/customer-order-complete.html';
-	header( "Location: $url" );
+	// $url = '/customer-order-complete.html';
+	// header( "Location: $url" );
 
 }
 

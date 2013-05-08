@@ -2,7 +2,7 @@
 
 	/**************************************************************************/
 	/**************************************************************************/
-	
+	date_default_timezone_set('America/Los_Angeles');
 	require_once('config.php');
 	require_once('../../include/functions.php');
 	require_once('../../include/phpMailer/class.phpmailer.php');

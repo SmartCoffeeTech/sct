@@ -6,7 +6,6 @@ import argparse
 import os
 import subprocess
 import config as cfg
-#make sure __init__.py is in dir
 
 
 def init_db():
@@ -85,11 +84,11 @@ def emit_top_5_results(db,cur,top_5_result_list,filename='null',destination='nul
 	
 def write_to_db(db,cur,coffee_id):
 	#write the recommendation and create the Customer
-	sql = """INSERT INTO Customer (name) VALUES('')"""
+	sql = """INSERT INTO Customer (customer_name) VALUES('')"""
 	cur.execute(sql)
 	db.commit()
 	
-	customer_id = int(cursor.lastrowid)
+	customer_id = int(cur.lastrowid)
 	
 	sql1 = """INSERT INTO Orders (customer_id,coffee_id) VALUES (%d,%d)""" % (customer_id,coffee_id)
 	cur.execute(sql1)
@@ -107,7 +106,14 @@ def write_to_json(filename,result_list):
 		f.write(data)
 		
 
-def compute_coffee_recommendation(coffee_tuple):
+def write_to_file(filename,coffee_id,epoch_time):
+	data = str([coffee_id,epoch_time])
+	
+	with open(filename, 'w+b') as f:
+		f.write(data)
+		
+
+def compute_coffee_recommendation(np_coffee_array,coffee_tuple):
 	
 	unordered_cor_matrix_list = []
 	rank_list = []
@@ -132,39 +138,43 @@ def compute_coffee_recommendation(coffee_tuple):
 
 
 def main():
-	#from coffee_recommendation_generator import *
-	#import numpy as np
-	#import MySQLdb as mysql
 	
 	#setup arg parsing
-	parser = argparse.ArgumentParser(description='Process some command line args. Imagine that!')
-	parser.add_argument('-id', '--coffee-id', type=int, help='the coffee_id in the db')
-	parser.add_argument('-t', '--time-epoch', type=int, help='time since epoch')
+	try: 
+		parser = argparse.ArgumentParser(description='Process some command line args. Imagine that!')
+		parser.add_argument('-id', '--coffee-id', type=int, help='the coffee_id in the db')
+		parser.add_argument('-t', '--epoch-time', type=int, help='time since epoch')
 	
-	#parse args and assign vars
-	args = parser.parse_args()
-	cust_coffee_id = args.coffee_id
-	time_epoch = args.time_epoch
-	
-	#setup fn
-	filename = '/tmp/customer_rec' + str(time_epoch) +'.json'
+		#parse args and assign vars
+		args = parser.parse_args()
+		cust_coffee_id = args.coffee_id
+		epoch_time = args.epoch_time
+		
+		#setup fn
+		filename = '/tmp/customer_rec' + str(epoch_time) +'.json'
+		filename_2 = '/tmp/recinfo' + str(epoch_time)
+		log_file = '/tmp/devlog'
 
-	#setup db
-	db,cur = init_db()
+		#setup db
+		db,cur = init_db()
 	
-	#setup coffee rec
-	coffee_id,coffee_name,coffee_vector_string = get_customer_selection(cur,cust_coffee_id)
-	np_coffee_array = convert_string_to_np_array(coffee_vector_string)
-	coffee_tuple = get_all_coffee_vectors(cust_coffee_id,cur)
+		#setup coffee rec
+		coffee_id,coffee_name,coffee_vector_string = get_customer_selection(cur,cust_coffee_id)
+		np_coffee_array = convert_string_to_np_array(coffee_vector_string)
+		coffee_tuple = get_all_coffee_vectors(cust_coffee_id,cur)
 	
-	data,rec_coffee_id = compute_coffee_recommendation(coffee_tuple)
+		data,rec_coffee_id = compute_coffee_recommendation(np_coffee_array,coffee_tuple)
 	
-	write_to_json(filename,data)
-	customer_id = write_to_db(db,cur,rec_coffee_id)
+		write_to_json(filename,data)
+		customer_id = str(write_to_db(db,cur,rec_coffee_id))
+		# epoch_time = str(epoch_time)
 	
-	time_epoch = str(time_epoch)
-	subprocess.call(["chmod", "755", filename])
-	subprocess.call(["php", "../www/php/customer_redirect.php", "-t", time_epoch, "-c", customer_id])
+		#needed?
+		subprocess.call(["chmod", "755", filename])
+		# subprocess.call(["php", "../www/php/customer_redirect.php", "-t", epoch_time, "-c", customer_id])
+		write_to_file(filename_2,rec_coffee_id,epoch_time)
+	except Exception, e:
+		write_to_file(logfile,'EXCEPTION: ',str(e))
 	
 	
 if __name__=='__main__':
