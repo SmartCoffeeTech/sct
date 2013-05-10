@@ -88,7 +88,7 @@ def emit_top_5_results(db,cur,top_5_result_list,filename='null',destination='nul
 		
 def query_builder_rec_coffee(rec_coffee_id):
 	get_rec_coffee_sql = '''select roaster_name as roast_company,coffee_name,cc.description as coffee_description,
-	characteristics,cr.image_url as roast_image_url, cc.origin as roast_location
+	characteristics as coffee_aromas,cr.image_url as roast_image_url, cc.origin as roast_location
 	from coffeez_coffee cc join coffeez_roaster cr on cc.roaster_id=cr.id 
 	where cc.id=%d
 	limit 1;''' % rec_coffee_id
@@ -164,17 +164,17 @@ def compute_coffee_recommendation(np_coffee_array,coffee_tuple):
 	
 def parse_result(raw_datars):
 	
-	raw_datars.sort()
-	
 	parse_dict = {
 	'roast_company' : str(raw_datars[0]),
 	'coffee_name' : str(raw_datars[1]),
 	'coffee_description' : str(raw_datars[2]),
-	'roast_image_url' : str(raw_datars[3]),
-	'roast_location' : str(raw_datars[4])
+	'coffee_aromas' : str(raw_datars[3]),
+	'roast_image_url' : str(raw_datars[4]),
+	'roast_location' : str(raw_datars[5])
 	}
 	
 	return parse_dict
+	
 
 
 def main():
@@ -191,6 +191,10 @@ def main():
 		args = parser.parse_args()
 		cust_coffee_id = args.coffee_id
 		epoch_time = args.epoch_time
+		
+		#TESTING
+		#cust_coffee_id = 1
+		#epoch_time = 1299
 		
 		#setup fn
 		filename = '/tmp/customer_rec' + str(epoch_time) + '.json'
@@ -211,6 +215,8 @@ def main():
 		query = query_builder_rec_coffee(rec_coffee_id)
 		result = query_db(cur,query)
 		result = result[0]
+		print result
+		print 'ok'
 		parsed_result_dict = parse_result(result)
 	
 		write_to_json(filename,data,1)
