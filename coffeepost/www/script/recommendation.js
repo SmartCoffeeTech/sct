@@ -19,12 +19,14 @@ function clicked(item) {
 	$.cookie("roaster", id);
 }
 
+var time_epoch = $.QueryString.usr;
+
 $.ajax({ 
-url: "/tmp/dataout"+time_epoch+".json", 
+url: "data/dataout"+time_epoch+".json", 
 cache: true,
 	success: function(data){
 		$("#coffee").find("description").text(data.coffee.coffee_description);
-		$("#coffee").find("aromas").text(data.coffee.coffee_aromas);
+		// $("#coffee").find("aromas").text(data.coffee.coffee_aromas);
 		$("#roaster").find("coffeeName").text(data.coffee.coffee_name);
 		$("#roaster").find("roastCompany").text(data.coffee.roast_company);
 		$("#roaster").find("roastLocation").text(data.coffee.roast_location);

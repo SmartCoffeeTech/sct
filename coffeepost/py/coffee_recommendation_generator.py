@@ -164,6 +164,8 @@ def compute_coffee_recommendation(np_coffee_array,coffee_tuple):
 	
 def parse_result(raw_datars):
 	
+	raw_datars.sort()
+	
 	parse_dict = {
 	'roast_company' : str(raw_datars[0]),
 	'coffee_name' : str(raw_datars[1]),
@@ -192,7 +194,7 @@ def main():
 		
 		#setup fn
 		filename = '/tmp/customer_rec' + str(epoch_time) + '.json'
-		recommended_json_filename = '/tmp/dataout' + str(epoch_time) + '.json'
+		recommended_json_filename = '/Users/kperko/work/sct/coffeepost/www/data/dataout' + str(epoch_time) + '.json'
 		filename_2 = '/tmp/recinfo' + str(epoch_time)
 		log_file = '/tmp/devlog'
 

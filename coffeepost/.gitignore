@@ -2,6 +2,7 @@
 ## Eclipse
 #################
 
+dataout*.json
 config.py
 *.pydevproject
 .project
