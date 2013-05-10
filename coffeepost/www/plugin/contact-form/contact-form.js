@@ -5,7 +5,6 @@
     {
         blockForm('contact-form','block');
         $.post('plugin/contact-form/contact-form.php',$('#contact-form').serialize(),submitContactFormResponse,'json');
-        $.post('php/customer_info_submit.php',$('#contact-form').serialize(),submitContactFormResponse,'json');
 
     }
 

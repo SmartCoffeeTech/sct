@@ -1,4 +1,5 @@
 import numpy as np
+from datetime import datetime
 from operator import itemgetter, attrgetter
 import json
 import argparse
@@ -51,11 +52,11 @@ def convert_string_to_np_array(string):
 	return np_array
 
 
-def get_all_coffee_vectors(cust_coffee_id,cursor):
+def get_all_coffee_vectors(cust_coffee_id,cursor,for_sale):
 	#from the db get the name and vector
 	#convert these to np arrays
 	#return coffee_vector
-	sql = "select id,coffee_name,binary_rep from coffeez_coffee where id!=%d and binary_rep is not NULL" % cust_coffee_id
+	sql = "select id,coffee_name,binary_rep from coffeez_coffee where id!=%d and binary_rep is not NULL and for_sale=%d" % (cust_coffee_id,for_sale)
 	#bring all the data into our matrix or create another function that does this
 	sql2 = """select id,coffee_name,binary_rep,description,characteristics,origin,features,roaster_name from coffeez_coffee c join coffeez_roaster r on c.roaster_id=r.id
 	where c.id!=%d and binary_rep is not NULL""" % cust_coffee_id
@@ -84,6 +85,23 @@ def emit_top_5_results(db,cur,top_5_result_list,filename='null',destination='nul
 	else:
 		print top_5_result_list
 		
+		
+def query_builder_rec_coffee(rec_coffee_id):
+	get_rec_coffee_sql = '''select roaster_name as roast_company,coffee_name,cc.description as coffee_description,
+	characteristics,cr.image_url as roast_image_url, cc.origin as roast_location
+	from coffeez_coffee cc join coffeez_roaster cr on cc.roaster_id=cr.id 
+	where cc.id=%d
+	limit 1;''' % rec_coffee_id
+	
+	return get_rec_coffee_sql
+		
+def query_db(cur,query):
+	
+	cur.execute(query)
+	result = cur.fetchall()
+	
+	return result
+		
 	
 def write_to_db(db,cur,coffee_id):
 	#write the recommendation and create the Customer
@@ -100,17 +118,21 @@ def write_to_db(db,cur,coffee_id):
 	return customer_id
 	
 	
-def write_to_json(filename,result_list):
-	json_dict = {}
-	json_dict['coffee_id']=int(result_list[0][0])
+def write_to_json(filename,result_list,option):
 	
-	data = json.dumps(json_dict)
+	if option==1:
+		json_dict = {}
+		json_dict['coffee_id']=int(result_list[0][0])
+		data = json.dumps(json_dict)
+	else:
+		data = json.dumps(result_list)
+		
 	with open(filename, 'w+b') as f:
 		f.write(data)
 		
 
-def write_to_file(filename,coffee_id,epoch_time):
-	data = str([coffee_id,epoch_time])
+def write_to_file(filename,arg1,arg2):
+	data = str([arg1,arg2])
 	
 	with open(filename, 'w+b') as f:
 		f.write(data)
@@ -138,11 +160,27 @@ def compute_coffee_recommendation(np_coffee_array,coffee_tuple):
 	rec_coffee_id = int(data[0][0])
 	
 	return data,rec_coffee_id
+	
+	
+def parse_result(raw_datars):
+	
+	parse_dict = {
+	'roast_company' : str(raw_datars[0]),
+	'coffee_name' : str(raw_datars[1]),
+	'coffee_description' : str(raw_datars[2]),
+	'roast_image_url' : str(raw_datars[3]),
+	'roast_location' : str(raw_datars[4])
+	}
+	
+	return parse_dict
 
 
 def main():
 	
 	try:
+		#hard_coded - set to 0 for testing
+		for_sale=1
+		
 		parser = argparse.ArgumentParser(description='Process some command line args. Imagine that!')
 		parser.add_argument('-id', '--coffee-id', type=int, help='the coffee_id in the db')
 		parser.add_argument('-t', '--epoch-time', type=int, help='time since epoch')
@@ -153,7 +191,8 @@ def main():
 		epoch_time = args.epoch_time
 		
 		#setup fn
-		filename = '/tmp/customer_rec' + str(epoch_time) +'.json'
+		filename = '/tmp/customer_rec' + str(epoch_time) + '.json'
+		recommended_json_filename = '/tmp/dataout' + str(epoch_time) + '.json'
 		filename_2 = '/tmp/recinfo' + str(epoch_time)
 		log_file = '/tmp/devlog'
 
@@ -163,24 +202,30 @@ def main():
 		#setup coffee rec
 		coffee_id,coffee_name,coffee_vector_string = get_customer_selection(cur,cust_coffee_id)
 		np_coffee_array = convert_string_to_np_array(coffee_vector_string)
-		coffee_tuple = get_all_coffee_vectors(cust_coffee_id,cur)
+		coffee_tuple = get_all_coffee_vectors(cust_coffee_id,cur,for_sale)
 	
 		data,rec_coffee_id = compute_coffee_recommendation(np_coffee_array,coffee_tuple)
+		
+		query = query_builder_rec_coffee(rec_coffee_id)
+		result = query_db(cur,query)
+		result = result[0]
+		parsed_result_dict = parse_result(result)
 	
-		write_to_json(filename,data)
+		write_to_json(filename,data,1)
+		write_to_json(recommended_json_filename,parsed_result_dict,0)
 		customer_id = str(write_to_db(db,cur,rec_coffee_id))
 		# epoch_time = str(epoch_time)
 	
 		#needed?
 		subprocess.call(["chmod", "755", filename])
-		# subprocess.call(["php", "../www/php/customer_redirect.php", "-t", epoch_time, "-c", customer_id])
 		write_to_file(filename_2,rec_coffee_id,epoch_time)
 		
 	except Exception, e:
-		write_to_file(logfile,'EXCEPTION: ',str(e))
+		dateval = str(datetime.today())
+		write_to_file(log_file,dateval,str(e))
 		
 	finally:
-		print 'Nogomenti Savez!!!'
+		print 'p3rk0 successfully generated your coffee rec'
 	
 	
 if __name__ == "__main__":
