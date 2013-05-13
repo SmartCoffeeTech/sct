@@ -21,12 +21,12 @@ def init_db():
 
 def get_customer_selection(cursor,cust_coffee_id):
 	
-	#hard code the id to test the recommender
-	if cust_coffee_id!=0:
+	if cust_coffee_id != 0:
 		sql = "select id,coffee_name,binary_rep from coffeez_coffee where id=%d limit 1" % cust_coffee_id
-	else:
-		cust_coffee_id=1
+	elif cust_coffee_id == 0:
+		cust_coffee_id = 1
 		sql = "select id,coffee_name,binary_rep from coffeez_coffee where id=%d limit 1" % cust_coffee_id
+	
 	cursor.execute(sql)
 	result = cursor.fetchall()
 	

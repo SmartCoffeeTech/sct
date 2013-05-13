@@ -18,8 +18,13 @@ function clicked(item) {
     id = $(item).attr("id");
 	$.cookie("roaster", id);
 }
-
 var time_epoch = $.QueryString.usr;
+
+function makeURL(time_epoch){
+	location.href = "shipping.html?usr="+time_epoch;
+	// var ab = "shipping.html?usr="+time_epoch;
+}
+
 
 $.ajax({ 
 url: "data/dataout"+time_epoch+".json", 
