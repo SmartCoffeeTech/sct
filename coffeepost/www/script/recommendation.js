@@ -18,17 +18,17 @@ function clicked(item) {
     id = $(item).attr("id");
 	$.cookie("roaster", id);
 }
+
 var time_epoch = $.QueryString.usr;
 
-function makeURL(time_epoch){
+function makeURL(){
 	location.href = "shipping.html?usr="+time_epoch;
 	// var ab = "shipping.html?usr="+time_epoch;
 }
 
-
 $.ajax({ 
 url: "data/dataout"+time_epoch+".json", 
-cache: true,
+cache: false,
 	success: function(data){
 		$("#coffee").find("description").text(data.coffee_description);
 		$("#coffee").find("aromas").text(data.coffee_aromas);
@@ -38,7 +38,7 @@ cache: true,
 		$("#roast_image").attr("src", data.roast_image_url);
 	},
 	dataType: "json",
-	cache: true
+	cache: false
 });
 Shadowbox.init();
 

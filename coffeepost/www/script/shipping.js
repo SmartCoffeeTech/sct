@@ -16,17 +16,17 @@ var time_epoch = $.QueryString.usr;
 
 $.ajax({ 
 url: "data/dataout"+time_epoch+".json", 
-cache: true,
+cache: false,
 	success: function(data){
-		$("#coffee").find("coffeeName").text(data.coffee.coffee_name);
-		$("#roaster").find("roastCompany").text(data.coffee.roast_company);
-		$("#roaster").find("roastLocation").text(data.coffee.roast_location);
-		$("#roast_image").attr("src", data.coffee.roast_image_url);
-		$("#contact-form-coffee").attr("value", data.coffee.coffee_name);
-		$("#contact-form-roast").attr("value", data.coffee.roast_company);
+		$("#coffee").find("coffeeName").text(data.coffee_name);
+		$("#roaster").find("roastCompany").text(data.roast_company);
+		$("#roaster").find("roastLocation").text(data.roast_location);
+		$("#roast_image").attr("src", data.roast_image_url);
+		$("#contact-form-coffee").attr("value", data.coffee_name);
+		$("#contact-form-roast").attr("value", data.roast_company);
 	},
 	dataType: "json",
-	cache: true
+	cache: false
 });
 
 var id = response.info[1].fieldId;
