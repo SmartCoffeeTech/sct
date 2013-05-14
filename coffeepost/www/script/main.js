@@ -55,7 +55,7 @@ $(document).ready(function()
 	/**************************************************************************/
 	/*	Google Maps															  */
 	/**************************************************************************/
-	
+	/*
 	try
 	{
 		var coordinate=new google.maps.LatLng(options.googleMap.coordinates[0],options.googleMap.coordinates[1]);
@@ -90,7 +90,7 @@ $(document).ready(function()
 		
 	}
 	catch(e) {}	
-	
+	*/
 	/**************************************************************************/
 	/*	Forms																  */
 	/**************************************************************************/
@@ -261,7 +261,7 @@ $(document).ready(function()
 	{
 		setTwitterDimension();
 		setImageListDimension();
-		googleMap.setCenter(googleMarker.getPosition());
+		// googleMap.setCenter(googleMarker.getPosition());
 	});
 	
 	$(window).trigger('resize');

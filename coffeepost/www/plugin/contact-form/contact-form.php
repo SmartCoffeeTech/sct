@@ -22,6 +22,7 @@
 		'contact-form-zip'					    => $_POST['contact-form-zip'],
 		'contact-form-roast'					=> $_POST['contact-form-roast'],		
 		'contact-form-coffee'					=> $_POST['contact-form-coffee'],
+		'contact-form-url'						=> $_POST['contact-form-url'],
 	);
 	
 	/**************************************************************************/
@@ -104,8 +105,52 @@
 		createResponse($response);		
 	}
 	$response['error']=0;
-	$response['info'][]=array('fieldId'=>'contact-form-send','message'=>CONTACT_FORM_SEND_MSG_OK);
-	createResponse($response);
+	
+	if (isset($values))
+	{
+		$epoch_time = $values['contact-form-url'];
+		
+		$filename = "/tmp/recinfo$epoch_time";
+
+		$handle = fopen($filename, "r");
+		$data = fread($handle,27);
+
+		$data_split = explode(",", $data);
+		$customer_id = str_replace("'","", str_replace(" ","",str_replace("]","",$data_split[2])));
+		
+		fclose($handle);
+		
+		// update this to use a production ready config file
+		// $con = mysql_connect(db_host,db_user,db_pass);
+		$con = mysql_connect(DB_CON,DB_USER,DB_PWD);
+		if (!$con){
+		die('Could not connect: ' . mysql_error());
+		}
+
+		mysql_select_db(DB_SCHEMA, $con);
+
+		$sqlCmd = sprintf("INSERT IGNORE INTO Customer (customer_id,customer_name, email, city, address, state, zip, shipping_info_submitted) VALUES(%d,'%s','%s','%s','%s','%s','%s',1) ON DUPLICATE KEY UPDATE customer_name=VALUES(customer_name),email=VALUES(email),city=VALUES(city),address=VALUES(address),
+		state=VALUES(state),zip=VALUES(zip), shipping_info_submitted=VALUES(shipping_info_submitted)", 
+		$customer_id,
+		mysql_real_escape_string($values['contact-form-name']),
+		mysql_real_escape_string($values['contact-form-mail']),
+		mysql_real_escape_string($values['contact-form-city']),
+		mysql_real_escape_string($values['contact-form-street']),
+		mysql_real_escape_string($values['contact-form-state']),
+		mysql_real_escape_string($values['contact-form-zip']),
+		1
+		);
+
+		mysql_query($sqlCmd);
+		mysql_query("COMMIT");
+		mysql_close($con);
+		// redirect to another url
+		// $url = '/customer-order-complete.html';
+		// header( "Location: $url" );
+		$response['info'][]=array('fieldId'=>'contact-form-send','message'=>CONTACT_FORM_SEND_MSG_OK);
+		createResponse($response);
+
+	}
 
 	/**************************************************************************/
 	/**************************************************************************/

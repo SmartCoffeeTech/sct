@@ -12,7 +12,12 @@
     })(window.location.search.substr(1).split('&'))
 })(jQuery);
 
+$(document).ready(function(){ 
+	
 var time_epoch = $.QueryString.usr;
+
+$("#contact-form-url").attr("value", time_epoch);
+
 
 $.ajax({ 
 url: "data/dataout"+time_epoch+".json", 
@@ -27,6 +32,8 @@ cache: false,
 	},
 	dataType: "json",
 	cache: false
+});
+
 });
 
 var id = response.info[1].fieldId;

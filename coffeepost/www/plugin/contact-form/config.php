@@ -21,6 +21,12 @@
     define('CONTACT_FORM_MSG_INVALID_DATA_ZIP','Enter Zip Code');
 	
     define('CONTACT_FORM_SEND_MSG_OK','Thank you for your Order.');
-    define('CONTACT_FORM_SEND_MSG_ERROR','Sorry, we can\'t send this message.');
+    define('CONTACT_FORM_SEND_MSG_ERROR','Sorry, we can\'t send this message. Please try again.');
+
+	// db config params
+	define('DB_CON', "localhost:/tmp/mysql.sock");
+	define('DB_USER', "root");
+	define('DB_PWD', "sct");
+	define('DB_SCHEMA', "coffeehouse");
     
 ?>

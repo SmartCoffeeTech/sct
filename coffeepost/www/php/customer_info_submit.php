@@ -22,7 +22,6 @@ $url = curPageURL();
 $a = parse_url($url);
 $a = explode("=",$a['query']);
 $customer_id = $a[1];
-$customer_id = $customer_id/1003;
 
 $customer_name = $_POST["contact-form-name"];
 $customer_city = $_POST["contact-form-mail"];

@@ -136,8 +136,11 @@ def write_to_json(filename,result_list,option):
 		f.write(data)
 		
 
-def write_to_file(filename,arg1,arg2):
-	data = str([arg1,arg2])
+def write_to_file(filename,arg1,arg2,arg3=None):
+	if arg3==None:
+		data = str([arg1,arg2])
+	else:
+		data = str([arg1,arg2,arg3])
 	
 	with open(filename, 'w+b') as f:
 		f.write(data)
@@ -231,7 +234,7 @@ def main():
 	
 		#needed?
 		subprocess.call(["chmod", "755", filename])
-		write_to_file(filename_2,rec_coffee_id,epoch_time)
+		write_to_file(filename_2,rec_coffee_id,epoch_time,customer_id)
 		
 	except Exception, e:
 		dateval = str(datetime.today())
