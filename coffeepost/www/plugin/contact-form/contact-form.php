@@ -129,8 +129,8 @@
 
 		mysql_select_db(DB_SCHEMA, $con);
 
-		$sqlCmd = sprintf("INSERT IGNORE INTO Customer (customer_id,customer_name, email, city, address, state, zip, shipping_info_submitted) VALUES(%d,'%s','%s','%s','%s','%s','%s',1) ON DUPLICATE KEY UPDATE customer_name=VALUES(customer_name),email=VALUES(email),city=VALUES(city),address=VALUES(address),
-		state=VALUES(state),zip=VALUES(zip), shipping_info_submitted=VALUES(shipping_info_submitted)", 
+		$sqlCmd = sprintf("INSERT IGNORE INTO Customer (customer_id,customer_name, email, city, address, state, zip, shipping_info_submitted) VALUES(%d,'%s','%s','%s','%s','%s','%s',%d,'%s') ON DUPLICATE KEY UPDATE customer_name=VALUES(customer_name),email=VALUES(email),city=VALUES(city),address=VALUES(address),
+		state=VALUES(state),zip=VALUES(zip), shipping_info_submitted=VALUES(shipping_info_submitted), time_modified=VALUES(time_modified)", 
 		$customer_id,
 		mysql_real_escape_string($values['contact-form-name']),
 		mysql_real_escape_string($values['contact-form-mail']),
@@ -138,7 +138,8 @@
 		mysql_real_escape_string($values['contact-form-street']),
 		mysql_real_escape_string($values['contact-form-state']),
 		mysql_real_escape_string($values['contact-form-zip']),
-		1
+		1,
+		NOW()
 		);
 
 		mysql_query($sqlCmd);

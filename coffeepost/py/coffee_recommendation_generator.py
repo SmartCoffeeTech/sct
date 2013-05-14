@@ -92,7 +92,7 @@ def emit_top_5_results(db,cur,top_5_result_list,filename='null',destination='nul
 		
 		
 def query_builder_rec_coffee(rec_coffee_id):
-	get_rec_coffee_sql = '''select roaster_name as roast_company,coffee_name,cc.description as coffee_description,
+	get_rec_coffee_sql = '''select roaster_name as roast_company,coffee_name,cc.web_description as coffee_description,
 	characteristics as coffee_aromas,cr.image_url as roast_image_url, cc.origin as roast_location
 	from coffeez_coffee cc join coffeez_roaster cr on cc.roaster_id=cr.id 
 	where cc.id=%d
@@ -110,13 +110,13 @@ def query_db(cur,query):
 	
 def write_to_db(db,cur,coffee_id):
 	#write the recommendation and create the Customer
-	sql = """INSERT INTO Customer (customer_name) VALUES('')"""
+	sql = """INSERT INTO Customer (customer_name,time_created) VALUES('',NOW())"""
 	cur.execute(sql)
 	db.commit()
 	
 	customer_id = int(cur.lastrowid)
 	
-	sql1 = """INSERT INTO Orders (customer_id,coffee_id) VALUES (%d,%d)""" % (customer_id,coffee_id)
+	sql1 = """INSERT INTO Orders (customer_id,coffee_id,time_created) VALUES (%d,%d,NOW())""" % (customer_id,coffee_id)
 	cur.execute(sql1)
 	db.commit()
 	
