@@ -1,3 +1,5 @@
 *.pyc
 *.DS_Store
 .DS_Store
+coffeepost/www/data/*.json
+coffeepost/www/data/recinfo*
