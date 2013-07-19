@@ -104,6 +104,7 @@ def stateController(page_location,page_location_filename,coffee_list,blends,blen
 			qry = 'select order_id,taste_profile from Orders order by time_created desc limit 1'
 			result = dbHandle.executeQuery(db_con,db_cur,qry,'select')
 			cust1 = json.loads(result[0][1])
+			print 'cust1: ', cust1
 			
 			#global blend_name
 			blend_name = blendCalc.computeCoffeeBlendSuggestion(blends,cust1)
